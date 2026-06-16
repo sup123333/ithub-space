@@ -2,7 +2,9 @@ package ru.ithub.ithub_space.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import ru.ithub.ithub_space.config.JwtService;
 import ru.ithub.ithub_space.model.Role;
 import ru.ithub.ithub_space.model.User;
 import ru.ithub.ithub_space.service.UserService;
@@ -13,6 +15,8 @@ import ru.ithub.ithub_space.service.UserService;
 public class AuthController {
 
     private final UserService userService;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
@@ -28,6 +32,17 @@ public class AuthController {
         );
         return ResponseEntity.ok("Пользователь " + user.getEmail() + " зарегистрирован");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        User user = userService.findByEmail(request.email());
+        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+            return ResponseEntity.status(401).body("Неверный пароль");
+        }
+        return ResponseEntity.ok(jwtService.generateToken(user.getEmail()));
+    }
+
+    record LoginRequest(String email, String password) {}
 
     record RegisterRequest(
             String firstName,
