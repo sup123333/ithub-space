@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Hub Space</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0F1320;
+            --surface: #1A1F3A;
+            --card: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.1);
+            --blue: #4F8EF7;
+            --blue-dim: rgba(79,142,247,0.15);
+            --green: #22C55E;
+            --text: #F1F5F9;
+            --muted: #94A3B8;
+            --nav-h: 60px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            z-index: 100;
+            gap: 8px;
+        }
+
+        .nav-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-right: 24px;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .nav-links a {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .nav-links a:hover { background: var(--card); color: var(--text); }
+        .nav-links a.active { background: var(--blue-dim); color: var(--blue); }
+
+        .nav-auth { margin-left: auto; display: flex; gap: 8px; }
+
+        .btn {
+            padding: 7px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.15s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-primary { background: var(--blue); color: #fff; }
+
+        /* MAIN */
+        main {
+            padding-top: calc(var(--nav-h) + 40px);
+            padding-bottom: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        /* PAGES */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--blue-dim);
+            color: var(--blue);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 12px; }
+        .hero p { color: var(--muted); font-size: 16px; margin-bottom: 28px; }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34,197,94,0.12);
+            color: var(--green);
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+        /* GRID */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        .card-method { font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 6px; text-transform: uppercase; }
+        .card-url { font-size: 13px; font-family: monospace; margin-bottom: 6px; }
+        .card-desc { font-size: 12px; color: var(--muted); }
+
+        /* PAGE HEADER */
+        .page-header { margin-bottom: 28px; }
+        .page-header h2 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+        .page-header p { color: var(--muted); font-size: 14px; }
+
+        /* STUB */
+        .stub {
+            background: var(--card);
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .stub-icon { font-size: 48px; margin-bottom: 16px; }
+        .stub h3 { font-size: 20px; margin-bottom: 8px; }
+        .stub p { color: var(--muted); font-size: 14px; max-width: 380px; margin: 0 auto 20px; }
+
+        .stub-tag {
+            display: inline-block;
+            background: var(--blue-dim);
+            color: var(--blue);
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+
+        /* AUTH FORM */
+        .form-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 40px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .form-box h2 { font-size: 22px; margin-bottom: 6px; }
+        .form-box .sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+        .form-group input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .form-group input:focus { border-color: var(--blue); }
+
+        .form-submit { width: 100%; margin-top: 8px; padding: 11px; font-size: 14px; }
+
+        .form-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--muted); }
+        .form-switch a { color: var(--blue); cursor: pointer; text-decoration: none; }
+
+        .alert {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .alert-error { background: rgba(239,68,68,0.15); color: #F87171; border: 1px solid rgba(239,68,68,0.3); }
+        .alert-success { background: rgba(34,197,94,0.15); color: #4ADE80; border: 1px solid rgba(34,197,94,0.3); }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #475569;
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+
+        @media (max-width: 680px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+            nav { padding: 0 16px; }
+            .nav-links a span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">IT Hub Space</div>
+    <div class="nav-links">
+        <a onclick="go('home')" class="active" id="nav-home">Главная</a>
+        <a onclick="go('events')" id="nav-events">Мероприятия</a>
+        <a onclick="go('faculties')" id="nav-faculties">Направления</a>
+        <a onclick="go('media')" id="nav-media">Медиа</a>
+        <a onclick="go('partners')" id="nav-partners">Партнёры</a>
+        <a onclick="go('portfolio')" id="nav-portfolio">Портфолио</a>
+    </div>
+    <div class="nav-auth" id="nav-auth">
+        <button class="btn btn-outline" onclick="go('login')">Войти</button>
+        <button class="btn btn-primary" onclick="go('register')">Регистрация</button>
+    </div>
+    <div class="nav-auth" id="nav-user" style="display:none">
+        <button class="btn btn-outline" onclick="go('profile')">Профиль</button>
+        <button class="btn btn-outline" onclick="logout()">Выйти</button>
+    </div>
+</nav>
+
+<main>
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+        <div class="hero">
+            <div class="badge">IT Hub Space — ДГТУ</div>
+            <h1>Backend API</h1>
+            <p>Spring Boot 3 · Java 21 · PostgreSQL · Spring Security + JWT</p>
+            <div class="status-pill"><div class="dot"></div> Сервер запущен · порт 8080</div>
+        </div>
+        <div class="grid-3">
+            <div class="card"><div class="card-method">POST</div><div class="card-url">/api/auth/register</div><div class="card-desc">Регистрация пользователя</div></div>
+            <div class="card"><div class="card-method">POST</div><div class="card-url">/api/auth/login</div><div class="card-desc">Вход, возвращает JWT</div></div>
+            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/events</div><div class="card-desc">Список мероприятий</div></div>
+            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/faculties</div><div class="card-desc">Факультеты и направления</div></div>
+            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/media</div><div class="card-desc">Фото и видео</div></div>
+            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/partners</div><div class="card-desc">Партнёры</div></div>
+            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/portfolios</div><div class="card-desc">Портфолио студентов</div></div>
+            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/users/me</div><div class="card-desc">Профиль (требует JWT)</div></div>
+            <div class="card"><div class="card-method">GET/POST</div><div class="card-url">/api/comments</div><div class="card-desc">Комментарии к событиям</div></div>
+        </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="page" id="page-events">
+        <div class="page-header">
+            <h2>Мероприятия</h2>
+            <p>Конференции, хакатоны, открытые лекции и другие события</p>
+        </div>
+        <div class="stub">
+            <div class="stub-icon"></div>
+            <h3>Список мероприятий</h3>
+            <p>Здесь будут отображаться карточки событий с датой, местом и описанием</p>
+            <span class="stub-tag">GET /api/events</span>
+        </div>
+    </div>
+
+    <!-- FACULTIES -->
+    <div class="page" id="page-faculties">
+        <div class="page-header">
+            <h2>Направления</h2>
+            <p>Факультеты и образовательные программы ДГТУ</p>
+        </div>
+        <div class="stub">
+            <div class="stub-icon"></div>
+            <h3>Направления подготовки</h3>
+            <p>Карточки факультетов с описанием, руководителем и количеством студентов</p>
+            <span class="stub-tag">GET /api/faculties</span>
+        </div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="page" id="page-media">
+        <div class="page-header">
+            <h2>Медиа</h2>
+            <p>Фотографии и видеозаписи с мероприятий</p>
+        </div>
+        <div class="stub">
+            <div class="stub-icon"></div>
+            <h3>Фото и видео</h3>
+            <p>Галерея медиафайлов с фильтрацией по типу (фото / видео)</p>
+            <span class="stub-tag">GET /api/media?type=PHOTO</span>
+        </div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="page" id="page-partners">
+        <div class="page-header">
+            <h2>Партнёры</h2>
+            <p>Компании и работодатели, сотрудничающие с IT Hub</p>
+        </div>
+        <div class="stub">
+            <div class="stub-icon"></div>
+            <h3>Партнёры и работодатели</h3>
+            <p>Логотипы и информация о компаниях-партнёрах</p>
+            <span class="stub-tag">GET /api/partners</span>
+        </div>
+    </div>
+
+    <!-- PORTFOLIO -->
+    <div class="page" id="page-portfolio">
+        <div class="page-header">
+            <h2>Портфолио</h2>
+            <p>Студенческие проекты и работы</p>
+        </div>
+        <div class="stub">
+            <div class="stub-icon"></div>
+            <h3>Работы студентов</h3>
+            <p>Карточки проектов с описанием, ссылкой и именем автора. Доступно без авторизации.</p>
+            <span class="stub-tag">GET /api/portfolios</span>
+        </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="page" id="page-profile">
+        <div class="page-header">
+            <h2>Личный кабинет</h2>
+            <p>Данные вашего аккаунта</p>
+        </div>
+        <div class="stub">
+            <div class="stub-icon"></div>
+            <h3>Профиль пользователя</h3>
+            <p>Имя, email, роль, группа или предмет — данные из JWT-токена</p>
+            <span class="stub-tag">GET /api/users/me</span>
+        </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="page" id="page-login">
+        <div class="form-box">
+            <h2>Вход</h2>
+            <div class="sub">Введите email и пароль</div>
+            <div class="alert alert-error" id="login-error"></div>
+            <div class="alert alert-success" id="login-ok"></div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="student@dstu.ru">
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" id="login-password" placeholder="••••••••">
+            </div>
+            <button class="btn btn-primary form-submit" onclick="doLogin()">Войти</button>
+            <div class="form-switch">Нет аккаунта? <a onclick="go('register')">Зарегистрироваться</a></div>
+        </div>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="page" id="page-register">
+        <div class="form-box">
+            <h2>Регистрация</h2>
+            <div class="sub">Создайте аккаунт IT Hub Space</div>
+            <div class="alert alert-error" id="reg-error"></div>
+            <div class="alert alert-success" id="reg-ok"></div>
+            <div class="form-group"><label>Имя</label><input type="text" id="reg-first" placeholder="Иван"></div>
+            <div class="form-group"><label>Фамилия</label><input type="text" id="reg-last" placeholder="Иванов"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="student@dstu.ru"></div>
+            <div class="form-group"><label>Пароль</label><input type="password" id="reg-pass" placeholder="••••••••"></div>
+            <button class="btn btn-primary form-submit" onclick="doRegister()">Зарегистрироваться</button>
+            <div class="form-switch">Уже есть аккаунт? <a onclick="go('login')">Войти</a></div>
+        </div>
+    </div>
+
+</main>
+
+<footer>IT Hub Space · 2026</footer>
+
+<script>
+    const pages = ['home','events','faculties','media','partners','portfolio','profile','login','register'];
+
+    function go(page) {
+        pages.forEach(p => {
+            document.getElementById('page-' + p).classList.remove('active');
+            const nav = document.getElementById('nav-' + p);
+            if (nav) nav.classList.remove('active');
+        });
+        document.getElementById('page-' + page).classList.add('active');
+        const nav = document.getElementById('nav-' + page);
+        if (nav) nav.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function showAlert(id, msg) {
+        const el = document.getElementById(id);
+        el.textContent = msg;
+        el.style.display = 'block';
+        setTimeout(() => el.style.display = 'none', 4000);
+    }
+
+    async function doLogin() {
+        const email = document.getElementById('login-email').value.trim();
+        const pass = document.getElementById('login-password').value;
+        if (!email || !pass) { showAlert('login-error', 'Заполните все поля'); return; }
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password: pass })
+            });
+            if (!res.ok) { showAlert('login-error', 'Неверный email или пароль'); return; }
+            const token = await res.text();
+            localStorage.setItem('token', token);
+            updateAuthUI(true);
+            go('home');
+        } catch {
+            showAlert('login-error', 'Ошибка соединения с сервером');
+        }
+    }
+
+    async function doRegister() {
+        const firstName = document.getElementById('reg-first').value.trim();
+        const lastName = document.getElementById('reg-last').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const password = document.getElementById('reg-pass').value;
+        if (!firstName || !lastName || !email || !password) { showAlert('reg-error', 'Заполните все поля'); return; }
+        try {
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ firstName, lastName, email, password, role: 'STUDENT' })
+            });
+            if (!res.ok) { showAlert('reg-error', 'Ошибка регистрации'); return; }
+            showAlert('reg-ok', 'Аккаунт создан! Войдите в систему.');
+            setTimeout(() => go('login'), 1500);
+        } catch {
+            showAlert('reg-error', 'Ошибка соединения с сервером');
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('token');
+        updateAuthUI(false);
+        go('home');
+    }
+
+    function updateAuthUI(loggedIn) {
+        document.getElementById('nav-auth').style.display = loggedIn ? 'none' : 'flex';
+        document.getElementById('nav-user').style.display = loggedIn ? 'flex' : 'none';
+    }
+
+    // init
+    if (localStorage.getItem('token')) updateAuthUI(true);
+</script>
+</body>
+</html>
