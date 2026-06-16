@@ -2,12 +2,11 @@ package ru.ithub.ithub_space.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "events")
-public class Event {
+@Table(name = "portfolios")
+public class Portfolio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +18,11 @@ public class Event {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private LocalDateTime eventDate;
-
-    private String location;
+    private String projectUrl;
 
     private String imageUrl;
 
-    @Column(columnDefinition = "TEXT")
-    private String program;
-
     @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User author;
+    @JoinColumn(name = "student_id")
+    private User student;
 }

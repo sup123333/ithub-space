@@ -30,6 +30,10 @@ public class User {
 
     private String direction; // куда хочешь поступить / специальность
 
+    private String groupName; // для студентов
+
+    private String subject; // для преподавателей
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
