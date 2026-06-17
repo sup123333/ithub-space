@@ -100,6 +100,32 @@ SELECT * FROM (VALUES
 ) AS v(url, title, type, created_at, author_id)
 WHERE NOT EXISTS (SELECT 1 FROM media LIMIT 1);
 
+-- ── BUILDINGS ──────────────────────────────────────────────
+INSERT INTO buildings (name, address, description, map_url, image_url)
+SELECT * FROM (VALUES
+  ('Главный корпус ДГТУ — IThub'::varchar,
+   'Ростов-на-Дону, пл. Гагарина, д. 1'::varchar,
+   'Основной корпус колледжа IThub на базе ДГТУ. Здесь проходят занятия по всем направлениям, хакатоны и дни открытых дверей. Компьютерные классы, зоны для командной работы и творческого коворкинга.'::text,
+   'https://yandex.ru/maps/-/CHrqv5Hn'::varchar,
+   null::varchar),
+  ('Корпус А — Разработка и Программирование'::varchar,
+   'Ростов-на-Дону, пл. Гагарина, д. 1, корп. А'::varchar,
+   'Корпус направлений Разработка и Программирование. Оснащён современными компьютерными классами с профессиональным ПО. Проводятся практические занятия по веб-разработке, Java и базам данных.'::text,
+   'https://yandex.ru/maps/-/CHrqv5Hn'::varchar,
+   null::varchar),
+  ('Корпус Б — Дизайн и Маркетинг'::varchar,
+   'Ростов-на-Дону, пл. Гагарина, д. 1, корп. Б'::varchar,
+   'Корпус направлений Цифровой маркетинг, Контент-маркетинг и Бренд-маркетинг. Оборудован графическими станциями и студией для создания контента.'::text,
+   'https://yandex.ru/maps/-/CHrqv5Hn'::varchar,
+   null::varchar),
+  ('Корпус В — Кибербезопасность'::varchar,
+   'Ростов-на-Дону, пл. Гагарина, д. 1, корп. В'::varchar,
+   'Корпус направления Кибербезопасность. Специализированные лаборатории для изучения защиты информации, сетевого администрирования и безопасности систем.'::text,
+   'https://yandex.ru/maps/-/CHrqv5Hn'::varchar,
+   null::varchar)
+) AS v(name, address, description, map_url, image_url)
+WHERE NOT EXISTS (SELECT 1 FROM buildings LIMIT 1);
+
 -- ── PORTFOLIOS ─────────────────────────────────────────────
 INSERT INTO portfolios (title, description, project_url, image_url, student_id)
 SELECT * FROM (VALUES
