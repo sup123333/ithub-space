@@ -3,238 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Hub Space</title>
+    <title>IT Hub Space — ДГТУ</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #0F1320;
-            --surface: #1A1F3A;
-            --card: rgba(255,255,255,0.06);
-            --border: rgba(255,255,255,0.1);
-            --blue: #4F8EF7;
-            --blue-dim: rgba(79,142,247,0.15);
-            --green: #22C55E;
-            --text: #F1F5F9;
-            --muted: #94A3B8;
-            --nav-h: 60px;
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+          --bg:#000000;--surface:#0D0D0D;--card:rgba(255,255,255,0.04);--card-hov:rgba(255,255,255,0.07);
+          --border:rgba(255,255,255,0.08);--purple:#9747FF;--purple2:#AA01E9;
+          --purple-dim:rgba(151,71,255,0.15);--purple-glow:rgba(151,71,255,0.08);
+          --text:#FFFFFF;--muted:#94A3B8;--muted2:#64748B;--green:#22C55E;--nav-h:64px
         }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
+        html{scroll-behavior:smooth}
+        body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
         /* NAV */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: var(--nav-h);
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 32px;
-            z-index: 100;
-            gap: 8px;
-        }
-
-        .nav-logo {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--blue);
-            margin-right: 24px;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 4px;
-            flex: 1;
-        }
-
-        .nav-links a {
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: var(--muted);
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .nav-links a:hover { background: var(--card); color: var(--text); }
-        .nav-links a.active { background: var(--blue-dim); color: var(--blue); }
-
-        .nav-auth { margin-left: auto; display: flex; gap: 8px; }
-
-        .btn {
-            padding: 7px 18px;
-            border-radius: 8px;
-            font-size: 13px;
-            cursor: pointer;
-            border: none;
-            transition: opacity 0.15s;
-        }
-        .btn:hover { opacity: 0.85; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
-        .btn-primary { background: var(--blue); color: #fff; }
-
-        /* MAIN */
-        main {
-            padding-top: calc(var(--nav-h) + 40px);
-            padding-bottom: 60px;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding-left: 24px;
-            padding-right: 24px;
-        }
-
-        /* PAGES */
-        .page { display: none; }
-        .page.active { display: block; }
-
+        nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(0,0,0,0.85);
+          backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+          border-bottom:1px solid var(--border);display:flex;align-items:center;
+          padding:0 40px;z-index:200;gap:12px}
+        .nav-logo{display:flex;align-items:center;gap:10px;margin-right:32px;cursor:pointer;text-decoration:none}
+        .nav-logo-img{height:36px;width:auto;flex-shrink:0}
+        .nav-logo-text{font-size:15px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
+        /* SCROLLER */
+        .scroller-section{overflow:hidden;padding:0 0 60px}
+        .scroller-label{max-width:1100px;margin:0 auto;padding:0 32px 24px;display:flex;align-items:center;justify-content:space-between}
+        .scroller-label h3{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:-.5px}
+        .scroller-track{display:flex;gap:16px;overflow-x:auto;padding:0 32px 16px;
+          scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none}
+        .scroller-track::-webkit-scrollbar{display:none}
+        .student-card{flex:0 0 240px;background:var(--card);border:1px solid var(--border);
+          border-radius:16px;overflow:hidden;transition:all .2s;position:relative}
+        .student-card:hover{border-color:rgba(151,71,255,.3);transform:translateY(-3px)}
+        .student-photo{height:300px;background:linear-gradient(160deg,rgba(151,71,255,.15),rgba(170,1,233,.08),rgba(76,194,241,.05));
+          display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .student-photo-letter{font-size:90px;font-weight:900;color:rgba(151,71,255,.25);font-family:Arial,sans-serif;user-select:none}
+        .student-photo-overlay{position:absolute;bottom:0;left:0;right:0;
+          background:linear-gradient(transparent,rgba(0,0,0,.75));padding:24px 16px 16px}
+        .student-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:2px}
+        .student-dir{font-size:12px;color:rgba(255,255,255,.6)}
+        .scroller-arrows{display:flex;gap:8px}
+        .arrow-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+          background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;
+          justify-content:center;font-size:16px;transition:all .15s}
+        .arrow-btn:hover{border-color:var(--purple);color:var(--purple)}
+        .nav-links{display:flex;gap:2px;flex:1}
+        .nav-links a{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;
+          color:var(--muted);text-decoration:none;cursor:pointer;transition:all .15s;white-space:nowrap}
+        .nav-links a:hover{background:var(--card);color:var(--text)}
+        .nav-links a.active{background:var(--purple-dim);color:var(--purple)}
+        .nav-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+        .btn{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;
+          border:none;transition:all .15s;white-space:nowrap}
+        .btn:hover{opacity:.85;transform:translateY(-1px)}
+        .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+        .btn-outline:hover{border-color:var(--purple);color:var(--purple)}
+        .btn-primary{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;
+          box-shadow:0 4px 20px rgba(151,71,255,.3)}
+        /* LAYOUT */
+        main{padding-top:var(--nav-h);position:relative;z-index:1}
+        .page{display:none}.page.active{display:block}
+        .section{max-width:1100px;margin:0 auto;padding:60px 32px}
         /* HERO */
-        .hero {
-            text-align: center;
-            padding: 60px 0 40px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--blue-dim);
-            color: var(--blue);
-            padding: 5px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 12px; }
-        .hero p { color: var(--muted); font-size: 16px; margin-bottom: 28px; }
-
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(34,197,94,0.12);
-            color: var(--green);
-            padding: 7px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-        }
-
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-
-        /* GRID */
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
-
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 18px 20px;
-        }
-
-        .card-method { font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 6px; text-transform: uppercase; }
-        .card-url { font-size: 13px; font-family: monospace; margin-bottom: 6px; }
-        .card-desc { font-size: 12px; color: var(--muted); }
-
+        .hero{position:relative;min-height:88vh;display:flex;align-items:center;
+          justify-content:center;overflow:hidden;text-align:center}
+        .hero-blob{position:absolute;width:700px;height:500px;background:var(--purple2);
+          filter:blur(200px);opacity:.18;border-radius:50%;top:50%;left:50%;
+          transform:translate(-50%,-50%) rotate(18deg);pointer-events:none}
+        .hero-blob2{position:absolute;width:400px;height:300px;background:#4CC2F1;
+          filter:blur(200px);opacity:.06;border-radius:50%;bottom:10%;right:10%;pointer-events:none}
+        .hero-content{position:relative;z-index:2;padding:40px 32px;max-width:900px}
+        .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--purple-dim);
+          border:1px solid rgba(151,71,255,.25);color:var(--purple);padding:7px 18px;
+          border-radius:100px;font-size:13px;font-weight:600;margin-bottom:28px;letter-spacing:.3px}
+        .hero-dot{width:7px;height:7px;border-radius:50%;background:var(--purple);animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+        .hero h1{font-size:clamp(42px,7vw,80px);font-weight:900;line-height:1.05;
+          letter-spacing:-2px;margin-bottom:20px;text-transform:uppercase}
+        .hero h1 .accent{background:linear-gradient(135deg,var(--purple),#C084FC,var(--purple2));
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-sub{color:var(--muted);font-size:17px;line-height:1.7;max-width:620px;margin:0 auto 36px}
+        .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .hero-actions .btn{padding:12px 28px;font-size:14px}
+        .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+          background:var(--border);border:1px solid var(--border);border-radius:16px;
+          overflow:hidden;margin-top:72px;position:relative;z-index:2;
+          max-width:900px;margin-left:auto;margin-right:auto}
+        .stat-item{background:var(--bg);padding:28px 20px;text-align:center}
+        .stat-num{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--purple),#C084FC);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
+        .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
         /* PAGE HEADER */
-        .page-header { margin-bottom: 28px; }
-        .page-header h2 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
-        .page-header p { color: var(--muted); font-size: 14px; }
+        .page-head{padding:56px 32px 0;max-width:1100px;margin:0 auto}
+        .page-head-eyebrow{font-size:12px;font-weight:700;color:var(--purple);
+          text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+        .page-head h2{font-size:40px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:10px}
+        .page-head p{color:var(--muted);font-size:15px;line-height:1.6}
+        /* GRIDS */
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+        /* CARD */
+        .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
+          transition:all .2s;cursor:default;position:relative;overflow:hidden}
+        .card:hover{border-color:rgba(151,71,255,.25);background:var(--card-hov);transform:translateY(-2px)}
+        .card-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;
+          letter-spacing:1px;padding:3px 10px;border-radius:6px;margin-bottom:14px}
+        .tag-event{background:rgba(151,71,255,.15);color:var(--purple)}
+        .tag-photo{background:rgba(34,197,94,.12);color:var(--green)}
+        .tag-video{background:rgba(251,191,36,.12);color:#FBBF24}
+        .tag-partner{background:rgba(79,142,247,.12);color:#4F8EF7}
+        .tag-portfolio{background:rgba(236,72,153,.12);color:#EC4899}
+        .card h3{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3}
+        .card p{font-size:13px;color:var(--muted);line-height:1.6}
+        .card-meta{display:flex;gap:16px;margin-top:16px;padding-top:16px;
+          border-top:1px solid var(--border);font-size:12px;color:var(--muted2)}
+        .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+          font-size:13px;color:var(--purple);text-decoration:none;font-weight:600}
+        .card-link:hover{text-decoration:underline}
+        /* EVENT CARD */
+        .event-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+          overflow:hidden;transition:all .2s}
+        .event-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
+        .event-date-banner{background:linear-gradient(135deg,var(--purple),var(--purple2));
+          padding:20px 24px;display:flex;align-items:center;gap:16px}
+        .event-date-big{font-size:36px;font-weight:900;line-height:1;color:#fff}
+        .event-date-detail{font-size:13px;color:rgba(255,255,255,.75)}
+        .event-date-month{font-size:15px;font-weight:700;color:#fff}
+        .event-body{padding:24px}
+        .event-body h3{font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.3}
+        .event-body p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+        .event-location{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2);margin-top:12px}
+        .event-program{margin-top:16px;padding:14px;background:var(--purple-glow);
+          border:1px solid rgba(151,71,255,.15);border-radius:10px;font-size:12px;
+          color:var(--muted);white-space:pre-line;line-height:1.8}
+        .event-program-title{font-size:11px;font-weight:700;color:var(--purple);
+          text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+        /* FACULTY */
+        .faculty-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+          padding:28px;transition:all .2s;position:relative;overflow:hidden}
+        .faculty-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+          background:linear-gradient(90deg,var(--purple),var(--purple2));opacity:0;transition:opacity .2s}
+        .faculty-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
+        .faculty-card:hover::after{opacity:1}
+        .faculty-num{font-size:48px;font-weight:900;color:rgba(151,71,255,0.5);line-height:1;
+          margin-bottom:12px;letter-spacing:-2px}
+        .faculty-card h3{font-size:20px;font-weight:800;margin-bottom:10px;text-transform:uppercase}
+        .faculty-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+        .faculty-footer{display:flex;align-items:center;justify-content:space-between;
+          padding-top:16px;border-top:1px solid var(--border)}
+        .faculty-head{font-size:12px;color:var(--muted2)}
+        .faculty-head strong{color:var(--text);display:block;font-size:13px}
+        .faculty-count{font-size:24px;font-weight:900;color:var(--purple);text-align:right}
+        .faculty-count small{display:block;font-size:11px;color:var(--muted2);font-weight:400}
+        /* PARTNER */
+        .partner-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .2s}
+        .partner-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
+        .partner-avatar{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;
+          justify-content:center;font-size:22px;font-weight:900;margin-bottom:16px;
+          background:linear-gradient(135deg,var(--purple-dim),rgba(151,71,255,.25));
+          border:1px solid rgba(151,71,255,.2);color:var(--purple);flex-shrink:0}
+        .partner-card h3{font-size:16px;font-weight:700;margin-bottom:10px}
+        .partner-card p{font-size:13px;color:var(--muted);line-height:1.6}
+        .partner-contacts{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);
+          font-size:12px;color:var(--muted2);display:flex;flex-direction:column;gap:4px}
+        /* MEDIA */
+        .media-filter{display:flex;gap:8px;margin-bottom:28px}
+        .filter-btn{padding:7px 18px;border-radius:100px;font-size:13px;font-weight:600;
+          cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s}
+        .filter-btn:hover{color:var(--text);border-color:rgba(151,71,255,.3)}
+        .filter-btn.active{background:var(--purple-dim);border-color:rgba(151,71,255,.3);color:var(--purple)}
+        .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+        .media-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s}
+        .media-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
+        .media-thumb{height:180px;display:flex;align-items:center;justify-content:center;
+          font-size:48px;background:linear-gradient(135deg,rgba(151,71,255,.08),rgba(170,1,233,.05));position:relative}
+        .media-type-badge{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;
+          padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+        .media-body{padding:16px}
+        .media-body h4{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.4}
+        .media-body p{font-size:12px;color:var(--muted2)}
+        /* PORTFOLIO */
+        .portfolio-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+          padding:26px;transition:all .2s;position:relative;overflow:hidden}
+        .portfolio-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
+        .portfolio-card h3{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3}
+        .portfolio-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+        .portfolio-author{display:flex;align-items:center;gap:10px;margin-top:16px;
+          padding-top:16px;border-top:1px solid var(--border)}
+        .author-avatar{width:32px;height:32px;border-radius:50%;
+          background:linear-gradient(135deg,var(--purple),var(--purple2));
+          display:flex;align-items:center;justify-content:center;
+          font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+        .author-name{font-size:13px;font-weight:600}
+        .author-role{font-size:11px;color:var(--muted2)}
+        /* PROFILE */
+        .profile-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:560px}
+        .profile-avatar{width:72px;height:72px;border-radius:18px;
+          background:linear-gradient(135deg,var(--purple),var(--purple2));
+          display:flex;align-items:center;justify-content:center;
+          font-size:28px;font-weight:900;color:#fff;margin-bottom:20px;
+          box-shadow:0 8px 32px rgba(151,71,255,.3)}
+        .profile-name{font-size:24px;font-weight:800;margin-bottom:4px}
+        .profile-email{font-size:14px;color:var(--muted);margin-bottom:24px}
+        .profile-field{display:flex;flex-direction:column;gap:4px;padding:14px 0;border-bottom:1px solid var(--border)}
+        .profile-field:last-child{border-bottom:none}
+        .profile-field label{font-size:12px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px}
+        .profile-field span{font-size:15px;font-weight:600}
+        .role-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;
+          border-radius:100px;font-size:13px;font-weight:700}
+        .role-ADMIN{background:rgba(239,68,68,.12);color:#EF4444}
+        .role-TEACHER{background:rgba(251,191,36,.12);color:#FBBF24}
+        .role-STUDENT{background:rgba(34,197,94,.12);color:var(--green)}
+        /* AUTH */
+        .auth-wrap{display:flex;align-items:flex-start;justify-content:center;
+          min-height:calc(100vh - var(--nav-h));padding:48px 24px}
+        .form-box{background:var(--card);border:1px solid var(--border);border-radius:20px;
+          padding:40px;width:100%;max-width:420px;position:relative;overflow:hidden}
+        .form-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+          background:var(--purple2);filter:blur(100px);opacity:.12;pointer-events:none}
+        .form-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+        .form-logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--purple),var(--purple2));
+          border-radius:10px;display:flex;align-items:center;justify-content:center;
+          font-size:18px;font-weight:900;color:#fff}
+        .form-logo-text{font-size:18px;font-weight:800;text-transform:uppercase}
+        .form-box h2{font-size:26px;font-weight:900;margin-bottom:6px}
+        .form-sub{color:var(--muted);font-size:14px;margin-bottom:28px}
+        .form-group{margin-bottom:14px}
+        .form-group label{display:block;font-size:12px;font-weight:600;color:var(--muted);
+          text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
+        .form-group input,.form-group select{width:100%;background:rgba(255,255,255,.05);
+          border:1px solid var(--border);border-radius:10px;padding:11px 14px;
+          color:var(--text);font-size:14px;outline:none;transition:border-color .15s;-webkit-appearance:none}
+        .form-group input:focus,.form-group select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(151,71,255,.1)}
+        .form-group select option{background:#1a1a2e}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .form-submit{width:100%;margin-top:8px;padding:13px;font-size:14px;border-radius:10px}
+        .form-switch{text-align:center;margin-top:18px;font-size:13px;color:var(--muted)}
+        .form-switch a{color:var(--purple);cursor:pointer;text-decoration:none;font-weight:600}
+        .form-switch a:hover{text-decoration:underline}
+        .alert{padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none}
+        .alert-error{background:rgba(239,68,68,.12);color:#FCA5A5;border:1px solid rgba(239,68,68,.25)}
+        .alert-success{background:rgba(34,197,94,.12);color:#86EFAC;border:1px solid rgba(34,197,94,.25)}
+        /* LOADING/EMPTY */
+        .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;
+          padding:80px 40px;gap:16px;color:var(--muted);font-size:14px}
+        .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--purple);
+          border-radius:50%;animation:spin .8s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .empty{text-align:center;padding:60px 40px;color:var(--muted)}
+        .empty-icon{font-size:48px;margin-bottom:16px}
+        .empty h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text)}
+        /* HOME */
+        .home-section-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+        .home-section-label h3{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:-.5px}
+        .see-all{font-size:13px;color:var(--purple);cursor:pointer;text-decoration:none;font-weight:600}
+        .see-all:hover{text-decoration:underline}
+        /* ABOUT */
+        .about-block{background:linear-gradient(135deg,rgba(151,71,255,.08),rgba(170,1,233,.04));
+          border:1px solid rgba(151,71,255,.15);border-radius:20px;padding:40px}
+        .about-block h2{font-size:28px;font-weight:900;text-transform:uppercase;margin-bottom:16px}
+        .about-block p{font-size:15px;color:var(--muted);line-height:1.8;max-width:700px}
+        .about-points{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+        .about-point{display:flex;gap:12px;align-items:flex-start}
+        .about-point-icon{width:36px;height:36px;border-radius:10px;background:var(--purple-dim);
+          border:1px solid rgba(151,71,255,.2);display:flex;align-items:center;
+          justify-content:center;font-size:16px;flex-shrink:0}
+        .about-point-text h4{font-size:14px;font-weight:700;margin-bottom:3px}
+        .about-point-text p{font-size:13px;color:var(--muted);line-height:1.5}
+        footer{border-top:1px solid var(--border);padding:32px;text-align:center;
+          color:var(--muted2);font-size:13px;position:relative;z-index:1}
+        footer strong{color:var(--purple)}
+        @media(max-width:900px){.hero-stats{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}.about-points{grid-template-columns:1fr}}
+        @media(max-width:680px){nav{padding:0 16px}.grid-2,.grid-3{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}.section,.page-head{padding-left:20px;padding-right:20px}.form-row{grid-template-columns:1fr}.form-box{padding:28px 22px}}
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-        /* STUB */
-        .stub {
-            background: var(--card);
-            border: 1px dashed var(--border);
-            border-radius: 16px;
-            padding: 60px 40px;
-            text-align: center;
-        }
-
-        .stub-icon { font-size: 48px; margin-bottom: 16px; }
-        .stub h3 { font-size: 20px; margin-bottom: 8px; }
-        .stub p { color: var(--muted); font-size: 14px; max-width: 380px; margin: 0 auto 20px; }
-
-        .stub-tag {
-            display: inline-block;
-            background: var(--blue-dim);
-            color: var(--blue);
-            font-size: 12px;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-family: monospace;
-        }
-
-        /* AUTH FORM */
-        .form-box {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 36px 40px;
-            max-width: 420px;
-            margin: 0 auto;
-        }
-
-        .form-box h2 { font-size: 22px; margin-bottom: 6px; }
-        .form-box .sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
-
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
-        .form-group input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 14px;
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.15s;
-        }
-        .form-group input:focus { border-color: var(--blue); }
-
-        .form-submit { width: 100%; margin-top: 8px; padding: 11px; font-size: 14px; }
-
-        .form-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--muted); }
-        .form-switch a { color: var(--blue); cursor: pointer; text-decoration: none; }
-
-        .alert {
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            margin-bottom: 16px;
-            display: none;
-        }
-        .alert-error { background: rgba(239,68,68,0.15); color: #F87171; border: 1px solid rgba(239,68,68,0.3); }
-        .alert-success { background: rgba(34,197,94,0.15); color: #4ADE80; border: 1px solid rgba(34,197,94,0.3); }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 24px;
-            color: #475569;
-            font-size: 13px;
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
-        }
-
-        @media (max-width: 680px) {
-            .grid-3 { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 32px; }
-            nav { padding: 0 16px; }
-            .nav-links a span { display: none; }
-        }
+        /* TEACHER MODAL */
+        #teacher-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
+          backdrop-filter:blur(12px);z-index:500;align-items:center;justify-content:center}
+        #teacher-modal.open{display:flex;animation:fadeIn .2s ease}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .tm-card{background:rgba(20,10,35,.95);border:1px solid rgba(151,71,255,.3);
+          border-radius:24px;padding:40px 36px;max-width:360px;width:90%;
+          text-align:center;position:relative;
+          animation:slideUp .3s cubic-bezier(.34,1.56,.64,1)}
+        @keyframes slideUp{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+        .tm-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.08);
+          border:none;color:#fff;width:32px;height:32px;border-radius:50%;
+          cursor:pointer;font-size:14px;transition:background .15s}
+        .tm-close:hover{background:rgba(151,71,255,.3)}
+        .tm-avatar{width:90px;height:90px;border-radius:50%;
+          background:linear-gradient(135deg,var(--purple),var(--purple2));
+          display:flex;align-items:center;justify-content:center;
+          font-size:36px;font-weight:900;color:#fff;margin:0 auto 20px;
+          box-shadow:0 0 40px rgba(151,71,255,.4)}
+        .tm-name{font-size:22px;font-weight:800;margin-bottom:8px}
+        .tm-role{font-size:14px;color:var(--purple);font-weight:600;margin-bottom:6px}
+        .tm-subject{font-size:13px;color:var(--muted);line-height:1.6}
+        /* Карточки кликабельны */
+        .student-card{cursor:pointer}
+        .student-card:active{transform:scale(.97)}
     </style>
 </head>
 <body>
-
 <nav>
-    <div class="nav-logo">IT Hub Space</div>
+    <a class="nav-logo" onclick="go('home')">
+        <svg class="nav-logo-img" viewBox="0 0 220 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Квадрат с точкой — как на скрине слева -->
+            <rect x="1.5" y="1.5" width="33" height="33" fill="none" stroke="white" stroke-width="2.5"/>
+            <rect x="12" y="12" width="11" height="11" fill="white"/>
+            <!-- IThub жирный белый -->
+            <text x="46" y="22" font-family="Arial" font-weight="900" font-size="20" fill="white">IThub</text>
+            <!-- Ростов-на-Дону серый -->
+            <text x="46" y="34" font-family="Arial" font-weight="400" font-size="11" fill="#888888">Ростов-на-Дону</text>
+        </svg>
+    </a>
     <div class="nav-links">
         <a onclick="go('home')" class="active" id="nav-home">Главная</a>
         <a onclick="go('events')" id="nav-events">Мероприятия</a>
@@ -243,238 +323,504 @@
         <a onclick="go('partners')" id="nav-partners">Партнёры</a>
         <a onclick="go('portfolio')" id="nav-portfolio">Портфолио</a>
     </div>
-    <div class="nav-auth" id="nav-auth">
+    <div class="nav-right" id="nav-auth">
         <button class="btn btn-outline" onclick="go('login')">Войти</button>
         <button class="btn btn-primary" onclick="go('register')">Регистрация</button>
     </div>
-    <div class="nav-auth" id="nav-user" style="display:none">
+    <div class="nav-right" id="nav-user" style="display:none">
+        <span style="font-size:13px;color:var(--muted)" id="nav-username"></span>
         <button class="btn btn-outline" onclick="go('profile')">Профиль</button>
         <button class="btn btn-outline" onclick="logout()">Выйти</button>
     </div>
 </nav>
-
 <main>
-
     <!-- HOME -->
     <div class="page active" id="page-home">
         <div class="hero">
-            <div class="badge">IT Hub Space — ДГТУ</div>
-            <h1>Backend API</h1>
-            <p>Spring Boot 3 · Java 21 · PostgreSQL · Spring Security + JWT</p>
-            <div class="status-pill"><div class="dot"></div> Сервер запущен · порт 8080</div>
+            <div class="hero-blob"></div>
+            <div class="hero-blob2"></div>
+            <div class="hero-content">
+                <div class="hero-eyebrow"><div class="hero-dot"></div>IThub ДГТУ · Ростов-на-Дону</div>
+                <h1>Всё об<br><span class="accent">IT Hub</span><br>в одном месте</h1>
+                <p class="hero-sub">Мероприятия, направления, медиа, портфолио студентов и партнёры колледжа — больше не нужно искать по соцсетям и разным сайтам</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="go('events')">Смотреть мероприятия</button>
+                    <button class="btn btn-outline" onclick="go('faculties')">Направления</button>
+                </div>
+            </div>
         </div>
-        <div class="grid-3">
-            <div class="card"><div class="card-method">POST</div><div class="card-url">/api/auth/register</div><div class="card-desc">Регистрация пользователя</div></div>
-            <div class="card"><div class="card-method">POST</div><div class="card-url">/api/auth/login</div><div class="card-desc">Вход, возвращает JWT</div></div>
-            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/events</div><div class="card-desc">Список мероприятий</div></div>
-            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/faculties</div><div class="card-desc">Факультеты и направления</div></div>
-            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/media</div><div class="card-desc">Фото и видео</div></div>
-            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/partners</div><div class="card-desc">Партнёры</div></div>
-            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/portfolios</div><div class="card-desc">Портфолио студентов</div></div>
-            <div class="card"><div class="card-method">GET</div><div class="card-url">/api/users/me</div><div class="card-desc">Профиль (требует JWT)</div></div>
-            <div class="card"><div class="card-method">GET/POST</div><div class="card-url">/api/comments</div><div class="card-desc">Комментарии к событиям</div></div>
+        <div class="section" style="padding-top:0">
+            <div class="hero-stats">
+                <div class="stat-item"><div class="stat-num" id="stat-events">—</div><div class="stat-label">Мероприятий</div></div>
+                <div class="stat-item"><div class="stat-num" id="stat-faculties">—</div><div class="stat-label">Направлений</div></div>
+                <div class="stat-item"><div class="stat-num" id="stat-partners">—</div><div class="stat-label">Партнёров</div></div>
+                <div class="stat-item"><div class="stat-num" id="stat-portfolio">—</div><div class="stat-label">Проектов</div></div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="about-block">
+                <h2>Зачем этот сайт?</h2>
+                <p>Официальный сайт IThub не охватывает всё — часть информации о колледже разбросана по ВКонтакте, Telegram и другим ресурсам. IT Hub Space собирает всё в единую точку: студенты видят расписание событий, работодатели смотрят портфолио выпускников, абитуриенты узнают о направлениях.</p>
+                <div class="about-points">
+                    <div class="about-point"><div class="about-point-icon" style="font-size:18px;color:var(--purple)">01</div><div class="about-point-text"><h4>Все мероприятия</h4><p>Хакатоны, воркшопы, дни открытых дверей — в одном календаре</p></div></div>
+                    <div class="about-point"><div class="about-point-icon" style="font-size:18px;color:var(--purple)">02</div><div class="about-point-text"><h4>Направления подготовки</h4><p>Разработка, кибербез, маркетинг — с описанием, кураторами и числом студентов</p></div></div>
+                    <div class="about-point"><div class="about-point-icon" style="font-size:18px;color:var(--purple)">03</div><div class="about-point-text"><h4>Портфолио студентов</h4><p>Реальные проекты — для работодателей и приёмной комиссии</p></div></div>
+                    <div class="about-point"><div class="about-point-icon" style="font-size:18px;color:var(--purple)">04</div><div class="about-point-text"><h4>Партнёры и работодатели</h4><p>Яндекс, СберТех, Ростелеком — компании, с которыми мы работаем</p></div></div>
+                </div>
+            </div>
+        </div>
+        <!-- TEACHERS SCROLLER -->
+        <div class="scroller-section">
+            <div class="scroller-label">
+                <h3>Преподаватели IThub</h3>
+                <div class="scroller-arrows">
+                    <button class="arrow-btn" onclick="scrollTeachers(-1)">&#8592;</button>
+                    <button class="arrow-btn" onclick="scrollTeachers(1)">&#8594;</button>
+                </div>
+            </div>
+            <div class="scroller-track" id="teachers-track">
+                <div class="student-card" onclick="openTeacher(0)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(151,71,255,.2),rgba(170,1,233,.1))"><div class="student-photo-letter">М</div><div class="student-photo-overlay"><div class="student-name">Мария Кузнецова</div><div class="student-dir">Директор</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(1)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(79,142,247,.15),rgba(151,71,255,.08))"><div class="student-photo-letter">В</div><div class="student-photo-overlay"><div class="student-name">Виктория Колесникова</div><div class="student-dir">Зам. директора по методике</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(2)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(236,72,153,.12),rgba(151,71,255,.08))"><div class="student-photo-letter">Е</div><div class="student-photo-overlay"><div class="student-name">Екатерина Пархоменко</div><div class="student-dir">Зам. директора</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(3)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(76,194,241,.12),rgba(151,71,255,.08))"><div class="student-photo-letter">В</div><div class="student-photo-overlay"><div class="student-name">Вероника Инаркаева</div><div class="student-dir">UX/UI дизайн</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(4)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(151,71,255,.15),rgba(170,1,233,.08))"><div class="student-photo-letter">И</div><div class="student-photo-overlay"><div class="student-name">Иван Сериков</div><div class="student-dir">HTML / CSS</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(5)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(170,1,233,.15),rgba(251,191,36,.06))"><div class="student-photo-letter">А</div><div class="student-photo-overlay"><div class="student-name">Айшат Юсупова</div><div class="student-dir">СУБД · PostgreSQL</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(6)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(34,197,94,.12),rgba(151,71,255,.08))"><div class="student-photo-letter">Е</div><div class="student-photo-overlay"><div class="student-name">Елена Дозорова</div><div class="student-dir">Кибербезопасность</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(7)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(251,191,36,.1),rgba(151,71,255,.08))"><div class="student-photo-letter">М</div><div class="student-photo-overlay"><div class="student-name">Мария Фудулей</div><div class="student-dir">Программирование</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(8)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(79,142,247,.12),rgba(170,1,233,.08))"><div class="student-photo-letter">А</div><div class="student-photo-overlay"><div class="student-name">Анастасия Климашева</div><div class="student-dir">Английский язык</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(9)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(151,71,255,.12),rgba(76,194,241,.08))"><div class="student-photo-letter">Н</div><div class="student-photo-overlay"><div class="student-name">Николай Русланович</div><div class="student-dir">Физическая культура</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(10)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(236,72,153,.1),rgba(251,191,36,.06))"><div class="student-photo-letter">Т</div><div class="student-photo-overlay"><div class="student-name">Татьяна Шульга</div><div class="student-dir">Высшая математика</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(11)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(34,197,94,.1),rgba(151,71,255,.08))"><div class="student-photo-letter">С</div><div class="student-photo-overlay"><div class="student-name">Светлана Зинякова</div><div class="student-dir">Английский язык</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(12)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(170,1,233,.12),rgba(76,194,241,.06))"><div class="student-photo-letter">Э</div><div class="student-photo-overlay"><div class="student-name">Эльмира Типаева</div><div class="student-dir">Математическая логика</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(13)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(151,71,255,.15),rgba(236,72,153,.06))"><div class="student-photo-letter">М</div><div class="student-photo-overlay"><div class="student-name">Марта Просветкина</div><div class="student-dir">Литература</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(14)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(79,142,247,.1),rgba(170,1,233,.08))"><div class="student-photo-letter">М</div><div class="student-photo-overlay"><div class="student-name">Мариетта Дадян</div><div class="student-dir">История</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(15)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(251,191,36,.08),rgba(151,71,255,.08))"><div class="student-photo-letter">С</div><div class="student-photo-overlay"><div class="student-name">Светлана Межерицкая</div><div class="student-dir">Английский язык</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(16)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(76,194,241,.1),rgba(151,71,255,.08))"><div class="student-photo-letter">К</div><div class="student-photo-overlay"><div class="student-name">Константин Поляков</div><div class="student-dir">Английский язык</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(17)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(236,72,153,.1),rgba(170,1,233,.08))"><div class="student-photo-letter">И</div><div class="student-photo-overlay"><div class="student-name">Ирина Шеравнер</div><div class="student-dir">Английский язык</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(18)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(34,197,94,.08),rgba(79,142,247,.08))"><div class="student-photo-letter">Д</div><div class="student-photo-overlay"><div class="student-name">Дарья Пидченко</div><div class="student-dir">Английский язык</div></div></div></div>
+                <div class="student-card" onclick="openTeacher(19)"><div class="student-photo" style="background:linear-gradient(160deg,rgba(151,71,255,.12),rgba(236,72,153,.06))"><div class="student-photo-letter">М</div><div class="student-photo-overlay"><div class="student-name">Мария Москвина</div><div class="student-dir">Английский язык</div></div></div></div>
+            </div>
+        </div>
+        <div class="section" style="padding-top:0">
+            <div class="home-section-label"><h3>Ближайшие мероприятия</h3><a class="see-all" onclick="go('events')">Все →</a></div>
+            <div class="grid-auto" id="home-events"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
+        </div>
+        <div class="section" style="padding-top:0">
+            <div class="home-section-label"><h3>Направления</h3><a class="see-all" onclick="go('faculties')">Все →</a></div>
+            <div class="grid-3" id="home-faculties"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
         </div>
     </div>
-
     <!-- EVENTS -->
     <div class="page" id="page-events">
-        <div class="page-header">
-            <h2>Мероприятия</h2>
-            <p>Конференции, хакатоны, открытые лекции и другие события</p>
+        <div class="page-head">
+            <div class="page-head-eyebrow">Мероприятия</div>
+            <h2>Что происходит<br>в IThub</h2>
+            <p>Хакатоны, воркшопы, открытые уроки, дни открытых дверей и другие события колледжа</p>
         </div>
-        <div class="stub">
-            <div class="stub-icon"></div>
-            <h3>Список мероприятий</h3>
-            <p>Здесь будут отображаться карточки событий с датой, местом и описанием</p>
-            <span class="stub-tag">GET /api/events</span>
-        </div>
+        <div class="section"><div id="events-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
     </div>
-
     <!-- FACULTIES -->
     <div class="page" id="page-faculties">
-        <div class="page-header">
-            <h2>Направления</h2>
-            <p>Факультеты и образовательные программы ДГТУ</p>
+        <div class="page-head">
+            <div class="page-head-eyebrow">Направления подготовки</div>
+            <h2>Выбери<br>свой путь</h2>
+            <p>Разработка, программирование, кибербезопасность, маркетинг — бизнес-ориентированное образование после 9 и 11 класса</p>
         </div>
-        <div class="stub">
-            <div class="stub-icon"></div>
-            <h3>Направления подготовки</h3>
-            <p>Карточки факультетов с описанием, руководителем и количеством студентов</p>
-            <span class="stub-tag">GET /api/faculties</span>
-        </div>
+        <div class="section"><div class="grid-2" id="faculties-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
     </div>
-
     <!-- MEDIA -->
     <div class="page" id="page-media">
-        <div class="page-header">
-            <h2>Медиа</h2>
-            <p>Фотографии и видеозаписи с мероприятий</p>
+        <div class="page-head">
+            <div class="page-head-eyebrow">Медиа</div>
+            <h2>Фото и видео<br>из жизни IThub</h2>
+            <p>Фотографии и видеозаписи с мероприятий, учебных пространств и событий колледжа</p>
         </div>
-        <div class="stub">
-            <div class="stub-icon"></div>
-            <h3>Фото и видео</h3>
-            <p>Галерея медиафайлов с фильтрацией по типу (фото / видео)</p>
-            <span class="stub-tag">GET /api/media?type=PHOTO</span>
+        <div class="section">
+            <div class="media-filter">
+                <button class="filter-btn active" onclick="filterMedia('ALL',this)">Все</button>
+                <button class="filter-btn" onclick="filterMedia('PHOTO',this)"> Фото</button>
+                <button class="filter-btn" onclick="filterMedia('VIDEO',this)">Видео</button>
+            </div>
+            <div class="media-grid" id="media-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
         </div>
     </div>
-
     <!-- PARTNERS -->
     <div class="page" id="page-partners">
-        <div class="page-header">
-            <h2>Партнёры</h2>
-            <p>Компании и работодатели, сотрудничающие с IT Hub</p>
+        <div class="page-head">
+            <div class="page-head-eyebrow">Партнёры</div>
+            <h2>Компании,<br>с которыми мы работаем</h2>
+            <p>Крупные IT-компании и работодатели, принимающие наших студентов на стажировки и трудоустройство</p>
         </div>
-        <div class="stub">
-            <div class="stub-icon"></div>
-            <h3>Партнёры и работодатели</h3>
-            <p>Логотипы и информация о компаниях-партнёрах</p>
-            <span class="stub-tag">GET /api/partners</span>
-        </div>
+        <div class="section"><div class="grid-auto" id="partners-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
     </div>
-
     <!-- PORTFOLIO -->
     <div class="page" id="page-portfolio">
-        <div class="page-header">
-            <h2>Портфолио</h2>
-            <p>Студенческие проекты и работы</p>
+        <div class="page-head">
+            <div class="page-head-eyebrow">Портфолио</div>
+            <h2>Проекты<br>наших студентов</h2>
+            <p>Реальные работы — сайты, боты, базы данных и исследования, созданные студентами IThub</p>
         </div>
-        <div class="stub">
-            <div class="stub-icon"></div>
-            <h3>Работы студентов</h3>
-            <p>Карточки проектов с описанием, ссылкой и именем автора. Доступно без авторизации.</p>
-            <span class="stub-tag">GET /api/portfolios</span>
-        </div>
+        <div class="section"><div class="grid-auto" id="portfolio-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
     </div>
-
     <!-- PROFILE -->
     <div class="page" id="page-profile">
-        <div class="page-header">
-            <h2>Личный кабинет</h2>
-            <p>Данные вашего аккаунта</p>
+        <div class="page-head">
+            <div class="page-head-eyebrow">Личный кабинет</div>
+            <h2>Профиль</h2>
+            <p>Данные вашего аккаунта IT Hub Space</p>
         </div>
-        <div class="stub">
-            <div class="stub-icon"></div>
-            <h3>Профиль пользователя</h3>
-            <p>Имя, email, роль, группа или предмет — данные из JWT-токена</p>
-            <span class="stub-tag">GET /api/users/me</span>
-        </div>
+        <div class="section"><div id="profile-content"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
     </div>
-
     <!-- LOGIN -->
     <div class="page" id="page-login">
-        <div class="form-box">
-            <h2>Вход</h2>
-            <div class="sub">Введите email и пароль</div>
-            <div class="alert alert-error" id="login-error"></div>
-            <div class="alert alert-success" id="login-ok"></div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="login-email" placeholder="student@dstu.ru">
+        <div class="auth-wrap">
+            <div class="form-box">
+                <div class="form-logo" style="margin-bottom:24px"><svg style="height:52px;width:auto;display:block" viewBox="0 0 200 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1.5" y="1.5" width="46" height="46" fill="none" stroke="white" stroke-width="2.5"/>
+                    <rect x="16" y="16" width="16" height="16" fill="white"/>
+                    <text x="58" y="30" font-family="Arial" font-weight="900" font-size="24" fill="white">IThub</text>
+                    <text x="58" y="48" font-family="Arial" font-weight="400" font-size="16" fill="#888888">college</text>
+                </svg></div>
+                <h2>Вход</h2>
+                <div class="form-sub">Введите email и пароль для входа</div>
+                <div class="alert alert-error" id="login-error"></div>
+                <div class="alert alert-success" id="login-ok"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="student@ithub.ru"></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+                <button class="btn btn-primary form-submit" onclick="doLogin()">Войти</button>
+                <div class="form-switch">Нет аккаунта? <a onclick="go('register')">Зарегистрироваться</a></div>
             </div>
-            <div class="form-group">
-                <label>Пароль</label>
-                <input type="password" id="login-password" placeholder="••••••••">
-            </div>
-            <button class="btn btn-primary form-submit" onclick="doLogin()">Войти</button>
-            <div class="form-switch">Нет аккаунта? <a onclick="go('register')">Зарегистрироваться</a></div>
         </div>
     </div>
-
     <!-- REGISTER -->
     <div class="page" id="page-register">
-        <div class="form-box">
-            <h2>Регистрация</h2>
-            <div class="sub">Создайте аккаунт IT Hub Space</div>
-            <div class="alert alert-error" id="reg-error"></div>
-            <div class="alert alert-success" id="reg-ok"></div>
-            <div class="form-group"><label>Имя</label><input type="text" id="reg-first" placeholder="Иван"></div>
-            <div class="form-group"><label>Фамилия</label><input type="text" id="reg-last" placeholder="Иванов"></div>
-            <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="student@dstu.ru"></div>
-            <div class="form-group"><label>Пароль</label><input type="password" id="reg-pass" placeholder="••••••••"></div>
-            <button class="btn btn-primary form-submit" onclick="doRegister()">Зарегистрироваться</button>
-            <div class="form-switch">Уже есть аккаунт? <a onclick="go('login')">Войти</a></div>
+        <div class="auth-wrap">
+            <div class="form-box">
+                <div class="form-logo" style="margin-bottom:24px"><svg style="height:52px;width:auto;display:block" viewBox="0 0 200 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1.5" y="1.5" width="46" height="46" fill="none" stroke="white" stroke-width="2.5"/>
+                    <rect x="16" y="16" width="16" height="16" fill="white"/>
+                    <text x="58" y="30" font-family="Arial" font-weight="900" font-size="24" fill="white">IThub</text>
+                    <text x="58" y="48" font-family="Arial" font-weight="400" font-size="16" fill="#888888">college</text>
+                </svg></div>
+                <h2>Регистрация</h2>
+                <div class="form-sub">Создайте аккаунт IT Hub Space</div>
+                <div class="alert alert-error" id="reg-error"></div>
+                <div class="alert alert-success" id="reg-ok"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Имя</label><input type="text" id="reg-first" placeholder="Иван"></div>
+                    <div class="form-group"><label>Фамилия</label><input type="text" id="reg-last" placeholder="Иванов"></div>
+                </div>
+                <div class="form-group"><label>Отчество</label><input type="text" id="reg-middle" placeholder="Иванович"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="student@ithub.ru"></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="reg-pass" placeholder="••••••••"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Город</label><input type="text" id="reg-city" placeholder="Ростов-на-Дону"></div>
+                    <div class="form-group"><label>Направление</label>
+                        <select id="reg-direction">
+                            <option value="">Выберите</option>
+                            <option>Разработка</option><option>Программирование</option>
+                            <option>Кибербезопасность</option><option>Цифровой маркетинг</option>
+                            <option>Контент-маркетинг</option><option>Бренд-маркетинг</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary form-submit" onclick="doRegister()">Создать аккаунт</button>
+                <div class="form-switch">Уже есть аккаунт? <a onclick="go('login')">Войти</a></div>
+            </div>
         </div>
     </div>
 
+    <!-- TEACHER MODAL -->
+    <div id="teacher-modal" onclick="closeTeacher(event)">
+        <div class="tm-card" id="tm-card">
+            <button class="tm-close" onclick="closeTeacher()">&#x2715;</button>
+            <div class="tm-avatar" id="tm-avatar"></div>
+            <div class="tm-name" id="tm-name"></div>
+            <div class="tm-role" id="tm-role"></div>
+            <div class="tm-subject" id="tm-subject"></div>
+        </div>
+    </div>
 </main>
-
-<footer>IT Hub Space · 2026</footer>
-
+<footer><strong>IT Hub Space</strong> · IThub ДГТУ · Ростов-на-Дону · 2026</footer>
 <script>
-    const pages = ['home','events','faculties','media','partners','portfolio','profile','login','register'];
-
-    function go(page) {
-        pages.forEach(p => {
-            document.getElementById('page-' + p).classList.remove('active');
-            const nav = document.getElementById('nav-' + p);
-            if (nav) nav.classList.remove('active');
-        });
-        document.getElementById('page-' + page).classList.add('active');
-        const nav = document.getElementById('nav-' + page);
-        if (nav) nav.classList.add('active');
-        window.scrollTo(0, 0);
+    const pages=['home','events','faculties','media','partners','portfolio','profile','login','register'];
+    const loaded={};
+    function go(p){
+      pages.forEach(x=>{
+        document.getElementById('page-'+x).classList.remove('active');
+        const n=document.getElementById('nav-'+x);if(n)n.classList.remove('active');
+      });
+      document.getElementById('page-'+p).classList.add('active');
+      const n=document.getElementById('nav-'+p);if(n)n.classList.add('active');
+      window.scrollTo({top:0,behavior:'instant'});
+      if(!loaded[p]){loaded[p]=true;loadPage(p);}
     }
-
-    function showAlert(id, msg) {
-        const el = document.getElementById(id);
-        el.textContent = msg;
-        el.style.display = 'block';
-        setTimeout(() => el.style.display = 'none', 4000);
+    async function api(url){
+      const token=localStorage.getItem('token');
+      const h={'Content-Type':'application/json'};
+      if(token)h['Authorization']='Bearer '+token;
+      const r=await fetch(url,{headers:h});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
     }
-
-    async function doLogin() {
-        const email = document.getElementById('login-email').value.trim();
-        const pass = document.getElementById('login-password').value;
-        if (!email || !pass) { showAlert('login-error', 'Заполните все поля'); return; }
-        try {
-            const res = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password: pass })
-            });
-            if (!res.ok) { showAlert('login-error', 'Неверный email или пароль'); return; }
-            const token = await res.text();
-            localStorage.setItem('token', token);
-            updateAuthUI(true);
-            go('home');
-        } catch {
-            showAlert('login-error', 'Ошибка соединения с сервером');
-        }
+    async function loadPage(p){
+      try{
+        if(p==='home')await loadHome();
+        else if(p==='events')await loadEvents();
+        else if(p==='faculties')await loadFaculties();
+        else if(p==='media')await loadMedia();
+        else if(p==='partners')await loadPartners();
+        else if(p==='portfolio')await loadPortfolio();
+        else if(p==='profile')await loadProfile();
+      }catch(e){console.error('loadPage',p,e);}
     }
-
-    async function doRegister() {
-        const firstName = document.getElementById('reg-first').value.trim();
-        const lastName = document.getElementById('reg-last').value.trim();
-        const email = document.getElementById('reg-email').value.trim();
-        const password = document.getElementById('reg-pass').value;
-        if (!firstName || !lastName || !email || !password) { showAlert('reg-error', 'Заполните все поля'); return; }
-        try {
-            const res = await fetch('/api/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ firstName, lastName, email, password, role: 'STUDENT' })
-            });
-            if (!res.ok) { showAlert('reg-error', 'Ошибка регистрации'); return; }
-            showAlert('reg-ok', 'Аккаунт создан! Войдите в систему.');
-            setTimeout(() => go('login'), 1500);
-        } catch {
-            showAlert('reg-error', 'Ошибка соединения с сервером');
-        }
+    async function loadHome(){
+      const[ev,fa,pa,po]=await Promise.allSettled([api('/api/events'),api('/api/faculties'),api('/api/partners'),api('/api/portfolios')]);
+      const e=ev.status==='fulfilled'?ev.value:[];
+      const f=fa.status==='fulfilled'?fa.value:[];
+      const p=pa.status==='fulfilled'?pa.value:[];
+      const q=po.status==='fulfilled'?po.value:[];
+      document.getElementById('stat-events').textContent=e.length||'—';
+      document.getElementById('stat-faculties').textContent=f.length||'—';
+      document.getElementById('stat-partners').textContent=p.length||'—';
+      document.getElementById('stat-portfolio').textContent=q.length||'—';
+      document.getElementById('home-events').innerHTML=e.slice(0,3).map(x=>renderEventSmall(x)).join('')||emptyH('Нет мероприятий');
+      document.getElementById('home-faculties').innerHTML=f.slice(0,3).map((x,i)=>renderFacultySmall(x,i)).join('')||emptyH('Нет направлений');
     }
-
-    function logout() {
-        localStorage.removeItem('token');
-        updateAuthUI(false);
+    async function loadEvents(){
+      const d=await api('/api/events');
+      const el=document.getElementById('events-list');
+      if(!d.length){el.innerHTML=emptyH('Нет мероприятий');return;}
+      el.innerHTML='<div style="display:grid;gap:20px">'+d.map(e=>renderEvent(e)).join('')+'</div>';
+    }
+    function renderEvent(e){
+      const d=e.eventDate?new Date(e.eventDate):null;
+      const day=d?d.getDate():'—';
+      const month=d?d.toLocaleString('ru',{month:'long'}):'';
+      const time=d?d.toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'}):'';
+      const year=d?d.getFullYear():'';
+      const prog=e.program?`<div class="event-program"><div class="event-program-title">Программа</div>${esc(e.program)}</div>`:'';
+      return`<div class="event-card">
+        <div class="event-date-banner">
+          <div><div class="event-date-big">${day}</div></div>
+          <div><div class="event-date-month">${month} ${year}</div><div class="event-date-detail">${time?'Начало в '+time:'Время уточняется'}</div></div>
+        </div>
+        <div class="event-body">
+          <h3>${esc(e.title)}</h3>
+          <p>${esc(e.description||'')}</p>
+          ${e.location?`<div class="event-location">${esc(e.location)}</div>`:''}
+          ${prog}
+        </div>
+      </div>`;
+    }
+    function renderEventSmall(e){
+      const d=e.eventDate?new Date(e.eventDate):null;
+      const date=d?d.toLocaleDateString('ru',{day:'numeric',month:'short'}):'';
+      return`<div class="card" onclick="go('events')" style="cursor:pointer">
+        <div class="card-tag tag-event">Мероприятие</div>
+        <h3>${esc(e.title)}</h3>
+        <p>${esc((e.description||'').slice(0,100))}${(e.description||'').length>100?'...':''}</p>
+        <div class="card-meta">${date?`<span>${date}</span>`:''}${e.location?`<span>${esc(e.location.split(',')[0])}</span>`:''}</div>
+      </div>`;
+    }
+    async function loadFaculties(){
+      const d=await api('/api/faculties');
+      const el=document.getElementById('faculties-list');
+      if(!d.length){el.innerHTML=emptyH('Нет направлений');return;}
+      el.innerHTML=d.map((f,i)=>renderFaculty(f,i)).join('');
+    }
+    function renderFaculty(f,i){
+      return`<div class="faculty-card">
+        <div class="faculty-num">0${i+1}</div>
+        <h3>${esc(f.name)}</h3>
+        <p>${esc(f.description||'')}</p>
+        <div class="faculty-footer">
+          <div class="faculty-head">Куратор<strong>${esc(f.headName||'Не указан')}</strong></div>
+          <div class="faculty-count">${f.studentCount||'—'}<small>студентов</small></div>
+        </div>
+      </div>`;
+    }
+    function renderFacultySmall(f,i){
+      return`<div class="card" onclick="go('faculties')" style="cursor:pointer">
+        <div style="font-size:11px;font-weight:700;color:var(--purple);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Направление</div>
+        <h3>${esc(f.name)}</h3>
+        <p>${esc((f.description||'').slice(0,80))}...</p>
+        <div class="card-meta">${f.studentCount?`<span>${f.studentCount} студентов</span>`:''}</div>
+      </div>`;
+    }
+    let allMedia=[];
+    async function loadMedia(){
+      allMedia=await api('/api/media');
+      renderMedia('ALL');
+    }
+    function filterMedia(type,btn){
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMedia(type);
+    }
+    function renderMedia(type){
+      const el=document.getElementById('media-list');
+      const f=type==='ALL'?allMedia:allMedia.filter(m=>m.type===type);
+      if(!f.length){el.innerHTML=emptyH('Нет медиафайлов');return;}
+      el.innerHTML=f.map(m=>renderMediaCard(m)).join('');
+    }
+    function renderMediaCard(m){
+      const isV=m.type==='VIDEO';
+      const d=m.createdAt?new Date(m.createdAt).toLocaleDateString('ru'):'';
+      return`<div class="media-card">
+        <div class="media-thumb"><span class="media-type-badge ${isV?'tag-video':'tag-photo'}">${isV?'Видео':'Фото'}</span></div>
+        <div class="media-body"><h4>${esc(m.title||'Без названия')}</h4>${d?`<p>${d}</p>`:''}</div>
+      </div>`;
+    }
+    async function loadPartners(){
+      const d=await api('/api/partners');
+      const el=document.getElementById('partners-list');
+      if(!d.length){el.innerHTML=emptyH('Нет партнёров');return;}
+      el.innerHTML=d.map(p=>renderPartner(p)).join('');
+    }
+    function renderPartner(p){
+      const init=(p.companyName||'P')[0].toUpperCase();
+      const c=[];
+      if(p.email)c.push(`${esc(p.email)}`);
+      if(p.phone)c.push(`${esc(p.phone)}`);
+      if(p.contactPerson)c.push(`${esc(p.contactPerson)}`);
+      return`<div class="partner-card">
+        <div class="partner-avatar">${init}</div>
+        <h3>${esc(p.companyName)}</h3>
+        <p>${esc(p.description||'')}</p>
+        ${c.length?`<div class="partner-contacts">${c.map(x=>`<span>${x}</span>`).join('')}</div>`:''}
+      </div>`;
+    }
+    async function loadPortfolio(){
+      const d=await api('/api/portfolios');
+      const el=document.getElementById('portfolio-list');
+      if(!d.length){el.innerHTML=emptyH('Нет проектов');return;}
+      el.innerHTML=d.map(p=>renderPortfolio(p)).join('');
+    }
+    function renderPortfolio(p){
+      const link=p.projectUrl?`<a class="card-link" href="${esc(p.projectUrl)}" target="_blank" rel="noopener">Открыть проект →</a>`:'';
+      return`<div class="portfolio-card">
+        <div class="card-tag tag-portfolio">Проект</div>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.description||'')}</p>
+        ${link}
+      </div>`;
+    }
+    async function loadProfile(){
+      const el=document.getElementById('profile-content');
+      const token=localStorage.getItem('token');
+      if(!token){
+        el.innerHTML=`<div class="empty"><h3>Войдите в аккаунт</h3><p>Для просмотра профиля необходима авторизация</p><br><button class="btn btn-primary" onclick="go('login')" style="margin-top:16px">Войти</button></div>`;
+        return;
+      }
+      try{
+        const d=await api('/api/users/me');
+        const labels={ADMIN:'Администратор',TEACHER:'Преподаватель',STUDENT:'Студент'};
+        const init=((d.firstName||'')[0]+(d.lastName||'')[0]).toUpperCase()||'U';
+        const fields=[
+          {l:'Имя',v:[d.firstName,d.middleName,d.lastName].filter(Boolean).join(' ')},
+          {l:'Email',v:d.email},
+          {l:'Роль',v:`<span class="role-badge role-${d.role}">${labels[d.role]||d.role}</span>`},
+          {l:'Город',v:d.city},{l:'Направление',v:d.direction},
+          {l:'Группа',v:d.groupName},{l:'Предмет',v:d.subject},
+        ].filter(f=>f.v);
+        el.innerHTML=`<div class="profile-card">
+          <div class="profile-avatar">${init}</div>
+          <div class="profile-name">${esc([d.firstName,d.lastName].filter(Boolean).join(' '))}</div>
+          <div class="profile-email">${esc(d.email||'')}</div>
+          ${fields.map(f=>`<div class="profile-field"><label>${f.l}</label><span>${typeof f.v==='string'?esc(f.v):f.v}</span></div>`).join('')}
+        </div>`;
+      }catch{
+        el.innerHTML=`<div class="empty"><h3>Ошибка загрузки</h3><p>Не удалось получить данные профиля</p></div>`;
+      }
+    }
+    async function doLogin(){
+      const email=document.getElementById('login-email').value.trim();
+      const pass=document.getElementById('login-password').value;
+      if(!email||!pass){showAlert('login-error','Заполните все поля');return;}
+      try{
+        const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
+        if(!r.ok){showAlert('login-error','Неверный email или пароль');return;}
+        const token=await r.text();
+        localStorage.setItem('token',token);
+        updateAuthUI(true,email);
         go('home');
+      }catch{showAlert('login-error','Ошибка соединения с сервером');}
     }
-
-    function updateAuthUI(loggedIn) {
-        document.getElementById('nav-auth').style.display = loggedIn ? 'none' : 'flex';
-        document.getElementById('nav-user').style.display = loggedIn ? 'flex' : 'none';
+    async function doRegister(){
+      const firstName=document.getElementById('reg-first').value.trim();
+      const lastName=document.getElementById('reg-last').value.trim();
+      const middleName=document.getElementById('reg-middle').value.trim();
+      const email=document.getElementById('reg-email').value.trim();
+      const password=document.getElementById('reg-pass').value;
+      const city=document.getElementById('reg-city').value.trim();
+      const direction=document.getElementById('reg-direction').value;
+      if(!firstName||!lastName||!email||!password){showAlert('reg-error','Заполните обязательные поля');return;}
+      try{
+        const r=await fetch('/api/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({firstName,lastName,middleName,email,password,city,direction,role:'STUDENT'})});
+        if(!r.ok){showAlert('reg-error','Ошибка — возможно, email уже занят');return;}
+        showAlert('reg-ok','✓ Аккаунт создан! Выполняется вход...');
+        setTimeout(()=>go('login'),1500);
+      }catch{showAlert('reg-error','Ошибка соединения с сервером');}
     }
+    function logout(){localStorage.removeItem('token');updateAuthUI(false);go('home');}
+    function updateAuthUI(on,email){
+      document.getElementById('nav-auth').style.display=on?'none':'flex';
+      document.getElementById('nav-user').style.display=on?'flex':'none';
+      if(email)document.getElementById('nav-username').textContent=email.split('@')[0];
+    }
+    function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+    function emptyH(t,s){return`<div class="empty"><h3>${t}</h3>${s?`<p>${s}</p>`:''}</div>`;}
+    function showAlert(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',4000);}
 
-    // init
-    if (localStorage.getItem('token')) updateAuthUI(true);
+    const TEACHERS = [
+      {name:'Мария Кузнецова',role:'Директор IThub Ростов',subject:'Руководитель проектов в образовании'},
+      {name:'Виктория Колесникова',role:'Заместитель директора',subject:'Методическая работа · Цифровой маркетинг'},
+      {name:'Екатерина Пархоменко',role:'Заместитель директора',subject:'Организация учебного процесса'},
+      {name:'Вероника Инаркаева',role:'Преподаватель',subject:'Основные принципы UX/UI дизайна'},
+      {name:'Иван Сериков',role:'Преподаватель',subject:'HTML / CSS · Веб-разработка'},
+      {name:'Айшат Юсупова',role:'Преподаватель',subject:'СУБД · PostgreSQL · MySQL'},
+      {name:'Елена Дозорова',role:'Преподаватель',subject:'Управление веб-серверами · Кибербезопасность'},
+      {name:'Мария Фудулей',role:'Преподаватель',subject:'Введение в программирование'},
+      {name:'Анастасия Климашева',role:'Преподаватель',subject:'Английский язык'},
+      {name:'Николай Русланович',role:'Преподаватель',subject:'Физическая культура'},
+      {name:'Татьяна Шульга',role:'Преподаватель',subject:'Высшая математика'},
+      {name:'Светлана Зинякова',role:'Преподаватель',subject:'Английский язык'},
+      {name:'Эльмира Типаева',role:'Преподаватель',subject:'Математическая логика'},
+      {name:'Марта Просветкина',role:'Преподаватель',subject:'Литература'},
+      {name:'Мариетта Дадян',role:'Преподаватель',subject:'История'},
+      {name:'Светлана Межерицкая',role:'Преподаватель',subject:'Английский язык'},
+      {name:'Константин Поляков',role:'Преподаватель',subject:'Английский язык'},
+      {name:'Ирина Шеравнер',role:'Преподаватель',subject:'Английский язык'},
+      {name:'Дарья Пидченко',role:'Преподаватель',subject:'Английский язык'},
+      {name:'Мария Москвина',role:'Преподаватель',subject:'Английский язык'},
+    ];
+    function openTeacher(i){
+      const t=TEACHERS[i];
+      document.getElementById('tm-avatar').textContent=t.name[0];
+      document.getElementById('tm-name').textContent=t.name;
+      document.getElementById('tm-role').textContent=t.role;
+      document.getElementById('tm-subject').textContent=t.subject;
+      const m=document.getElementById('teacher-modal');
+      m.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeTeacher(e){
+      if(e&&e.target!==document.getElementById('teacher-modal'))return;
+      document.getElementById('teacher-modal').classList.remove('open');
+      document.body.style.overflow='';
+    }
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTeacher({target:document.getElementById('teacher-modal')});});
+    function scrollTeachers(dir){
+      const t=document.getElementById('teachers-track');
+      t.scrollBy({left:dir*260,behavior:'smooth'});
+    }
+    (function(){
+      const token=localStorage.getItem('token');
+      if(token){try{const p=JSON.parse(atob(token.split('.')[1]));updateAuthUI(true,p.sub||'');}catch{updateAuthUI(true);}}
+      loadPage('home');
+    })();
 </script>
 </body>
 </html>

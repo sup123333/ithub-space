@@ -1,6 +1,7 @@
 package ru.ithub.ithub_space.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import ru.ithub.ithub_space.model.Role;
 import ru.ithub.ithub_space.model.User;
 import ru.ithub.ithub_space.service.UserService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -35,10 +37,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        log.info("Попытка входа: {}", request.email());
         User user = userService.findByEmail(request.email());
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+            log.warn("Неверный пароль для: {}", request.email());
             return ResponseEntity.status(401).body("Неверный пароль");
         }
+        log.info("Успешный вход: {}", request.email());
         return ResponseEntity.ok(jwtService.generateToken(user.getEmail()));
     }
 

@@ -1,6 +1,7 @@
 package ru.ithub.ithub_space.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +11,7 @@ import ru.ithub.ithub_space.model.Role;
 import ru.ithub.ithub_space.model.User;
 import ru.ithub.ithub_space.repository.UserRepository;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
@@ -19,8 +21,12 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.debug("Загрузка пользователя по email: {}", email);
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден: " + email));
+                .orElseThrow(() -> {
+                    log.warn("Пользователь не найден: {}", email);
+                    return new UsernameNotFoundException("Пользователь не найден: " + email);
+                });
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())
@@ -33,7 +39,10 @@ public class UserService implements UserDetailsService {
                          String password, String city,
                          String direction, Role role) {
 
+        log.info("Регистрация нового пользователя: {}", email);
+
         if (userRepository.existsByEmail(email)) {
+            log.warn("Попытка регистрации с уже существующим email: {}", email);
             throw new RuntimeException("Пользователь с таким email уже существует");
         }
 
@@ -47,11 +56,17 @@ public class UserService implements UserDetailsService {
         user.setDirection(direction);
         user.setRole(role);
 
-        return userRepository.save(user);
+        User saved = userRepository.save(user);
+        log.debug("Пользователь зарегистрирован: {} {} ({})", firstName, lastName, email);
+        return saved;
     }
 
     public User findByEmail(String email) {
+        log.debug("Поиск пользователя по email: {}", email);
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+                .orElseThrow(() -> {
+                    log.warn("Пользователь не найден: {}", email);
+                    return new RuntimeException("Пользователь не найден");
+                });
     }
 }
