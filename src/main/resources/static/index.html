@@ -34,7 +34,7 @@
           backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
           border-bottom:1px solid var(--border);display:flex;align-items:center;
           padding:0 40px;z-index:200;gap:12px}
-        .nav-logo{display:flex;align-items:center;gap:10px;margin-right:32px;cursor:pointer;text-decoration:none}
+        .nav-logo{display:flex;align-items:center;gap:10px;margin-right:32px;cursor:pointer;text-decoration:none;color:var(--text)}
         .nav-logo-img{height:36px;width:auto;flex-shrink:0}
         .nav-logo-text{font-size:15px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
         .scroller-section{overflow:hidden;padding:0 0 60px}
@@ -482,22 +482,53 @@
         .buildings-city-group.open .buildings-city-body{grid-template-rows:1fr}
         .buildings-city-inner{overflow:hidden;padding:0 16px;transition:padding .35s cubic-bezier(.25,.46,.45,.94)}
         .buildings-city-group.open .buildings-city-inner{padding:0 16px 16px}
+        /* ── Admission page ── */
+        .adm-perks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px}
+        .adm-perk{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 16px;display:flex;gap:14px;align-items:flex-start;transition:all .2s}
+        .adm-perk:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
+        .adm-perk-icon{font-size:24px;flex-shrink:0;line-height:1}
+        .adm-perk h4{font-size:13px;font-weight:700;margin-bottom:3px}
+        .adm-perk p{font-size:12px;color:var(--muted);line-height:1.5}
+        .adm-directions{display:flex;flex-wrap:wrap;gap:8px}
+        .adm-dir-btn{padding:8px 18px;border-radius:100px;border:1px solid var(--border);
+          background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+        .adm-dir-btn:hover{border-color:rgba(151,71,255,.4);color:var(--text)}
+        .adm-dir-btn.active{background:var(--purple-dim);border-color:rgba(151,71,255,.4);color:var(--purple)}
+        .adm-layout{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;margin-top:8px}
+        .adm-form-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px}
+        .adm-info{display:flex;flex-direction:column;gap:16px}
+        .adm-info-block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+        .adm-info-block h4{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:16px}
+        .adm-steps{display:flex;flex-direction:column;gap:14px}
+        .adm-step{display:flex;gap:14px;align-items:flex-start}
+        .adm-step-num{width:28px;height:28px;border-radius:50%;background:var(--purple-dim);
+          border:1px solid rgba(151,71,255,.3);color:var(--purple);font-size:12px;font-weight:800;
+          display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .adm-step strong{font-size:13px;display:block;margin-bottom:2px}
+        .adm-step p{font-size:12px;color:var(--muted);line-height:1.4;margin:0}
+        .adm-contacts{display:flex;flex-direction:column;gap:10px}
+        .adm-contact{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text);text-decoration:none;transition:color .15s}
+        .adm-contact:hover{color:var(--purple)}
+        .adm-contact span:first-child{font-size:16px;flex-shrink:0}
+        @media(max-width:900px){.adm-perks{grid-template-columns:repeat(2,1fr)}.adm-layout{grid-template-columns:1fr}}
+        @media(max-width:480px){.adm-perks{grid-template-columns:1fr}.adm-form-wrap{padding:20px 16px}}
     </style>
 </head>
 <body>
 <nav>
     <a class="nav-logo" onclick="go('home');closeMobileNav()">
         <svg class="nav-logo-img" viewBox="0 0 220 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1.5" y="1.5" width="33" height="33" fill="none" stroke="white" stroke-width="2.5"/>
-            <rect x="12" y="12" width="11" height="11" fill="white"/>
-            <text x="46" y="22" font-family="Arial" font-weight="900" font-size="20" fill="white">IThub</text>
-            <text x="46" y="34" font-family="Arial" font-weight="400" font-size="11" fill="#888888">Ростов-на-Дону</text>
+            <rect x="1.5" y="1.5" width="33" height="33" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <rect x="12" y="12" width="11" height="11" fill="currentColor"/>
+            <text x="46" y="22" font-family="Arial" font-weight="900" font-size="20" fill="currentColor">IThub</text>
+            <text x="46" y="34" font-family="Arial" font-weight="400" font-size="11" fill="var(--muted)">Ростов-на-Дону</text>
         </svg>
     </a>
     <div class="nav-links">
         <a onclick="go('home')" class="active" id="nav-home">Главная</a>
         <a onclick="go('events')" id="nav-events">Мероприятия</a>
         <a onclick="go('faculties')" id="nav-faculties">Направления</a>
+        <a onclick="go('admission')" id="nav-admission" style="color:var(--purple);font-weight:700">Поступить</a>
         <a onclick="go('media')" id="nav-media">Медиа</a>
         <a onclick="go('partners')" id="nav-partners">Партнёры</a>
         <a onclick="go('portfolio')" id="nav-portfolio">Портфолио</a>
@@ -522,6 +553,7 @@
     <a onclick="go('home');closeMobileNav()" id="mob-home">Главная</a>
     <a onclick="go('events');closeMobileNav()" id="mob-events">Мероприятия</a>
     <a onclick="go('faculties');closeMobileNav()" id="mob-faculties">Направления</a>
+    <a onclick="go('admission');closeMobileNav()" id="mob-admission" style="color:var(--purple);font-weight:700">Поступить</a>
     <a onclick="go('media');closeMobileNav()" id="mob-media">Медиа</a>
     <a onclick="go('partners');closeMobileNav()" id="mob-partners">Партнёры</a>
     <a onclick="go('portfolio');closeMobileNav()" id="mob-portfolio">Портфолио</a>
@@ -551,7 +583,8 @@
                 <h1>Всё об<br><span class="accent">IT Hub</span><br>в одном месте</h1>
                 <p class="hero-sub">Мероприятия, направления, медиа, портфолио студентов и партнёры колледжа — больше не нужно искать по соцсетям и разным сайтам</p>
                 <div class="hero-actions">
-                    <button class="btn btn-primary" onclick="go('events')">Смотреть мероприятия</button>
+                    <button class="btn btn-primary" onclick="go('admission')">Поступить в IThub</button>
+                    <button class="btn btn-outline" onclick="go('events')">Мероприятия</button>
                     <button class="btn btn-outline" onclick="go('faculties')">Направления</button>
                 </div>
             </div>
@@ -695,6 +728,106 @@
         </div>
         <div class="section"><div id="profile-content"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
     </div>
+    <!-- ADMISSION -->
+    <div class="page" id="page-admission">
+        <div class="hero" style="min-height:40vh">
+            <div class="hero-blob"></div>
+            <div class="hero-blob2"></div>
+            <div class="hero-content" style="padding:32px">
+                <div class="hero-eyebrow"><div class="hero-dot"></div>Приёмная комиссия · 2025–2026</div>
+                <h1 style="font-size:clamp(32px,6vw,60px)">Поступи в<br><span class="accent">IThub ДГТУ</span></h1>
+                <p class="hero-sub" style="font-size:15px">ЕГЭ и ОГЭ не требуются — только аттестат или диплом. Обучение после 9, 10 и 11 класса.</p>
+            </div>
+        </div>
+        <div class="section" style="padding-top:0">
+            <!-- Преимущества -->
+            <div class="adm-perks">
+                <div class="adm-perk"><div class="adm-perk-icon">📄</div><div><h4>Без ЕГЭ и ОГЭ</h4><p>Только аттестат или диплом об образовании</p></div></div>
+                <div class="adm-perk"><div class="adm-perk-icon">🎓</div><div><h4>Диплом гос. образца</h4><p>Выдаётся совместно с ДГТУ</p></div></div>
+                <div class="adm-perk"><div class="adm-perk-icon">💼</div><div><h4>Трудоустройство</h4><p>Партнёры: Яндекс, СберТех, Ростелеком</p></div></div>
+                <div class="adm-perk"><div class="adm-perk-icon">⚡</div><div><h4>Бизнес-роли</h4><p>Учим профессиям, востребованным прямо сейчас</p></div></div>
+            </div>
+
+            <!-- Направления-кнопки -->
+            <div style="margin:40px 0 16px">
+                <h3 style="font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:16px">Выбери направление</h3>
+                <div class="adm-directions" id="adm-directions">
+                    <button class="adm-dir-btn active" onclick="selectDir(this,'Разработка')">💻 Разработка</button>
+                    <button class="adm-dir-btn" onclick="selectDir(this,'Программирование')">⚙️ Программирование</button>
+                    <button class="adm-dir-btn" onclick="selectDir(this,'Кибербезопасность')">🔐 Кибербезопасность</button>
+                    <button class="adm-dir-btn" onclick="selectDir(this,'Цифровой маркетинг')">📱 Цифровой маркетинг</button>
+                    <button class="adm-dir-btn" onclick="selectDir(this,'Контент-маркетинг')">✍️ Контент-маркетинг</button>
+                    <button class="adm-dir-btn" onclick="selectDir(this,'Бренд-маркетинг')">🎯 Бренд-маркетинг</button>
+                </div>
+            </div>
+
+            <!-- Форма + инфо -->
+            <div class="adm-layout">
+                <!-- Форма -->
+                <div class="adm-form-wrap">
+                    <h3 style="font-size:18px;font-weight:800;margin-bottom:6px">Оставить заявку</h3>
+                    <p style="font-size:13px;color:var(--muted);margin-bottom:24px">Приёмная комиссия свяжется в течение 1 рабочего дня</p>
+                    <div class="alert alert-error" id="adm-error" style="display:none"></div>
+                    <div class="alert alert-success" id="adm-ok" style="display:none"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Имя *</label><input id="adm-first" type="text" placeholder="Иван"></div>
+                        <div class="form-group"><label>Фамилия *</label><input id="adm-last" type="text" placeholder="Иванов"></div>
+                    </div>
+                    <div class="form-group"><label>Email *</label><input id="adm-email" type="email" placeholder="ivan@example.com"></div>
+                    <div class="form-group"><label>Телефон</label><input id="adm-phone" type="tel" placeholder="+7 (999) 000-00-00"></div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Направление *</label>
+                            <select id="adm-direction">
+                                <option value="">Выберите направление</option>
+                                <option>Разработка</option>
+                                <option>Программирование</option>
+                                <option>Кибербезопасность</option>
+                                <option>Цифровой маркетинг</option>
+                                <option>Контент-маркетинг</option>
+                                <option>Бренд-маркетинг</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>После какого класса</label>
+                            <select id="adm-grade">
+                                <option value="">Выберите</option>
+                                <option>9 класса</option>
+                                <option>10 класса</option>
+                                <option>11 класса</option>
+                                <option>Колледжа / вуза</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Вопрос или комментарий</label><textarea id="adm-comment" rows="3" placeholder="Напишите если есть вопросы..." style="width:100%;background:var(--form-input-bg);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-size:14px;outline:none;resize:vertical;font-family:Arial,sans-serif;transition:border-color .15s" onfocus="this.style.borderColor='var(--purple)'" onblur="this.style.borderColor='var(--border)'"></textarea></div>
+                    <button class="btn btn-primary form-submit" onclick="submitAdmission()">Отправить заявку →</button>
+                    <p style="font-size:11px;color:var(--muted2);margin-top:12px;line-height:1.6">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с политикой конфиденциальности IThub.</p>
+                </div>
+
+                <!-- Контакты и шаги -->
+                <div class="adm-info">
+                    <div class="adm-info-block">
+                        <h4>Как поступить</h4>
+                        <div class="adm-steps">
+                            <div class="adm-step"><div class="adm-step-num">1</div><div><strong>Оставьте заявку</strong><p>Заполните форму — мы перезвоним</p></div></div>
+                            <div class="adm-step"><div class="adm-step-num">2</div><div><strong>Собеседование</strong><p>Познакомимся и расскажем о программе</p></div></div>
+                            <div class="adm-step"><div class="adm-step-num">3</div><div><strong>Документы</strong><p>Аттестат, паспорт, договор и оплата</p></div></div>
+                            <div class="adm-step"><div class="adm-step-num">4</div><div><strong>Добро пожаловать!</strong><p>Вы студент IThub ДГТУ</p></div></div>
+                        </div>
+                    </div>
+                    <div class="adm-info-block">
+                        <h4>Контакты приёмной комиссии</h4>
+                        <div class="adm-contacts">
+                            <a class="adm-contact" href="tel:+78633062019"><span>📞</span><span>+7 (863) 306-20-19</span></a>
+                            <a class="adm-contact" href="mailto:priem.rostov@ithub.ru"><span>✉️</span><span>priem.rostov@ithub.ru</span></a>
+                            <a class="adm-contact" href="https://t.me/+qTU3XWwfuCQ1OTBi" target="_blank" rel="noopener"><span>✈️</span><span>Чат абитуриентов в Telegram</span></a>
+                            <div class="adm-contact"><span>📍</span><span>пл. Гагарина, д. 1, Ростов-на-Дону</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- LOGIN -->
     <div class="page" id="page-login">
         <div class="auth-wrap">
@@ -778,7 +911,7 @@
 </main>
 <footer><strong>IT Hub Space</strong> · IThub ДГТУ · Ростов-на-Дону · 2026</footer>
 <script>
-    const pages=['home','events','faculties','media','partners','portfolio','buildings','profile','login','register'];
+    const pages=['home','events','faculties','media','partners','portfolio','buildings','admission','profile','login','register'];
     const loaded={};
     function go(p){
       pages.forEach(x=>{
@@ -1221,6 +1354,48 @@
       const ml=document.getElementById('theme-mob-label');
       if(mi)mi.textContent=icon;
       if(ml)ml.textContent=label;
+    }
+    // ── Admission ──
+    function selectDir(btn, dir) {
+      document.querySelectorAll('.adm-dir-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const sel = document.getElementById('adm-direction');
+      if(sel) sel.value = dir;
+    }
+    async function submitAdmission() {
+      const first = document.getElementById('adm-first').value.trim();
+      const last  = document.getElementById('adm-last').value.trim();
+      const email = document.getElementById('adm-email').value.trim();
+      const dir   = document.getElementById('adm-direction').value;
+      const phone = document.getElementById('adm-phone').value.trim();
+      const grade = document.getElementById('adm-grade').value;
+      const comment = document.getElementById('adm-comment').value.trim();
+      if(!first||!last||!email||!dir){
+        showAlert('adm-error','Заполните обязательные поля: имя, фамилия, email и направление');return;
+      }
+      // Регистрируем как абитуриента через существующий API
+      try{
+        const r = await fetch('/api/auth/register',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            firstName:first, lastName:last, email, password: Math.random().toString(36).slice(2)+'Aa1!',
+            city:'Ростов-на-Дону', direction:dir, role:'APPLICANT',
+            middleName: [grade, phone, comment].filter(Boolean).join(' | ')
+          })
+        });
+        if(r.ok){
+          showAlert('adm-ok','✓ Заявка отправлена! Приёмная комиссия свяжется с вами в течение 1 рабочего дня.');
+          ['adm-first','adm-last','adm-email','adm-phone','adm-comment'].forEach(id=>{document.getElementById(id).value='';});
+          document.getElementById('adm-direction').value='';
+          document.getElementById('adm-grade').value='';
+        } else if(r.status===409||r.status===400){
+          showAlert('adm-error','Заявка с таким email уже существует. Мы с вами свяжемся!');
+        } else {
+          showAlert('adm-error','Ошибка отправки. Позвоните нам: +7 (863) 306-20-19');
+        }
+      }catch{
+        showAlert('adm-error','Нет соединения с сервером. Позвоните: +7 (863) 306-20-19');
+      }
     }
     // ── Mobile nav ──
     function toggleMobileNav(){
