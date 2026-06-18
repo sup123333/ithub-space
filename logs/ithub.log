@@ -1,1 +1,30 @@
 2026-06-19 00:04:30 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h10m229ms469µs600ns).
+2026-06-19 00:18:47 [HikariPool-1:housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m21s552ms277µs300ns).
+2026-06-19 00:32:40 [main] INFO  r.i.i.IthubSpaceApplication - Starting IthubSpaceApplication using Java 21.0.11 with PID 12772 (C:\Users\arnau\IdeaProjects\ithub-space\build\classes\java\main started by arnau in C:\Users\arnau\IdeaProjects\ithub-space)
+2026-06-19 00:32:40 [main] DEBUG r.i.i.IthubSpaceApplication - Running with Spring Boot v3.5.15, Spring v6.2.19
+2026-06-19 00:32:40 [main] INFO  r.i.i.IthubSpaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 00:32:43 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-19 00:32:43 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 00:32:43 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.55]
+2026-06-19 00:32:43 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 00:32:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 00:32:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@362a6aa5
+2026-06-19 00:32:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 00:32:48 [main] DEBUG r.ithub.ithub_space.config.JwtFilter - Filter 'jwtFilter' configured for use
+2026-06-19 00:32:49 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-19 00:32:49 [main] INFO  r.i.i.IthubSpaceApplication - Started IthubSpaceApplication in 10.544 seconds (process running for 12.204)
+2026-06-19 00:33:16 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-19 00:40:58 [main] INFO  r.i.i.IthubSpaceApplication - Starting IthubSpaceApplication using Java 21.0.11 with PID 30540 (C:\Users\arnau\IdeaProjects\ithub-space\build\classes\java\main started by arnau in C:\Users\arnau\IdeaProjects\ithub-space)
+2026-06-19 00:40:58 [main] DEBUG r.i.i.IthubSpaceApplication - Running with Spring Boot v3.5.15, Spring v6.2.19
+2026-06-19 00:40:58 [main] INFO  r.i.i.IthubSpaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-19 00:41:01 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-19 00:41:01 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-19 00:41:01 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.55]
+2026-06-19 00:41:01 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-19 00:41:03 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-19 00:41:03 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@52f43225
+2026-06-19 00:41:03 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-19 00:41:06 [main] DEBUG r.ithub.ithub_space.config.JwtFilter - Filter 'jwtFilter' configured for use
+2026-06-19 00:41:08 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-19 00:41:08 [main] INFO  r.i.i.IthubSpaceApplication - Started IthubSpaceApplication in 10.502 seconds (process running for 11.16)
+2026-06-19 00:41:35 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'

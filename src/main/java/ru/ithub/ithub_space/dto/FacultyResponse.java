@@ -8,7 +8,10 @@ public record FacultyResponse(
         String description,
         String headName,
         Integer studentCount,
-        String imageUrl
+        String imageUrl,
+        String businessRoles,
+        String skills,
+        String curatorPhoto
 ) {
     public static FacultyResponse from(FacultyEntity faculty) {
         return new FacultyResponse(
@@ -17,7 +20,10 @@ public record FacultyResponse(
                 faculty.getDescription(),
                 faculty.getHeadName(),
                 faculty.getStudentCount(),
-                faculty.getImageUrl()
+                faculty.getImageUrl(),
+                faculty.getBusinessRoles(),
+                faculty.getSkills(),
+                faculty.getCuratorPhoto()
         );
     }
 }

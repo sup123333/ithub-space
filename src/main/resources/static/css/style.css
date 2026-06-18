@@ -112,6 +112,7 @@
         .tag-event{background:rgba(151,71,255,.15);color:var(--purple)}
         .tag-photo{background:rgba(34,197,94,.12);color:var(--green)}
         .tag-video{background:rgba(251,191,36,.12);color:#FBBF24}
+        .tag-space{background:rgba(151,71,255,.12);color:var(--purple)}
         .tag-partner{background:rgba(79,142,247,.12);color:#4F8EF7}
         .tag-portfolio{background:rgba(236,72,153,.12);color:#EC4899}
         .tag-building{background:rgba(76,194,241,.12);color:#4CC2F1}
@@ -261,6 +262,12 @@
         footer{border-top:1px solid var(--border);padding:32px;text-align:center;
           color:var(--muted2);font-size:13px;position:relative;z-index:1}
         footer strong{color:var(--purple)}
+        .footer-content{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+        .footer-social{display:flex;gap:10px}
+        .social-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);
+          color:var(--muted);display:flex;align-items:center;justify-content:center;
+          text-decoration:none;transition:all .15s}
+        .social-btn:hover{color:var(--purple);border-color:var(--purple)}
         @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
         /* ── Burger button (hidden on desktop) ── */
@@ -460,6 +467,47 @@
         @media(max-width:700px){
           .tm-photo-side{display:none}
           .tm-info-side{width:100%;border-left:none;padding:48px 28px}}
+        /* ── Faculty modal ── */
+        #faculty-modal{display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:24px}
+        #faculty-modal.open{display:flex}
+        .fm-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);
+          backdrop-filter:blur(6px);cursor:pointer}
+        .fm-panel{position:relative;background:var(--photo-bg);border:1px solid var(--border);
+          border-radius:24px;max-width:600px;width:100%;max-height:86vh;overflow-y:auto;
+          padding:48px;animation:fmIn .3s cubic-bezier(.25,.46,.45,.94)}
+        @keyframes fmIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+        .fm-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.07);
+          border:1px solid rgba(255,255,255,.1);color:var(--muted);width:36px;height:36px;
+          border-radius:50%;cursor:pointer;font-size:15px;transition:all .15s;
+          display:flex;align-items:center;justify-content:center;line-height:1}
+        .fm-close:hover{background:rgba(151,71,255,.25);border-color:var(--purple);color:#fff}
+        .fm-tag{display:inline-flex;align-items:center;gap:6px;
+          background:var(--purple-dim);border:1px solid rgba(151,71,255,.25);
+          color:var(--purple);padding:5px 14px;border-radius:100px;
+          font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+        .fm-title{font-size:clamp(24px,3vw,32px);font-weight:900;line-height:1.15;margin-bottom:14px}
+        .fm-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+        .fm-section-title{font-size:12px;color:var(--muted2);text-transform:uppercase;
+          letter-spacing:1px;font-weight:700;margin-bottom:12px}
+        .fm-roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+        .fm-role-chip{background:var(--card);border:1px solid var(--border);padding:7px 14px;
+          border-radius:100px;font-size:13px;font-weight:600;color:var(--text)}
+        .fm-skills{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+        .fm-skill-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text);line-height:1.5}
+        .fm-skill-check{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--purple-dim);
+          color:var(--purple);display:flex;align-items:center;justify-content:center;font-size:11px;
+          font-weight:900;margin-top:1px}
+        .fm-curator{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);
+          border:1px solid var(--border);border-radius:14px;margin-bottom:24px}
+        .fm-curator-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;
+          object-position:center 30%;flex-shrink:0;background:var(--purple-dim);
+          display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--purple)}
+        .fm-curator-info{display:flex;flex-direction:column}
+        .fm-curator-role{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px}
+        .fm-curator-name{font-size:14px;font-weight:700}
+        .fm-cta{width:100%}
+        @media(max-width:560px){.fm-panel{padding:36px 22px}}
+        .faculty-card{cursor:pointer}
         .student-card{cursor:pointer}
         .student-card:active{transform:scale(.97)}
         /* ── Buildings accordion ── */

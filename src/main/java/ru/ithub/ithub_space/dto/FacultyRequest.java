@@ -7,7 +7,10 @@ public record FacultyRequest(
         String description,
         String headName,
         Integer studentCount,
-        String imageUrl
+        String imageUrl,
+        String businessRoles,
+        String skills,
+        String curatorPhoto
 ) {
     public FacultyEntity toEntity() {
         FacultyEntity faculty = new FacultyEntity();
@@ -16,6 +19,9 @@ public record FacultyRequest(
         faculty.setHeadName(headName);
         faculty.setStudentCount(studentCount);
         faculty.setImageUrl(imageUrl);
+        faculty.setBusinessRoles(businessRoles);
+        faculty.setSkills(skills);
+        faculty.setCuratorPhoto(curatorPhoto);
         return faculty;
     }
 }

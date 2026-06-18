@@ -84,14 +84,16 @@
         <div class="card-meta">${date?`<span>${date}</span>`:''}${e.location?`<span>${esc(e.location.split(',')[0])}</span>`:''}</div>
       </div>`;
     }
+    let allFaculties=[];
     async function loadFaculties(){
       const d=await api('/api/faculties');
+      allFaculties=d;
       const el=document.getElementById('faculties-list');
       if(!d.length){el.innerHTML=emptyH('Нет направлений');return;}
       el.innerHTML=d.map((f,i)=>renderFaculty(f,i)).join('');
     }
     function renderFaculty(f,i){
-      return`<div class="faculty-card">
+      return`<div class="faculty-card" onclick="openFaculty(${i})">
         <div class="faculty-num">0${i+1}</div>
         <h3>${esc(f.name)}</h3>
         <p>${esc(f.description||'')}</p>
@@ -100,6 +102,48 @@
           <div class="faculty-count">${f.studentCount||'—'}<small>студентов</small></div>
         </div>
       </div>`;
+    }
+    let currentFacultyName=null;
+    function openFaculty(i){
+      const f=allFaculties[i];
+      if(!f)return;
+      currentFacultyName=f.name;
+      document.getElementById('fm-title').textContent=f.name;
+      document.getElementById('fm-desc').textContent=f.description||'';
+      const roles=(f.businessRoles||'').split('·').map(s=>s.trim()).filter(Boolean);
+      document.getElementById('fm-roles-block').style.display=roles.length?'':'none';
+      document.getElementById('fm-roles').innerHTML=roles.map(r=>`<span class="fm-role-chip">${esc(r)}</span>`).join('');
+      const skills=(f.skills||'').split('·').map(s=>s.trim()).filter(Boolean);
+      document.getElementById('fm-skills-block').style.display=skills.length?'':'none';
+      document.getElementById('fm-skills').innerHTML=skills.map(s=>`<div class="fm-skill-item"><span class="fm-skill-check">✓</span><span>${esc(s)}</span></div>`).join('');
+      const curatorEl=document.getElementById('fm-curator');
+      if(f.headName){
+        const avatar=f.curatorPhoto
+          ?`<img class="fm-curator-avatar" src="${esc(f.curatorPhoto)}" alt="${esc(f.headName)}">`
+          :`<div class="fm-curator-avatar">${esc(f.headName[0])}</div>`;
+        curatorEl.style.display='flex';
+        curatorEl.innerHTML=`${avatar}<div class="fm-curator-info"><div class="fm-curator-role">Куратор направления</div><div class="fm-curator-name">${esc(f.headName)}</div></div>`;
+      } else {
+        curatorEl.style.display='none';
+      }
+      document.getElementById('faculty-modal').classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeFaculty(){
+      document.getElementById('faculty-modal').classList.remove('open');
+      document.body.style.overflow='';
+    }
+    function goToAdmissionWithDirection(dirName){
+      closeFaculty();
+      go('admission');
+      if(!dirName)return;
+      const btns=document.querySelectorAll('.adm-dir-btn');
+      btns.forEach(b=>b.classList.remove('active'));
+      const target=Array.from(btns).find(b=>b.textContent.trim().endsWith(dirName));
+      if(target)target.classList.add('active');
+      const sel=document.getElementById('adm-direction');
+      if(sel)sel.value=dirName;
+      setTimeout(()=>document.getElementById('adm-directions')?.scrollIntoView({behavior:'smooth',block:'center'}),150);
     }
     function renderFacultySmall(f,i){
       return`<div class="card" onclick="go('faculties')" style="cursor:pointer">
@@ -126,16 +170,17 @@
       el.innerHTML=f.map(m=>renderMediaCard(m)).join('');
     }
 function renderMediaCard(m){
-  const isV=m.type==='VIDEO';
+  const tagClass=m.type==='VIDEO'?'tag-video':m.type==='SPACE'?'tag-space':'tag-photo';
+  const tagLabel=m.type==='VIDEO'?'Видео':m.type==='SPACE'?'Пространство':'Фото';
   const d=m.createdAt?new Date(m.createdAt).toLocaleDateString('ru'):'';
   const thumb=m.thumbnailUrl||m.url||'';
   const imgHtml=thumb
     ?`<img src="${esc(thumb)}" alt="${esc(m.title||'')}" style="width:100%;height:100%;object-fit:cover;border-radius:12px 12px 0 0">`
-    :`<span class="media-type-badge ${isV?'tag-video':'tag-photo'}">${isV?'Видео':'Фото'}</span>`;
+    :`<span class="media-type-badge ${tagClass}">${tagLabel}</span>`;
   return`<div class="media-card">
     <div class="media-thumb" style="background:none;overflow:hidden">${imgHtml}</div>
     <div class="media-body">
-      <span class="media-type-badge ${isV?'tag-video':'tag-photo'}" style="margin-bottom:6px;display:inline-block">${isV?'Видео':'Фото'}</span>
+      <span class="media-type-badge ${tagClass}" style="margin-bottom:6px;display:inline-block">${tagLabel}</span>
       <h4>${esc(m.title||'Без названия')}</h4>
       ${m.description?`<p>${esc(m.description)}</p>`:''}
       ${d?`<p style="font-size:11px;color:var(--muted2)">${d}</p>`:''}
@@ -440,7 +485,7 @@ function renderMediaCard(m){
       document.getElementById('teacher-modal').classList.remove('open');
       document.body.style.overflow='';
     }
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTeacher();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTeacher();closeFaculty();}});
     function scrollTeachers(dir){
       const t=document.getElementById('teachers-track');
       t.scrollBy({left:dir*260,behavior:'smooth'});
@@ -515,6 +560,28 @@ function renderMediaCard(m){
         }
       }catch{
         showAlert('adm-error','Нет соединения с сервером. Позвоните: +7 (863) 306-20-19');
+      }
+    }
+    async function submitExcursion(){
+      const name = document.getElementById('exc-name').value.trim();
+      const phone = document.getElementById('exc-phone').value.trim();
+      const email = document.getElementById('exc-email').value.trim();
+      if(!name||!phone){
+        showAlert('exc-error','Заполните имя и телефон');return;
+      }
+      try{
+        const r = await fetch('/api/excursions',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({name, phone, email: email||null})
+        });
+        if(r.ok){
+          showAlert('exc-ok','✓ Заявка принята! Мы свяжемся с вами, чтобы договориться о времени.');
+          ['exc-name','exc-phone','exc-email'].forEach(id=>{document.getElementById(id).value='';});
+        } else {
+          showAlert('exc-error','Ошибка отправки. Позвоните нам: +7 (863) 306-20-19');
+        }
+      }catch{
+        showAlert('exc-error','Нет соединения с сервером. Позвоните: +7 (863) 306-20-19');
       }
     }
     // ── Mobile nav ──

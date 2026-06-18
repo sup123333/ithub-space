@@ -23,4 +23,12 @@ public class FacultyEntity {
     private Integer studentCount;
 
     private String imageUrl;
+
+    @Column(columnDefinition = "TEXT")
+    private String businessRoles;
+
+    @Column(columnDefinition = "TEXT")
+    private String skills;
+
+    private String curatorPhoto;
 }

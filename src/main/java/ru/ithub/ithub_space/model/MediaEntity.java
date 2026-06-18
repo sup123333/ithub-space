@@ -33,6 +33,6 @@ public class MediaEntity {
     private UserEntity author;
 
     public enum MediaType {
-        PHOTO, VIDEO
+        PHOTO, VIDEO, SPACE
     }
 }

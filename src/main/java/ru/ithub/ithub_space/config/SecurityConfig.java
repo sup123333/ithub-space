@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/partners").permitAll()
                 .requestMatchers("/api/buildings/**").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/media/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/excursions").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
