@@ -14,7 +14,6 @@
         }
         html{scroll-behavior:smooth}
         body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-        /* NAV */
         nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(0,0,0,0.85);
           backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
           border-bottom:1px solid var(--border);display:flex;align-items:center;
@@ -22,7 +21,6 @@
         .nav-logo{display:flex;align-items:center;gap:10px;margin-right:32px;cursor:pointer;text-decoration:none}
         .nav-logo-img{height:36px;width:auto;flex-shrink:0}
         .nav-logo-text{font-size:15px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.5px}
-        /* SCROLLER */
         .scroller-section{overflow:hidden;padding:0 0 60px}
         .scroller-label{max-width:1100px;margin:0 auto;padding:0 32px 24px;display:flex;align-items:center;justify-content:space-between}
         .scroller-label h3{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:-.5px}
@@ -57,11 +55,9 @@
         .btn-outline:hover{border-color:var(--purple);color:var(--purple)}
         .btn-primary{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;
           box-shadow:0 4px 20px rgba(151,71,255,.3)}
-        /* LAYOUT */
         main{padding-top:var(--nav-h);position:relative;z-index:1}
         .page{display:none}.page.active{display:block}
         .section{max-width:1100px;margin:0 auto;padding:60px 32px}
-        /* HERO */
         .hero{position:relative;min-height:88vh;display:flex;align-items:center;
           justify-content:center;overflow:hidden;text-align:center}
         .hero-blob{position:absolute;width:700px;height:500px;background:var(--purple2);
@@ -90,17 +86,14 @@
         .stat-num{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--purple),#C084FC);
           -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
         .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
-        /* PAGE HEADER */
         .page-head{padding:56px 32px 0;max-width:1100px;margin:0 auto}
         .page-head-eyebrow{font-size:12px;font-weight:700;color:var(--purple);
           text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
         .page-head h2{font-size:40px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin-bottom:10px}
         .page-head p{color:var(--muted);font-size:15px;line-height:1.6}
-        /* GRIDS */
         .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
         .grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-        /* CARD */
         .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;
           transition:all .2s;cursor:default;position:relative;overflow:hidden}
         .card:hover{border-color:rgba(151,71,255,.25);background:var(--card-hov);transform:translateY(-2px)}
@@ -111,6 +104,7 @@
         .tag-video{background:rgba(251,191,36,.12);color:#FBBF24}
         .tag-partner{background:rgba(79,142,247,.12);color:#4F8EF7}
         .tag-portfolio{background:rgba(236,72,153,.12);color:#EC4899}
+        .tag-building{background:rgba(76,194,241,.12);color:#4CC2F1}
         .card h3{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3}
         .card p{font-size:13px;color:var(--muted);line-height:1.6}
         .card-meta{display:flex;gap:16px;margin-top:16px;padding-top:16px;
@@ -118,7 +112,6 @@
         .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;
           font-size:13px;color:var(--purple);text-decoration:none;font-weight:600}
         .card-link:hover{text-decoration:underline}
-        /* EVENT CARD */
         .event-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
           overflow:hidden;transition:all .2s}
         .event-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
@@ -136,7 +129,6 @@
           color:var(--muted);white-space:pre-line;line-height:1.8}
         .event-program-title{font-size:11px;font-weight:700;color:var(--purple);
           text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-        /* FACULTY */
         .faculty-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
           padding:28px;transition:all .2s;position:relative;overflow:hidden}
         .faculty-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;
@@ -153,7 +145,6 @@
         .faculty-head strong{color:var(--text);display:block;font-size:13px}
         .faculty-count{font-size:24px;font-weight:900;color:var(--purple);text-align:right}
         .faculty-count small{display:block;font-size:11px;color:var(--muted2);font-weight:400}
-        /* PARTNER */
         .partner-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .2s}
         .partner-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
         .partner-avatar{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;
@@ -164,7 +155,6 @@
         .partner-card p{font-size:13px;color:var(--muted);line-height:1.6}
         .partner-contacts{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);
           font-size:12px;color:var(--muted2);display:flex;flex-direction:column;gap:4px}
-        /* MEDIA */
         .media-filter{display:flex;gap:8px;margin-bottom:28px}
         .filter-btn{padding:7px 18px;border-radius:100px;font-size:13px;font-weight:600;
           cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s}
@@ -180,21 +170,11 @@
         .media-body{padding:16px}
         .media-body h4{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.4}
         .media-body p{font-size:12px;color:var(--muted2)}
-        /* PORTFOLIO */
         .portfolio-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
           padding:26px;transition:all .2s;position:relative;overflow:hidden}
         .portfolio-card:hover{border-color:rgba(151,71,255,.25);transform:translateY(-2px)}
         .portfolio-card h3{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3}
         .portfolio-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
-        .portfolio-author{display:flex;align-items:center;gap:10px;margin-top:16px;
-          padding-top:16px;border-top:1px solid var(--border)}
-        .author-avatar{width:32px;height:32px;border-radius:50%;
-          background:linear-gradient(135deg,var(--purple),var(--purple2));
-          display:flex;align-items:center;justify-content:center;
-          font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
-        .author-name{font-size:13px;font-weight:600}
-        .author-role{font-size:11px;color:var(--muted2)}
-        /* PROFILE */
         .profile-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:560px}
         .profile-avatar{width:72px;height:72px;border-radius:18px;
           background:linear-gradient(135deg,var(--purple),var(--purple2));
@@ -212,7 +192,6 @@
         .role-ADMIN{background:rgba(239,68,68,.12);color:#EF4444}
         .role-TEACHER{background:rgba(251,191,36,.12);color:#FBBF24}
         .role-STUDENT{background:rgba(34,197,94,.12);color:var(--green)}
-        /* AUTH */
         .auth-wrap{display:flex;align-items:flex-start;justify-content:center;
           min-height:calc(100vh - var(--nav-h));padding:48px 24px}
         .form-box{background:var(--card);border:1px solid var(--border);border-radius:20px;
@@ -242,7 +221,6 @@
         .alert{padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none}
         .alert-error{background:rgba(239,68,68,.12);color:#FCA5A5;border:1px solid rgba(239,68,68,.25)}
         .alert-success{background:rgba(34,197,94,.12);color:#86EFAC;border:1px solid rgba(34,197,94,.25)}
-        /* LOADING/EMPTY */
         .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;
           padding:80px 40px;gap:16px;color:var(--muted);font-size:14px}
         .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--purple);
@@ -251,12 +229,10 @@
         .empty{text-align:center;padding:60px 40px;color:var(--muted)}
         .empty-icon{font-size:48px;margin-bottom:16px}
         .empty h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--text)}
-        /* HOME */
         .home-section-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
         .home-section-label h3{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:-.5px}
         .see-all{font-size:13px;color:var(--purple);cursor:pointer;text-decoration:none;font-weight:600}
         .see-all:hover{text-decoration:underline}
-        /* ABOUT */
         .about-block{background:linear-gradient(135deg,rgba(151,71,255,.08),rgba(170,1,233,.04));
           border:1px solid rgba(151,71,255,.15);border-radius:20px;padding:40px}
         .about-block h2{font-size:28px;font-weight:900;text-transform:uppercase;margin-bottom:16px}
@@ -268,14 +244,16 @@
           justify-content:center;font-size:16px;flex-shrink:0}
         .about-point-text h4{font-size:14px;font-weight:700;margin-bottom:3px}
         .about-point-text p{font-size:13px;color:var(--muted);line-height:1.5}
+        .search-input{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);
+          border-radius:10px;padding:11px 16px;color:var(--text);font-size:14px;outline:none;
+          transition:border-color .15s}
+        .search-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(151,71,255,.1)}
         footer{border-top:1px solid var(--border);padding:32px;text-align:center;
           color:var(--muted2);font-size:13px;position:relative;z-index:1}
         footer strong{color:var(--purple)}
         @media(max-width:900px){.hero-stats{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}.about-points{grid-template-columns:1fr}}
         @media(max-width:680px){nav{padding:0 16px}.grid-2,.grid-3{grid-template-columns:1fr}.hero h1{letter-spacing:-1px}.section,.page-head{padding-left:20px;padding-right:20px}.form-row{grid-template-columns:1fr}.form-box{padding:28px 22px}}
         @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-        /* TEACHER MODAL */
         #teacher-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
           backdrop-filter:blur(12px);z-index:500;align-items:center;justify-content:center}
         #teacher-modal.open{display:flex;animation:fadeIn .2s ease}
@@ -297,7 +275,6 @@
         .tm-name{font-size:22px;font-weight:800;margin-bottom:8px}
         .tm-role{font-size:14px;color:var(--purple);font-weight:600;margin-bottom:6px}
         .tm-subject{font-size:13px;color:var(--muted);line-height:1.6}
-        /* Карточки кликабельны */
         .student-card{cursor:pointer}
         .student-card:active{transform:scale(.97)}
     </style>
@@ -306,12 +283,9 @@
 <nav>
     <a class="nav-logo" onclick="go('home')">
         <svg class="nav-logo-img" viewBox="0 0 220 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Квадрат с точкой — как на скрине слева -->
             <rect x="1.5" y="1.5" width="33" height="33" fill="none" stroke="white" stroke-width="2.5"/>
             <rect x="12" y="12" width="11" height="11" fill="white"/>
-            <!-- IThub жирный белый -->
             <text x="46" y="22" font-family="Arial" font-weight="900" font-size="20" fill="white">IThub</text>
-            <!-- Ростов-на-Дону серый -->
             <text x="46" y="34" font-family="Arial" font-weight="400" font-size="11" fill="#888888">Ростов-на-Дону</text>
         </svg>
     </a>
@@ -322,6 +296,7 @@
         <a onclick="go('media')" id="nav-media">Медиа</a>
         <a onclick="go('partners')" id="nav-partners">Партнёры</a>
         <a onclick="go('portfolio')" id="nav-portfolio">Портфолио</a>
+        <a onclick="go('buildings')" id="nav-buildings">Корпуса</a>
     </div>
     <div class="nav-right" id="nav-auth">
         <button class="btn btn-outline" onclick="go('login')">Войти</button>
@@ -369,7 +344,6 @@
                 </div>
             </div>
         </div>
-        <!-- TEACHERS SCROLLER -->
         <div class="scroller-section">
             <div class="scroller-label">
                 <h3>Преподаватели IThub</h3>
@@ -438,7 +412,7 @@
         <div class="section">
             <div class="media-filter">
                 <button class="filter-btn active" onclick="filterMedia('ALL',this)">Все</button>
-                <button class="filter-btn" onclick="filterMedia('PHOTO',this)"> Фото</button>
+                <button class="filter-btn" onclick="filterMedia('PHOTO',this)">Фото</button>
                 <button class="filter-btn" onclick="filterMedia('VIDEO',this)">Видео</button>
             </div>
             <div class="media-grid" id="media-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
@@ -461,6 +435,24 @@
             <p>Реальные работы — сайты, боты, базы данных и исследования, созданные студентами IThub</p>
         </div>
         <div class="section"><div class="grid-auto" id="portfolio-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div></div>
+    </div>
+    <!-- BUILDINGS -->
+    <div class="page" id="page-buildings">
+        <div class="page-head">
+            <div class="page-head-eyebrow">Корпуса</div>
+            <h2>Корпуса<br>IThub ДГТУ</h2>
+            <p>Найдите нужный корпус по названию или адресу</p>
+        </div>
+        <div class="section">
+            <div style="display:flex;gap:12px;margin-bottom:28px">
+                <input type="text" id="buildings-search" class="search-input" placeholder="Поиск по названию или адресу..."
+                       oninput="searchBuildings(this.value)"
+                       onfocus="this.style.borderColor='var(--purple)'"
+                       onblur="this.style.borderColor='var(--border)'">
+                <button class="btn btn-outline" onclick="searchBuildings('');document.getElementById('buildings-search').value=''">Сбросить</button>
+            </div>
+            <div class="grid-auto" id="buildings-list"><div class="loading"><div class="spinner"></div>Загрузка...</div></div>
+        </div>
     </div>
     <!-- PROFILE -->
     <div class="page" id="page-profile">
@@ -529,7 +521,6 @@
             </div>
         </div>
     </div>
-
     <!-- TEACHER MODAL -->
     <div id="teacher-modal" onclick="closeTeacher(event)">
         <div class="tm-card" id="tm-card">
@@ -543,7 +534,7 @@
 </main>
 <footer><strong>IT Hub Space</strong> · IThub ДГТУ · Ростов-на-Дону · 2026</footer>
 <script>
-    const pages=['home','events','faculties','media','partners','portfolio','profile','login','register'];
+    const pages=['home','events','faculties','media','partners','portfolio','buildings','profile','login','register'];
     const loaded={};
     function go(p){
       pages.forEach(x=>{
@@ -554,6 +545,10 @@
       const n=document.getElementById('nav-'+p);if(n)n.classList.add('active');
       window.scrollTo({top:0,behavior:'instant'});
       if(!loaded[p]){loaded[p]=true;loadPage(p);}
+      if(p==='buildings'){
+        document.getElementById('buildings-list').innerHTML='<div class="loading"><div class="spinner"></div>Загрузка...</div>';
+        loadBuildings();
+      }
     }
     async function api(url){
       const token=localStorage.getItem('token');
@@ -571,6 +566,7 @@
         else if(p==='media')await loadMedia();
         else if(p==='partners')await loadPartners();
         else if(p==='portfolio')await loadPortfolio();
+        else if(p==='buildings')await loadBuildings();
         else if(p==='profile')await loadProfile();
       }catch(e){console.error('loadPage',p,e);}
     }
@@ -608,7 +604,7 @@
         <div class="event-body">
           <h3>${esc(e.title)}</h3>
           <p>${esc(e.description||'')}</p>
-          ${e.location?`<div class="event-location">${esc(e.location)}</div>`:''}
+          ${e.location?`<div class="event-location">📍 ${esc(e.location)}</div>`:''}
           ${prog}
         </div>
       </div>`;
@@ -681,9 +677,9 @@
     function renderPartner(p){
       const init=(p.companyName||'P')[0].toUpperCase();
       const c=[];
-      if(p.email)c.push(`${esc(p.email)}`);
-      if(p.phone)c.push(`${esc(p.phone)}`);
-      if(p.contactPerson)c.push(`${esc(p.contactPerson)}`);
+      if(p.email)c.push(esc(p.email));
+      if(p.phone)c.push(esc(p.phone));
+      if(p.contactPerson)c.push(esc(p.contactPerson));
       return`<div class="partner-card">
         <div class="partner-avatar">${init}</div>
         <h3>${esc(p.companyName)}</h3>
@@ -706,6 +702,32 @@
         ${link}
       </div>`;
     }
+    let allBuildings=[];
+    async function loadBuildings(){
+      allBuildings=await api('/api/buildings');
+      renderBuildings(allBuildings);
+    }
+    async function searchBuildings(q){
+      if(!q.trim()){renderBuildings(allBuildings);return;}
+      try{
+        const r=await fetch('/api/buildings/search?q='+encodeURIComponent(q));
+        const data=await r.json();
+        renderBuildings(data);
+      }catch{renderBuildings([]);}
+    }
+    function renderBuildings(data){
+      const el=document.getElementById('buildings-list');
+      if(!data||!data.length){el.innerHTML=emptyH('Ничего не найдено','Попробуйте другой запрос');return;}
+      el.innerHTML=data.map(b=>`
+        <div class="card">
+          <div class="card-tag tag-building">Корпус</div>
+          <h3>${esc(b.name)}</h3>
+          <p>${esc(b.description||'')}</p>
+          <div class="card-meta"><span>📍 ${esc(b.address||'')}</span></div>
+          ${b.mapUrl?`<a class="card-link" href="${esc(b.mapUrl)}" target="_blank" rel="noopener">Открыть на карте →</a>`:''}
+        </div>
+      `).join('');
+    }
     async function loadProfile(){
       const el=document.getElementById('profile-content');
       const token=localStorage.getItem('token');
@@ -715,7 +737,7 @@
       }
       try{
         const d=await api('/api/users/me');
-        const labels={ADMIN:'Администратор',TEACHER:'Преподаватель',STUDENT:'Студент'};
+        const labels={ADMIN:'Администратор',TEACHER:'Преподаватель',STUDENT:'Студент',APPLICANT:'Абитуриент',PARTNER:'Партнёр'};
         const init=((d.firstName||'')[0]+(d.lastName||'')[0]).toUpperCase()||'U';
         const fields=[
           {l:'Имя',v:[d.firstName,d.middleName,d.lastName].filter(Boolean).join(' ')},
@@ -773,8 +795,7 @@
     function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
     function emptyH(t,s){return`<div class="empty"><h3>${t}</h3>${s?`<p>${s}</p>`:''}</div>`;}
     function showAlert(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',4000);}
-
-    const TEACHERS = [
+    const TEACHERS=[
       {name:'Мария Кузнецова',role:'Директор IThub Ростов',subject:'Руководитель проектов в образовании'},
       {name:'Виктория Колесникова',role:'Заместитель директора',subject:'Методическая работа · Цифровой маркетинг'},
       {name:'Екатерина Пархоменко',role:'Заместитель директора',subject:'Организация учебного процесса'},
@@ -802,8 +823,7 @@
       document.getElementById('tm-name').textContent=t.name;
       document.getElementById('tm-role').textContent=t.role;
       document.getElementById('tm-subject').textContent=t.subject;
-      const m=document.getElementById('teacher-modal');
-      m.classList.add('open');
+      document.getElementById('teacher-modal').classList.add('open');
       document.body.style.overflow='hidden';
     }
     function closeTeacher(e){
