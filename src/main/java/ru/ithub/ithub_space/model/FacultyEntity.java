@@ -5,24 +5,22 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "partners")
-public class Partner {
+@Table(name = "faculties")
+public class FacultyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String companyName;
-
-    private String contactPerson;
-
-    private String email;
-
-    private String phone;
+    private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String logoUrl;
+    private String headName;
+
+    private Integer studentCount;
+
+    private String imageUrl;
 }

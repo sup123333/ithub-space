@@ -6,8 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.ithub.ithub_space.config.JwtService;
+import ru.ithub.ithub_space.exception.NotFoundException;
 import ru.ithub.ithub_space.model.Role;
-import ru.ithub.ithub_space.model.User;
+import ru.ithub.ithub_space.model.UserEntity;
 import ru.ithub.ithub_space.service.UserService;
 
 @Slf4j
@@ -22,7 +23,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-        User user = userService.register(
+        UserEntity user = userService.register(
                 request.firstName(),
                 request.lastName(),
                 request.middleName(),
@@ -37,11 +38,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        log.info("Попытка входа: {}", request.email());
-        User user = userService.findByEmail(request.email());
+        UserEntity user;
+        try {
+            user = userService.findByEmail(request.email());
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(401).body("Неверный email или пароль");
+        }
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            log.warn("Неверный пароль для: {}", request.email());
-            return ResponseEntity.status(401).body("Неверный пароль");
+            return ResponseEntity.status(401).body("Неверный email или пароль");
         }
         log.info("Успешный вход: {}", request.email());
         return ResponseEntity.ok(jwtService.generateToken(user.getEmail()));

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "portfolios")
-public class Portfolio {
+public class PortfolioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +24,5 @@ public class Portfolio {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private User student;
+    private UserEntity student;
 }

@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "faculties")
-public class Faculty {
+@Table(name = "buildings")
+public class BuildingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,12 +15,12 @@ public class Faculty {
     @Column(nullable = false)
     private String name;
 
+    private String address;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String headName;
-
-    private Integer studentCount;
+    private String mapUrl;
 
     private String imageUrl;
 }

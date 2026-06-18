@@ -7,8 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.ithub.ithub_space.exception.ConflictException;
+import ru.ithub.ithub_space.exception.NotFoundException;
 import ru.ithub.ithub_space.model.Role;
-import ru.ithub.ithub_space.model.User;
+import ru.ithub.ithub_space.model.UserEntity;
 import ru.ithub.ithub_space.repository.UserRepository;
 
 @Slf4j
@@ -21,8 +23,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        log.debug("Загрузка пользователя по email: {}", email);
-        User user = userRepository.findByEmail(email)
+        UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
                     log.warn("Пользователь не найден: {}", email);
                     return new UsernameNotFoundException("Пользователь не найден: " + email);
@@ -34,7 +35,7 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 
-    public User register(String firstName, String lastName,
+    public UserEntity register(String firstName, String lastName,
                          String middleName, String email,
                          String password, String city,
                          String direction, Role role) {
@@ -43,10 +44,10 @@ public class UserService implements UserDetailsService {
 
         if (userRepository.existsByEmail(email)) {
             log.warn("Попытка регистрации с уже существующим email: {}", email);
-            throw new RuntimeException("Пользователь с таким email уже существует");
+            throw new ConflictException("Пользователь с таким email уже существует");
         }
 
-        User user = new User();
+        UserEntity user = new UserEntity();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setMiddleName(middleName);
@@ -56,17 +57,11 @@ public class UserService implements UserDetailsService {
         user.setDirection(direction);
         user.setRole(role);
 
-        User saved = userRepository.save(user);
-        log.debug("Пользователь зарегистрирован: {} {} ({})", firstName, lastName, email);
-        return saved;
+        return userRepository.save(user);
     }
 
-    public User findByEmail(String email) {
-        log.debug("Поиск пользователя по email: {}", email);
+    public UserEntity findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> {
-                    log.warn("Пользователь не найден: {}", email);
-                    return new RuntimeException("Пользователь не найден");
-                });
+                .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
     }
 }

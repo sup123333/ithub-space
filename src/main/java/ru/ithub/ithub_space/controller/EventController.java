@@ -2,8 +2,11 @@ package ru.ithub.ithub_space.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.ithub.ithub_space.model.Event;
+import ru.ithub.ithub_space.dto.EventRequest;
+import ru.ithub.ithub_space.dto.EventResponse;
+import ru.ithub.ithub_space.model.EventEntity;
 import ru.ithub.ithub_space.service.EventService;
 
 import java.util.List;
@@ -16,26 +19,31 @@ public class EventController {
     private final EventService eventService;
 
     @GetMapping
-    public ResponseEntity<List<Event>> getAll() {
-        return ResponseEntity.ok(eventService.getAll());
+    public ResponseEntity<List<EventResponse>> getAll() {
+        return ResponseEntity.ok(eventService.getAll().stream().map(EventResponse::from).toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Event> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(eventService.getById(id));
+    public ResponseEntity<EventResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(EventResponse.from(eventService.getById(id)));
     }
 
     @PostMapping
-    public ResponseEntity<Event> create(@RequestBody Event event) {
-        return ResponseEntity.status(201).body(eventService.create(event));
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<EventResponse> create(@RequestBody EventRequest request) {
+        EventEntity saved = eventService.create(request.toEntity());
+        return ResponseEntity.status(201).body(EventResponse.from(saved));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Event> update(@PathVariable Long id, @RequestBody Event event) {
-        return ResponseEntity.ok(eventService.update(id, event));
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<EventResponse> update(@PathVariable Long id, @RequestBody EventRequest request) {
+        EventEntity updated = eventService.update(id, request.toEntity());
+        return ResponseEntity.ok(EventResponse.from(updated));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         eventService.delete(id);
         return ResponseEntity.noContent().build();

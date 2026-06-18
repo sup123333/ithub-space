@@ -3,7 +3,8 @@ package ru.ithub.ithub_space.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.ithub.ithub_space.model.Event;
+import ru.ithub.ithub_space.exception.NotFoundException;
+import ru.ithub.ithub_space.model.EventEntity;
 import ru.ithub.ithub_space.repository.EventRepository;
 
 import java.util.List;
@@ -15,31 +16,23 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    public List<Event> getAll() {
-        List<Event> events = eventRepository.findAllByOrderByEventDateDesc();
-        log.debug("Получено мероприятий: {}", events.size());
-        return events;
+    public List<EventEntity> getAll() {
+        return eventRepository.findAllByOrderByEventDateDesc();
     }
 
-    public Event getById(Long id) {
-        log.debug("Поиск мероприятия по id: {}", id);
+    public EventEntity getById(Long id) {
         return eventRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.warn("Мероприятие не найдено: {}", id);
-                    return new RuntimeException("Мероприятие не найдено: " + id);
-                });
+                .orElseThrow(() -> new NotFoundException("Мероприятие не найдено: " + id));
     }
 
-    public Event create(Event event) {
+    public EventEntity create(EventEntity event) {
         log.info("Создание мероприятия: {}", event.getTitle());
-        Event saved = eventRepository.save(event);
-        log.debug("Мероприятие создано с id: {}", saved.getId());
-        return saved;
+        return eventRepository.save(event);
     }
 
-    public Event update(Long id, Event updated) {
+    public EventEntity update(Long id, EventEntity updated) {
         log.info("Обновление мероприятия id: {}", id);
-        Event event = getById(id);
+        EventEntity event = getById(id);
         event.setTitle(updated.getTitle());
         event.setDescription(updated.getDescription());
         event.setEventDate(updated.getEventDate());
