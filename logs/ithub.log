@@ -237,3 +237,20 @@ Caused by: org.postgresql.util.PSQLException: ERROR: relation "buildings" does n
 2026-06-18 11:57:53 [http-nio-8080-exec-2] DEBUG r.i.ithub_space.service.EventService - Получено мероприятий: 5
 2026-06-18 12:01:33 [http-nio-8080-exec-8] DEBUG r.i.ithub_space.service.EventService - Получено мероприятий: 5
 2026-06-18 12:01:34 [http-nio-8080-exec-9] DEBUG r.i.ithub_space.service.EventService - Получено мероприятий: 5
+2026-06-18 12:02:31 [main] INFO  r.i.i.IthubSpaceApplication - Starting IthubSpaceApplication using Java 21.0.11 with PID 24736 (C:\Users\arnau\IdeaProjects\ithub-space\build\classes\java\main started by arnau in C:\Users\arnau\IdeaProjects\ithub-space)
+2026-06-18 12:02:31 [main] DEBUG r.i.i.IthubSpaceApplication - Running with Spring Boot v3.5.15, Spring v6.2.19
+2026-06-18 12:02:31 [main] INFO  r.i.i.IthubSpaceApplication - No active profile set, falling back to 1 default profile: "default"
+2026-06-18 12:02:34 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-18 12:02:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-06-18 12:02:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.55]
+2026-06-18 12:02:34 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-06-18 12:02:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-06-18 12:02:36 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@ab327c
+2026-06-18 12:02:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-06-18 12:02:40 [main] DEBUG r.ithub.ithub_space.config.JwtFilter - Filter 'jwtFilter' configured for use
+2026-06-18 12:02:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-06-18 12:02:41 [main] INFO  r.i.i.IthubSpaceApplication - Started IthubSpaceApplication in 11.829 seconds (process running for 12.545)
+2026-06-18 12:02:50 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-18 12:02:50 [http-nio-8080-exec-1] DEBUG r.i.ithub_space.service.EventService - Получено мероприятий: 5
+2026-06-18 12:02:59 [http-nio-8080-exec-7] DEBUG r.i.ithub_space.service.EventService - Получено мероприятий: 5
+2026-06-18 12:04:59 [http-nio-8080-exec-9] DEBUG r.i.ithub_space.service.EventService - Получено мероприятий: 5
