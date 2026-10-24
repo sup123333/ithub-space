@@ -14,9 +14,9 @@
 
 **IT Hub Space** — веб-платформа, которая собирает всё в одном месте для трёх аудиторий:
 
-- 🎓 **Абитуриенты** — направления, форма поступления, FAQ, адреса корпусов
-- 📚 **Студенты** — мероприятия, медиа, портфолио, преподаватели
-- 💼 **Работодатели** — портфолио выпускников, партнёрская программа
+-  **Абитуриенты** — направления, форма поступления, FAQ, адреса корпусов
+-  **Студенты** — мероприятия, медиа, портфолио, преподаватели
+-  **Работодатели** — портфолио выпускников, партнёрская программа
 
 ---
 
@@ -153,6 +153,7 @@ src/main/
 
 | Метод | URL | Доступ | Описание |
 |-------|-----|--------|----------|
+| GET | `/api/health` | Публичный | Состояние API + число направлений, мероприятий, корпусов |
 | POST | `/api/auth/register` | Публичный | Регистрация |
 | POST | `/api/auth/login` | Публичный | Вход, возврат JWT |
 | GET | `/api/users/me` | 🔒 JWT | Профиль пользователя |
@@ -235,6 +236,85 @@ git push origin dev
 logs/ithub.log   — текущий день
 logs/ithub.YYYY-MM-DD.log   — архив
 ```
+
+---
+
+## Docker (контрольная точка «Контейнер»)
+
+```
+API (Spring Boot) -> Dockerfile -> docker build -> image -> docker run -p 8080:8080 -> container -> curl
+```
+
+API платформы IT Hub Space упаковано в Docker-образ. Endpoint'ы по теме проекта:
+
+- `GET /api/health` — проверка, что API живо, плюс количество направлений, мероприятий и корпусов в базе;
+- `GET /api/faculties` — направления (специальности) колледжа для абитуриентов.
+
+### Dockerfile
+
+Файл `Dockerfile` в корне проекта, двухэтапная сборка:
+
+| Инструкция | Зачем |
+|------------|-------|
+| `FROM eclipse-temurin:21-jdk-alpine AS build` | базовый образ с JDK 21 для сборки |
+| `WORKDIR /app` | рабочая папка внутри контейнера |
+| `COPY ...` | копируем Gradle-обёртку, `build.gradle` и `src` |
+| `RUN ./gradlew bootJar` | при сборке образа собираем исполняемый jar |
+| `FROM eclipse-temurin:21-jre-alpine` | лёгкий образ только с JRE для запуска |
+| `COPY --from=build ... app.jar` | берём из первого этапа только готовый jar |
+| `ENV PORT=8080` | порт, на котором Spring Boot слушает внутри контейнера |
+| `EXPOSE 8080` | документирует порт приложения |
+| `ENTRYPOINT ["java", "-jar", "app.jar"]` | основная команда: контейнер = приложение |
+
+### Сборка, запуск и проверка
+
+API нужна PostgreSQL, поэтому база запускается во втором контейнере в общей сети `ithub-net`.
+
+```bash
+# 0. Сеть и база данных
+docker network create ithub-net
+docker run -d --name ithub-db --network ithub-net \
+  -e POSTGRES_DB=ithub_space -e POSTGRES_PASSWORD=132455 postgres:16-alpine
+
+# 1. Собрать образ
+docker build -t ithub-space-api .
+
+# 2. Запустить контейнер с пробросом порта 8080 (хост) -> 8080 (контейнер)
+docker run -d --name ithub-api --network ithub-net -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://ithub-db:5432/ithub_space \
+  ithub-space-api
+
+# 3. Проверить, что контейнер работает
+docker ps
+
+# 4. Запрос к API снаружи контейнера (или открыть в браузере / Postman)
+curl http://localhost:8080/api/health
+curl http://localhost:8080/api/faculties
+
+# 5. Логи контейнера
+docker logs ithub-api
+
+# Остановка и удаление
+docker stop ithub-api ithub-db
+docker rm ithub-api ithub-db
+```
+
+Все шаги одной командой (Windows), вывод сохраняется в `docs/docker/`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\docker-check.ps1
+```
+
+### Результаты проверки
+
+| Файл | Что внутри |
+|------|-----------|
+| `docs/docker/00-local-run.txt` | проверка API локально без Docker (`./gradlew bootRun`, порт 8090) |
+| `docs/docker/01-docker-build.txt` | вывод `docker build` |
+| `docs/docker/02-docker-run.txt` | вывод `docker run -p 8080:8080` |
+| `docs/docker/03-docker-ps.txt` | вывод `docker ps` |
+| `docs/docker/04-api-health.txt`, `05-api-faculties.txt` | ответы API |
+| `docs/docker/06-docker-logs.txt` | вывод `docker logs ithub-api` |
 
 ---
 
