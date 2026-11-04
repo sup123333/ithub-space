@@ -1,70 +1,86 @@
-# IT Hub Space
+# IT Hub Space — backend
 
-> Единая информационная платформа колледжа IThub ДГТУ Ростов-на-Дону
+> REST API единой информационной платформы колледжа IThub ДГТУ (Ростов-на-Дону).
+> Командный проект учебной практики, 2026. Я — **backend-разработчик** (Java / Spring Boot).
 
-[![Java](https://img.shields.io/badge/Java-21-orange)](https://openjdk.org/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-green)](https://spring.io/projects/spring-boot)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)](https://www.postgresql.org/)
-
----
-
-## О проекте
-
-До IT Hub Space информация об IThub ДГТУ была разбросана по нескольким источникам:
-официальный сайт, ВКонтакте, Telegram и по личному запросу.
-Портфолио студентов и карта корпусов по России отсутствовали полностью.
-
-**IT Hub Space** — веб-платформа, которая собирает всё в одном месте для трёх аудиторий:
-
-- **Абитуриенты** — направления, форма поступления, FAQ, адреса корпусов
-- **Студенты** — мероприятия, медиа, портфолио, преподаватели
-- **Работодатели** — портфолио выпускников, партнёрская программа
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6-6DB33F)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-336791)
+![Gradle](https://img.shields.io/badge/Gradle-8-02303A)
 
 ---
 
-## Команда
+## Зачем это нужно
 
-| ФИО | Роль |
-|-----|------|
-| Арнаутов Владимир | Backend-разработчик |
-| Джамбулатович Алим | Frontend-разработчик |
-| Крупнов Георгий | Team Lead / PM |
-| Шарафаненко Кристина | Аналитик |
-| Канцян Артём | Тестировщик |
-| Мусин Лев | Дизайнер |
-| Аллазов Алихан | Дизайнер |
+Информация о колледже была разбросана по сайту, ВКонтакте и Telegram, а портфолио студентов
+и списка корпусов не было вовсе. IT Hub Space собирает всё в одном месте для трёх аудиторий:
 
----
+- **абитуриенты** — направления, мероприятия, заявка на поступление;
+- **студенты** — мероприятия, медиа, портфолио;
+- **работодатели** — портфолио выпускников, партнёрская программа.
 
-## Стек технологий
+## Моя роль
 
-**Backend**
-- Java 21 + Spring Boot 3
-- Spring Security + JWT (HMAC-SHA256)
-- Spring Data JPA + Hibernate + PostgreSQL
-- HikariCP, BCrypt, Gradle
+В команде из 7 человек (team lead, аналитик, frontend, тестировщик, 2 дизайнера) я отвечал за серверную часть:
 
-**Frontend**
-- HTML5 + CSS3 + Vanilla JavaScript (без фреймворков)
-- CSS Variables (тёмная/светлая тема)
-- SPA — одностраничное приложение
-- Адаптивная вёрстка: 1024px / 768px / 480px
+- спроектировал доменную модель и схему БД (JPA-сущности `User`, `Event`, `Faculty`, `Media`);
+- реализовал слои `controller → service → repository` на Spring Boot;
+- настроил Spring Security: хеширование паролей BCrypt, `UserDetailsService` на базе БД;
+- вёл репозиторий: ветки `feature/*`, Conventional Commits, разрешение merge-конфликтов.
 
-**Инструменты**
-- Git + GitHub
-- IntelliJ IDEA, pgAdmin, Postman
+## Стек
 
----
+| Слой | Технологии |
+|------|-----------|
+| Язык | Java 21 |
+| Фреймворк | Spring Boot 3.5 (Web, Data JPA, Security, Validation) |
+| БД | PostgreSQL, Hibernate |
+| Сборка | Gradle |
+| Прочее | Lombok, JUnit 5 |
 
-## Быстрый старт
+## Архитектура
 
-### Требования
+```
+HTTP (JSON)
+   │
+Controller   — AuthController, EventController, FacultyController, MediaController
+   │
+Service      — UserService, EventService
+   │
+Repository   — Spring Data JPA
+   │
+PostgreSQL
+```
 
-- Java 21+
-- PostgreSQL 14+
-- Gradle 8+
+```
+src/main/java/ru/ithub/ithub_space/
+├── config/        # SecurityConfig
+├── controller/    # REST-контроллеры
+├── service/       # бизнес-логика
+├── repository/    # Spring Data JPA
+└── model/         # JPA-сущности и enum Role
+```
 
-### Установка
+## API (реализовано)
+
+| Метод | URL | Описание |
+|-------|-----|----------|
+| POST | `/api/auth/register` | Регистрация пользователя (пароль хешируется BCrypt) |
+| GET | `/api/events` | Список мероприятий, отсортирован по дате |
+| GET | `/api/events/{id}` | Мероприятие по id |
+| POST / PUT / DELETE | `/api/events[/{id}]` | Создание, изменение, удаление мероприятия |
+| GET | `/api/faculties[/{id}]` | Направления обучения |
+| POST | `/api/faculties` | Добавить направление |
+| GET | `/api/media?type=PHOTO\|VIDEO` | Медиа с фильтром по типу |
+| POST | `/api/media` | Добавить медиафайл |
+
+Полный план эндпоинтов, включая будущие, — в [api-plan.md](api-plan.md).
+Архитектурные решения и компромиссы — в [project-notes.md](project-notes.md).
+
+## Запуск
+
+Нужны Java 21+ и PostgreSQL 14+.
 
 ```bash
 git clone https://github.com/sup123333/ithub-space.git
@@ -75,69 +91,45 @@ cd ithub-space
 CREATE DATABASE ithub_space;
 ```
 
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/ithub_space
-spring.datasource.username=postgres
-spring.datasource.password=ВАШ_ПАРОЛЬ
-```
+Параметры подключения задаются переменными окружения (есть значения по умолчанию):
+
+| Переменная | По умолчанию |
+|------------|--------------|
+| `DB_URL` | `jdbc:postgresql://localhost:5432/ithub_space` |
+| `DB_USERNAME` | `postgres` |
+| `DB_PASSWORD` | `postgres` |
+| `SERVER_PORT` | `8080` |
 
 ```bash
-./gradlew bootRun   # Linux / macOS
-gradlew.bat bootRun # Windows
+./gradlew bootRun      # Linux / macOS
+gradlew.bat bootRun    # Windows
 ```
 
-Открыть в браузере: `http://localhost:8080`
+Схема БД создаётся автоматически (`spring.jpa.hibernate.ddl-auto=update`).
 
-> При первом запуске Spring Boot автоматически создаёт схему БД и заполняет таблицы из `data.sql`.
+## Roadmap
 
----
+- [x] Доменная модель и CRUD для мероприятий, направлений, медиа
+- [x] Регистрация с хешированием паролей
+- [ ] Вход и выдача JWT, stateless-аутентификация
+- [ ] Роль `ADMIN` для изменения контента, публичный доступ на чтение
+- [ ] DTO и валидация входных данных вместо сущностей в контроллерах
+- [ ] Глобальная обработка ошибок (`@RestControllerAdvice`), корректные 400/404
+- [ ] Пагинация для `/api/events`
+- [ ] Unit- и интеграционные тесты (Testcontainers)
+- [ ] Swagger / OpenAPI, Docker Compose
 
-## Архитектура
+## Команда
 
-```
-[Браузер]  →  Fetch API (JSON)
-    ↓
-[VIEW — index.html]   SPA · CSS Variables · Адаптивность
-    ↓
-[CONTROLLER — Spring Boot REST]
-  AuthController · EventController · FacultyController
-  BuildingController · MediaController · PortfolioController
-  PartnerController · UserController
-    ↓
-[MODEL — Spring Data JPA]
-  User · Event · Faculty · Building · Partner · Portfolio · Media
-    ↓
-[PostgreSQL — 7 таблиц · data.sql]
-```
-
----
-
-## Функциональность
-
-| Раздел | Описание |
-|--------|----------|
-| Мероприятия | Список событий с датой, временем, локацией |
-| Направления | 6 специальностей с описанием и куратором |
-| Преподаватели | Скроллер, split-screen модальное окно |
-| Корпуса | 16 объектов в 12 городах, поиск по городу/адресу |
-| Поступить | Форма заявки + FAQ |
-| Медиа | Фото и видео с фильтрацией |
-| Портфолио | Студенческие проекты со ссылками |
-| Партнёры | Компании-работодатели |
-| Тема | Тёмная / Светлая, сохраняется в localStorage |
+| Участник | Роль |
+|----------|------|
+| **Арнаутов Владимир** | **Backend** |
+| Джамбулатович Алим | Frontend |
+| Крупнов Георгий | Team Lead / PM |
+| Шарафаненко Кристина | Аналитик |
+| Канцян Артём | Тестировщик |
+| Мусин Лев, Аллазов Алихан | Дизайн |
 
 ---
 
-## Безопасность
-
-Каждый запрос → `JwtFilter` → `SecurityContextHolder`
-
-- Публичные эндпоинты: `/api/events`, `/api/buildings`, `/api/faculties` и др.
-- Защищённые: `/api/users/me` — требуют `Authorization: Bearer <token>`
-- Пароли хешируются через BCrypt
-
----
-
-## Лицензия
-
-Учебный проект. АТК ДГТУ / IThub Ростов-на-Дону, 2026.
+Учебный проект · АТК ДГТУ / IThub Ростов-на-Дону · 2026
