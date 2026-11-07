@@ -1,0 +1,133 @@
+
+### 1. Register ADMIN
+> curl.exe -s -i -X POST http://localhost:8080/api/auth/register -d @docs/compose/requests/register.json
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 78
+Date: Sat, 07 Nov 2026 06:11:14 GMT
+
+Пользователь compose-admin@ithub.ru зарегистрирован
+
+### 2. Login
+> $TOKEN = curl.exe -s -X POST http://localhost:8080/api/auth/login -d @docs/compose/requests/login.json
+token: eyJhbGciOiJIUzM4NCJ9.eyJz... (length 174)
+
+### 3. POST without token (expect 403)
+> curl.exe -s -i -X POST http://localhost:8080/api/events -d @docs/compose/requests/event-create.json
+HTTP/1.1 403 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+### 4. POST create (expect 201)
+> curl.exe -s -i -X POST http://localhost:8080/api/events -H 'Authorization: Bearer $TOKEN' -d @docs/compose/requests/event-create.json
+HTTP/1.1 201 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+{"id":6,"title":"Docker Compose meetup","description":"API + PostgreSQL in Docker Compose","eventDate":"2026-12-01T18:00:00","location":"IThub Rostov-on-Don, room 3","imageUrl":null,"program":"18:00 - intro; 18:30 - demo"}
+-> ID = 6
+
+### 5. GET by id (expect 200)
+> curl.exe -s -i http://localhost:8080/api/events/6
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+{"id":6,"title":"Docker Compose meetup","description":"API + PostgreSQL in Docker Compose","eventDate":"2026-12-01T18:00:00","location":"IThub Rostov-on-Don, room 3","imageUrl":null,"program":"18:00 - intro; 18:30 - demo"}
+
+### 6. PUT update (expect 200)
+> curl.exe -s -i -X PUT http://localhost:8080/api/events/6 -H 'Authorization: Bearer $TOKEN' -d @docs/compose/requests/event-update.json
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+{"id":6,"title":"Docker Compose meetup (updated)","description":"Moved to the main hall","eventDate":"2026-12-02T19:00:00","location":"IThub Rostov-on-Don, main hall","imageUrl":null,"program":"19:00 - intro; 19:30 - demo; 20:00 - Q&A"}
+
+### 7. GET after update (expect 200, new title)
+> curl.exe -s -i http://localhost:8080/api/events/6
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+{"id":6,"title":"Docker Compose meetup (updated)","description":"Moved to the main hall","eventDate":"2026-12-02T19:00:00","location":"IThub Rostov-on-Don, main hall","imageUrl":null,"program":"19:00 - intro; 19:30 - demo; 20:00 - Q&A"}
+
+### 8. DELETE (expect 204)
+> curl.exe -s -i -X DELETE http://localhost:8080/api/events/6 -H 'Authorization: Bearer $TOKEN'
+HTTP/1.1 204 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+### 9. GET after delete (expect 404)
+> curl.exe -s -i http://localhost:8080/api/events/6
+HTTP/1.1 404 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+{"message":"Мероприятие не найдено: 6"}
+
+### 10. DELETE missing (expect 404)
+> curl.exe -s -i -X DELETE http://localhost:8080/api/events/6 -H 'Authorization: Bearer $TOKEN'
+HTTP/1.1 404 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:15 GMT
+
+{"message":"Мероприятие не найдено: 6"}

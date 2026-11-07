@@ -318,6 +318,76 @@ powershell -ExecutionPolicy Bypass -File .\docker-check.ps1
 
 ---
 
+## Запуск через Docker Compose (контрольная точка «Compose»)
+
+Вместо ручных `docker network create` / `docker run` весь стек (API + PostgreSQL) описан в [`docker-compose.yml`](docker-compose.yml). Каждая строка в файле прокомментирована.
+
+| Сервис | Контейнер | Образ | Порт на хосте | Назначение |
+|--------|-----------|-------|---------------|------------|
+| `api` | `ithub-api` | собирается из `Dockerfile` | `8080` | Spring Boot API; стартует только когда `db` стал `healthy` |
+| `db` | `ithub-db` | `postgres:16` | не публикуется | PostgreSQL; данные в томе `db_data`, готовность проверяет `pg_isready` |
+
+- Оба сервиса в сети `ithub-net`: API подключается к базе по имени сервиса, `jdbc:postgresql://db:5432/app`.
+- Порт БД наружу не открыт, база доступна только из контейнера API.
+- Datasource в `application.properties` оставлен с дефолтами для локального запуска; в Compose он переопределяется переменными `SPRING_DATASOURCE_URL` / `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD`, порт задаёт `SERVER_PORT`.
+- `spring.jpa.hibernate.ddl-auto=update`: схема не пересоздаётся при старте, а `data.sql` вставляет демо-данные только в пустые таблицы. Поэтому записи переживают перезапуск.
+
+### Запуск и статус
+
+```powershell
+docker compose up -d --build   # собрать образ API и запустить оба контейнера в фоне
+docker compose ps              # статус: api - Up, db - Up (healthy)
+docker compose logs --tail 60  # последние строки логов обоих сервисов
+docker compose logs -f api     # логи API в реальном времени
+```
+
+### CRUD для мероприятий
+
+GET открыт всем; POST / PUT / DELETE требуют JWT (`Authorization: Bearer <token>`) пользователя с ролью `ADMIN`.
+
+```powershell
+curl.exe -s -X POST http://localhost:8080/api/auth/register -H "Content-Type: application/json" -d "@docs/compose/requests/register.json"
+$TOKEN = curl.exe -s -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d "@docs/compose/requests/login.json"
+
+curl.exe -s -i -X POST   http://localhost:8080/api/events     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "@docs/compose/requests/event-create.json"   # 201
+curl.exe -s -i           http://localhost:8080/api/events/6                                                                                                            # 200
+curl.exe -s -i -X PUT    http://localhost:8080/api/events/6   -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "@docs/compose/requests/event-update.json"   # 200
+curl.exe -s -i -X DELETE http://localhost:8080/api/events/6   -H "Authorization: Bearer $TOKEN"                                                                                   # 204
+curl.exe -s -i           http://localhost:8080/api/events/6                                                                                                            # 404
+```
+
+Все команды с пояснениями: [`docs/compose/crud-requests.md`](docs/compose/crud-requests.md).
+
+### Проверка сохранения данных
+
+```powershell
+# создать мероприятие (запомнить id из ответа)
+curl.exe -s -X POST http://localhost:8080/api/events -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "@docs/compose/requests/event-persist.json"
+docker compose down            # контейнеры удалены, том db_data остался
+docker compose up -d
+curl.exe -s http://localhost:8080/api/events/<id>   # запись на месте
+docker volume ls               # в списке есть ithub-space_db_data
+```
+
+### Остановка: `down` и `down -v`
+
+| Команда | Контейнеры и сеть | Том `db_data` (данные БД) |
+|---------|-------------------|---------------------------|
+| `docker compose down` | удаляются | **остаётся**, при следующем `up` данные на месте |
+| `docker compose down -v` | удаляются | **удаляется**, при следующем `up` база создаётся с нуля, заново загружаются только демо-данные из `data.sql` |
+
+### Результаты проверки
+
+| Файл | Что внутри |
+|------|-----------|
+| `docs/compose/01-compose-up.txt` | вывод `docker compose up -d --build` |
+| `docs/compose/02-compose-ps.txt` | `docker compose ps`: оба сервиса, `db` в статусе `healthy` |
+| `docs/compose/03-crud.txt` | полный CRUD через `curl.exe`: register/login → POST → GET → PUT → GET → DELETE → GET (404) |
+| `docs/compose/04-persistence.txt` | запись до и после `down` / `up -d` + `docker volume ls` |
+| `docs/compose/05-compose-logs.txt` | последние строки `docker compose logs` |
+
+---
+
 ## Тестирование
 
 - **28 тест-кейсов** (Postman)
