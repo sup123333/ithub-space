@@ -20,6 +20,18 @@
 
 ---
 
+## Моя роль
+
+В команде из 7 человек (team lead, аналитик, frontend, тестировщик, 2 дизайнера) я отвечал за серверную часть:
+
+- спроектировал доменную модель и схему БД (JPA-сущности `User`, `Event`, `Faculty`, `Media` и др.);
+- реализовал слои `controller → service → repository` на Spring Boot;
+- настроил Spring Security: BCrypt, JWT, роль `ADMIN` для изменения контента;
+- упаковал API в Docker и Docker Compose;
+- вёл репозиторий: ветки `feature/*`, Conventional Commits, разрешение merge-конфликтов.
+
+---
+
 ## Команда
 
 | ФИО | Роль |
@@ -75,11 +87,18 @@ cd ithub-space
 CREATE DATABASE ithub_space;
 ```
 
-```properties
-# 3. Настроить src/main/resources/application.properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/ithub_space
-spring.datasource.username=postgres
-spring.datasource.password=ВАШ_ПАРОЛЬ
+3. Параметры подключения задаются переменными окружения (в `application.properties` только значения по умолчанию, реальных паролей в репозитории нет):
+
+| Переменная | По умолчанию |
+|------------|--------------|
+| `DB_URL` | `jdbc:postgresql://localhost:5432/ithub_space` |
+| `DB_USERNAME` | `postgres` |
+| `DB_PASSWORD` | `postgres` |
+| `SERVER_PORT` (или `PORT`) | `8080` |
+| `JWT_SECRET` | тестовый ключ, в проде задать свой |
+
+```powershell
+$env:DB_PASSWORD = "ВАШ_ПАРОЛЬ"   # PowerShell; в bash: export DB_PASSWORD=...
 ```
 
 ```bash
@@ -164,6 +183,9 @@ src/main/
 | GET | `/api/portfolios` | Публичный | Портфолио |
 | GET | `/api/buildings` | Публичный | Корпуса |
 | GET | `/api/buildings/search?q=` | Публичный | Поиск корпусов |
+
+Полный план эндпоинтов, включая будущие, — в [api-plan.md](api-plan.md).
+Архитектурные решения и компромиссы — в [project-notes.md](project-notes.md).
 
 ### Пример запроса (авторизация)
 
@@ -309,7 +331,7 @@ powershell -ExecutionPolicy Bypass -File .\docker-check.ps1
 
 | Файл | Что внутри |
 |------|-----------|
-| `docs/docker/00-local-run.txt` | проверка API локально без Docker (`./gradlew bootRun`, порт 8090) |
+| `docs/docker/00-local-run.txt` | проверка API локально без Docker (`./gradlew bootRun`; на момент проверки порт по умолчанию был 8090, сейчас 8080) |
 | `docs/docker/01-docker-build.txt` | вывод `docker build` |
 | `docs/docker/02-docker-run.txt` | вывод `docker run -p 8080:8080` |
 | `docs/docker/03-docker-ps.txt` | вывод `docker ps` |
@@ -329,7 +351,7 @@ powershell -ExecutionPolicy Bypass -File .\docker-check.ps1
 
 - Оба сервиса в сети `ithub-net`: API подключается к базе по имени сервиса, `jdbc:postgresql://db:5432/app`.
 - Порт БД наружу не открыт, база доступна только из контейнера API.
-- Datasource в `application.properties` оставлен с дефолтами для локального запуска; в Compose он переопределяется переменными `SPRING_DATASOURCE_URL` / `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD`, порт задаёт `SERVER_PORT`.
+- Datasource в `application.properties` оставлен с дефолтами для локального запуска; в Compose он переопределяется переменными `SPRING_DATASOURCE_URL` / `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` (у переменных окружения Spring приоритет выше, чем у файла), порт задаёт `SERVER_PORT`.
 - `spring.jpa.hibernate.ddl-auto=update`: схема не пересоздаётся при старте, а `data.sql` вставляет демо-данные только в пустые таблицы. Поэтому записи переживают перезапуск.
 
 ### Запуск и статус
@@ -385,6 +407,22 @@ docker volume ls               # в списке есть ithub-space_db_data
 | `docs/compose/03-crud.txt` | полный CRUD через `curl.exe`: register/login → POST → GET → PUT → GET → DELETE → GET (404) |
 | `docs/compose/04-persistence.txt` | запись до и после `down` / `up -d` + `docker volume ls` |
 | `docs/compose/05-compose-logs.txt` | последние строки `docker compose logs` |
+
+---
+
+## Roadmap
+
+- [x] Доменная модель и CRUD для мероприятий, направлений, медиа, корпусов
+- [x] Регистрация с хешированием паролей
+- [x] Вход и выдача JWT, stateless-аутентификация
+- [x] Роль `ADMIN` для изменения контента, публичный доступ на чтение
+- [x] DTO вместо сущностей в контроллерах
+- [x] Глобальная обработка ошибок (`@RestControllerAdvice`), корректные 404 / 409
+- [x] Docker и Docker Compose
+- [ ] Валидация входных данных (`@Valid`), корректные 400
+- [ ] Пагинация для `/api/events`
+- [ ] Unit- и интеграционные тесты (Testcontainers)
+- [ ] Swagger / OpenAPI
 
 ---
 
