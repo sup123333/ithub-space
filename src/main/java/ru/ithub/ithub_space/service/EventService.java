@@ -38,11 +38,12 @@ public class EventService {
         event.setEventDate(updated.getEventDate());
         event.setLocation(updated.getLocation());
         event.setImageUrl(updated.getImageUrl());
+        event.setProgram(updated.getProgram());
         return eventRepository.save(event);
     }
 
     public void delete(Long id) {
         log.info("Удаление мероприятия id: {}", id);
-        eventRepository.deleteById(id);
+        eventRepository.delete(getById(id));
     }
 }

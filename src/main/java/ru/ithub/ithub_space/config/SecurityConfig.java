@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/health").permitAll()
                 .requestMatchers("/api/portfolios").permitAll()
-                .requestMatchers("/api/events/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/events/**").permitAll()
                 .requestMatchers("/api/faculties/**").permitAll()
                 .requestMatchers("/api/partners").permitAll()
                 .requestMatchers("/api/buildings/**").permitAll()
