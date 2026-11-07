@@ -1,0 +1,42 @@
+# Запуск: docker compose up -d --build | Остановка: docker compose down | С удалением данных: docker compose down -v
+
+services:                                   # список сервисов (контейнеров) проекта
+  api:                                      # сервис приложения Spring Boot
+    build: .                                # собрать образ из Dockerfile в корне проекта
+    container_name: ithub-api               # фиксированное имя контейнера вместо автосгенерированного
+    ports:                                  # проброс портов хост:контейнер
+      - "8080:8080"                         # API доступно на http://localhost:8080
+    environment:                            # переменные окружения переопределяют application.properties
+      SERVER_PORT: 8080                     # порт Spring Boot внутри контейнера (server.port)
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/app   # "db" - имя сервиса БД, резолвится внутри сети ithub-net
+      SPRING_DATASOURCE_USERNAME: postgres  # пользователь БД, совпадает с POSTGRES_USER
+      SPRING_DATASOURCE_PASSWORD: 1234      # пароль БД, совпадает с POSTGRES_PASSWORD
+    depends_on:                             # зависимость от других сервисов
+      db:                                   # API зависит от сервиса db
+        condition: service_healthy          # стартовать только когда healthcheck БД стал healthy
+    restart: on-failure                     # перезапустить контейнер, если приложение упало с ошибкой
+    networks:                               # к каким сетям подключён контейнер
+      - ithub-net                           # общая сеть с БД
+
+  db:                                       # сервис базы данных
+    image: postgres:16                      # официальный образ PostgreSQL 16 с Docker Hub
+    container_name: ithub-db                # фиксированное имя контейнера БД
+    environment:                            # параметры инициализации PostgreSQL при первом запуске
+      POSTGRES_DB: app                      # имя создаваемой базы
+      POSTGRES_USER: postgres               # имя суперпользователя
+      POSTGRES_PASSWORD: 1234               # пароль суперпользователя
+    volumes:                                # подключение томов
+      - db_data:/var/lib/postgresql/data    # файлы БД лежат в именованном томе и переживают удаление контейнера
+    healthcheck:                            # проверка, что БД готова принимать подключения
+      test: ["CMD-SHELL", "pg_isready -U postgres -d app"]   # утилита PostgreSQL: код 0 = база готова
+      interval: 5s                          # проверять каждые 5 секунд
+      retries: 10                           # после 10 неудач подряд статус unhealthy
+    networks:                               # порт 5432 наружу НЕ публикуется: БД доступна только из сети ithub-net
+      - ithub-net                           # общая сеть с API
+
+networks:                                   # объявление сетей
+  ithub-net:                                # пользовательская сеть с DNS по именам сервисов
+    driver: bridge                          # стандартный драйвер для сети на одном хосте
+
+volumes:                                    # объявление томов
+  db_data:                                  # именованный том для данных PostgreSQL (удаляется только через down -v)
