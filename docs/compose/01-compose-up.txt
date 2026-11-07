@@ -1,0 +1,682 @@
+ Image postgres:16 Pulling 
+ da434b32d480 Pulling fs layer 0B
+ be193f0583fb Pulling fs layer 0B
+ bcc75ab4e010 Pulling fs layer 0B
+ 9732cf873eb7 Pulling fs layer 0B
+ 7e0f86eb8508 Pulling fs layer 0B
+ 1244f763be36 Pulling fs layer 0B
+ d9f83a042741 Pulling fs layer 0B
+ e9dd37612d7b Pulling fs layer 0B
+ c924699dde26 Pulling fs layer 0B
+ 37fb86c2a767 Pulling fs layer 0B
+ 379ccbe62e26 Pulling fs layer 0B
+ a28de24f57c0 Pulling fs layer 0B
+ 6d141360b363 Pulling fs layer 0B
+ 369949eb0229 Pulling fs layer 0B
+ 3e9a8bde18c8 Downloading 1.049MB
+ 3e9a8bde18c8 Downloading 2.097MB
+ 3e9a8bde18c8 Downloading 2.097MB
+ 3e9a8bde18c8 Downloading 3.146MB
+ 3e9a8bde18c8 Downloading 4.194MB
+ aad9f8e2454d Download complete 0B
+ 3e9a8bde18c8 Downloading 4.194MB
+ 3e9a8bde18c8 Downloading 5.243MB
+ 3e9a8bde18c8 Download complete 0B
+ be193f0583fb Download complete 0B
+ 37fb86c2a767 Downloading 1.049MB
+ 7e0f86eb8508 Downloading 1.049MB
+ 37fb86c2a767 Downloading 1.049MB
+ 7e0f86eb8508 Downloading 1.049MB
+ 7e0f86eb8508 Download complete 0B
+ 37fb86c2a767 Downloading 2.097MB
+ 37fb86c2a767 Downloading 2.097MB
+ 37fb86c2a767 Downloading 3.146MB
+ 37fb86c2a767 Downloading 4.194MB
+ 37fb86c2a767 Downloading 5.243MB
+ 37fb86c2a767 Downloading 6.291MB
+ 37fb86c2a767 Downloading 7.34MB
+ 37fb86c2a767 Downloading 7.34MB
+ 1244f763be36 Download complete 0B
+ 37fb86c2a767 Downloading 7.34MB
+ 37fb86c2a767 Downloading 8.389MB
+ 37fb86c2a767 Downloading 8.389MB
+ d9f83a042741 Download complete 0B
+ 37fb86c2a767 Downloading 9.437MB
+ 37fb86c2a767 Downloading 9.437MB
+ 37fb86c2a767 Downloading 10.49MB
+ 37fb86c2a767 Downloading 10.49MB
+ 37fb86c2a767 Downloading 11.53MB
+ 37fb86c2a767 Downloading 11.53MB
+ 37fb86c2a767 Downloading 12.58MB
+ 37fb86c2a767 Downloading 13.63MB
+ e9dd37612d7b Download complete 0B
+ 37fb86c2a767 Downloading 13.63MB
+ 37fb86c2a767 Downloading 14.68MB
+ 37fb86c2a767 Downloading 14.68MB
+ 37fb86c2a767 Downloading 15.73MB
+ 37fb86c2a767 Downloading 15.73MB
+ 37fb86c2a767 Downloading 16.78MB
+ 37fb86c2a767 Downloading 16.78MB
+ 37fb86c2a767 Downloading 16.78MB
+ 37fb86c2a767 Downloading 16.78MB
+ 9732cf873eb7 Download complete 0B
+ 37fb86c2a767 Downloading 16.78MB
+ 37fb86c2a767 Downloading 16.78MB
+ 37fb86c2a767 Downloading 17.83MB
+ da434b32d480 Downloading 1.049MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 18.87MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 20.97MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 22.02MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 23.07MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 23.07MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 24.12MB
+ bcc75ab4e010 Downloading 1.049MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 25.17MB
+ bcc75ab4e010 Download complete 0B
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 25.17MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 26.21MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 27.26MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 27.26MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 28.31MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 29.36MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Downloading 29.36MB
+ da434b32d480 Downloading 1.049MB
+ 37fb86c2a767 Download complete 0B
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 1.049MB
+ 379ccbe62e26 Downloading 1.049MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 1.049MB
+ 379ccbe62e26 Downloading 1.049MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 1.049MB
+ a28de24f57c0 Download complete 0B
+ 379ccbe62e26 Downloading 1.049MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 1.049MB
+ 379ccbe62e26 Downloading 2.097MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 1.049MB
+ 379ccbe62e26 Downloading 2.097MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 1.049MB
+ 379ccbe62e26 Downloading 2.097MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 2.097MB
+ 37fb86c2a767 Extracting 1B
+ 379ccbe62e26 Downloading 3.146MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 1B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 3.146MB
+ 37fb86c2a767 Extracting 1B
+ 379ccbe62e26 Downloading 3.146MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 1B
+ 369949eb0229 Downloading 1.049MB
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 3.146MB
+ 37fb86c2a767 Extracting 2B
+ 379ccbe62e26 Downloading 3.146MB
+ 369949eb0229 Downloading 1.049MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 2B
+ 379ccbe62e26 Downloading 3.146MB
+ 369949eb0229 Downloading 1.049MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 2B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 3.146MB
+ 369949eb0229 Downloading 1.049MB
+ 37fb86c2a767 Extracting 2B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 3.146MB
+ 369949eb0229 Downloading 1.049MB
+ 37fb86c2a767 Extracting 2B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 3.146MB
+ 369949eb0229 Downloading 1.049MB
+ 37fb86c2a767 Extracting 2B
+ 379ccbe62e26 Downloading 4.194MB
+ 369949eb0229 Downloading 2.097MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 2B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 4.194MB
+ 369949eb0229 Downloading 2.097MB
+ 37fb86c2a767 Extracting 2B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 5.243MB
+ 369949eb0229 Downloading 2.097MB
+ 37fb86c2a767 Extracting 2B
+ 369949eb0229 Downloading 3.146MB
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 5.243MB
+ 37fb86c2a767 Extracting 3B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 5.243MB
+ 369949eb0229 Downloading 3.146MB
+ 37fb86c2a767 Extracting 3B
+ 369949eb0229 Downloading 3.146MB
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 5.243MB
+ 37fb86c2a767 Extracting 3B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 6.291MB
+ 369949eb0229 Downloading 3.146MB
+ 37fb86c2a767 Extracting 3B
+ 379ccbe62e26 Downloading 7.34MB
+ 369949eb0229 Downloading 4.194MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 3B
+ 379ccbe62e26 Downloading 7.34MB
+ 369949eb0229 Downloading 5.243MB
+ da434b32d480 Downloading 2.097MB
+ 37fb86c2a767 Extracting 3B
+ 369949eb0229 Downloading 6.291MB
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 8.389MB
+ 37fb86c2a767 Extracting 3B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 9.437MB
+ 369949eb0229 Download complete 0B
+ 37fb86c2a767 Extracting 3B
+ da434b32d480 Downloading 2.097MB
+ 379ccbe62e26 Downloading 9.437MB
+ 37fb86c2a767 Extracting 3B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 10.49MB
+ 37fb86c2a767 Extracting 3B
+ 379ccbe62e26 Downloading 11.53MB
+ da434b32d480 Downloading 3.146MB
+ c924699dde26 Download complete 0B
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 11.53MB
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 12.58MB
+ 6d141360b363 Download complete 0B
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 12.58MB
+ 37fb86c2a767 Extracting 4B
+ 379ccbe62e26 Downloading 13.63MB
+ da434b32d480 Downloading 3.146MB
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 14.68MB
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 14.68MB
+ 37fb86c2a767 Extracting 4B
+ 379ccbe62e26 Downloading 15.73MB
+ da434b32d480 Downloading 3.146MB
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 16.78MB
+ 37fb86c2a767 Extracting 4B
+ 379ccbe62e26 Downloading 16.78MB
+ da434b32d480 Downloading 3.146MB
+ 37fb86c2a767 Extracting 4B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 17.83MB
+ 37fb86c2a767 Extracting 5B
+ da434b32d480 Downloading 3.146MB
+ 379ccbe62e26 Downloading 17.83MB
+ 37fb86c2a767 Pull complete 0B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 17.83MB
+ e9dd37612d7b Pull complete 0B
+ 369949eb0229 Extracting 1B
+ 379ccbe62e26 Downloading 18.87MB
+ da434b32d480 Downloading 4.194MB
+ 369949eb0229 Extracting 1B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 19.92MB
+ 369949eb0229 Extracting 1B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 20.97MB
+ 369949eb0229 Extracting 1B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 22.02MB
+ 369949eb0229 Extracting 1B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 22.02MB
+ 369949eb0229 Extracting 1B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 23.07MB
+ 7e0f86eb8508 Extracting 1B
+ 369949eb0229 Pull complete 0B
+ da434b32d480 Downloading 4.194MB
+ 379ccbe62e26 Downloading 24.12MB
+ 7e0f86eb8508 Pull complete 0B
+ 379ccbe62e26 Downloading 24.12MB
+ da434b32d480 Downloading 5.243MB
+ 379ccbe62e26 Downloading 24.12MB
+ da434b32d480 Downloading 5.243MB
+ da434b32d480 Downloading 5.243MB
+ 379ccbe62e26 Downloading 24.12MB
+ 379ccbe62e26 Downloading 24.12MB
+ da434b32d480 Downloading 5.243MB
+ 379ccbe62e26 Downloading 25.17MB
+ da434b32d480 Downloading 5.243MB
+ 379ccbe62e26 Downloading 26.21MB
+ da434b32d480 Downloading 5.243MB
+ da434b32d480 Downloading 5.243MB
+ 379ccbe62e26 Downloading 27.26MB
+ 379ccbe62e26 Downloading 27.26MB
+ da434b32d480 Downloading 6.291MB
+ da434b32d480 Downloading 6.291MB
+ 379ccbe62e26 Downloading 28.31MB
+ da434b32d480 Downloading 6.291MB
+ 379ccbe62e26 Downloading 28.31MB
+ da434b32d480 Downloading 6.291MB
+ 379ccbe62e26 Downloading 29.36MB
+ 379ccbe62e26 Downloading 29.36MB
+ da434b32d480 Downloading 6.291MB
+ 379ccbe62e26 Downloading 30.41MB
+ da434b32d480 Downloading 6.291MB
+ da434b32d480 Downloading 6.291MB
+ 379ccbe62e26 Downloading 30.41MB
+ 379ccbe62e26 Downloading 31.46MB
+ da434b32d480 Downloading 6.291MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 32.51MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 32.51MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 32.51MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 33.55MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 34.6MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 34.6MB
+ 379ccbe62e26 Downloading 34.6MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 35.65MB
+ da434b32d480 Downloading 7.34MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 35.65MB
+ 379ccbe62e26 Downloading 35.65MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 36.7MB
+ da434b32d480 Downloading 7.34MB
+ da434b32d480 Downloading 7.34MB
+ 379ccbe62e26 Downloading 36.7MB
+ da434b32d480 Download complete 0B
+ 379ccbe62e26 Downloading 37.75MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 38.8MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 38.8MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 39.85MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 40.89MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 40.89MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 41.94MB
+ da434b32d480 Extracting 1B
+ 379ccbe62e26 Downloading 41.94MB
+ bcc75ab4e010 Extracting 1B
+ da434b32d480 Pull complete 0B
+ 379ccbe62e26 Downloading 42.99MB
+ bcc75ab4e010 Extracting 1B
+ 379ccbe62e26 Downloading 44.04MB
+ bcc75ab4e010 Pull complete 0B
+ a28de24f57c0 Extracting 1B
+ 379ccbe62e26 Downloading 44.04MB
+ a28de24f57c0 Pull complete 0B
+ 6d141360b363 Pull complete 0B
+ 379ccbe62e26 Downloading 45.09MB
+ 379ccbe62e26 Downloading 46.14MB
+ 379ccbe62e26 Downloading 46.14MB
+ 379ccbe62e26 Downloading 47.19MB
+ 379ccbe62e26 Downloading 47.19MB
+ 379ccbe62e26 Downloading 48.23MB
+ 379ccbe62e26 Downloading 49.28MB
+ 379ccbe62e26 Downloading 50.33MB
+ 379ccbe62e26 Downloading 51.38MB
+ 379ccbe62e26 Downloading 52.43MB
+ 379ccbe62e26 Downloading 53.48MB
+ 379ccbe62e26 Downloading 54.53MB
+ 379ccbe62e26 Downloading 55.57MB
+ 379ccbe62e26 Downloading 56.62MB
+ 379ccbe62e26 Downloading 57.67MB
+ 379ccbe62e26 Downloading 58.72MB
+ 379ccbe62e26 Downloading 59.77MB
+ 379ccbe62e26 Downloading 59.77MB
+ 379ccbe62e26 Downloading 60.82MB
+ 379ccbe62e26 Downloading 61.87MB
+ 379ccbe62e26 Downloading 62.91MB
+ 379ccbe62e26 Downloading 63.96MB
+ 379ccbe62e26 Downloading 63.96MB
+ 379ccbe62e26 Downloading 65.01MB
+ 379ccbe62e26 Downloading 66.06MB
+ 379ccbe62e26 Downloading 67.11MB
+ 379ccbe62e26 Downloading 68.16MB
+ 379ccbe62e26 Downloading 69.21MB
+ 379ccbe62e26 Downloading 70.25MB
+ 379ccbe62e26 Downloading 70.25MB
+ 379ccbe62e26 Downloading 71.3MB
+ 379ccbe62e26 Downloading 72.35MB
+ 379ccbe62e26 Downloading 73.4MB
+ 379ccbe62e26 Downloading 73.4MB
+ 379ccbe62e26 Downloading 74.45MB
+ 379ccbe62e26 Downloading 75.5MB
+ 379ccbe62e26 Downloading 76.55MB
+ 379ccbe62e26 Downloading 77.59MB
+ 379ccbe62e26 Downloading 78.64MB
+ 379ccbe62e26 Downloading 79.69MB
+ 379ccbe62e26 Downloading 79.69MB
+ 379ccbe62e26 Downloading 80.74MB
+ 379ccbe62e26 Downloading 81.79MB
+ 379ccbe62e26 Downloading 82.84MB
+ 379ccbe62e26 Downloading 83.89MB
+ 379ccbe62e26 Downloading 83.89MB
+ 379ccbe62e26 Downloading 84.93MB
+ 379ccbe62e26 Downloading 85.98MB
+ 379ccbe62e26 Downloading 85.98MB
+ 379ccbe62e26 Downloading 87.03MB
+ 379ccbe62e26 Downloading 87.03MB
+ 379ccbe62e26 Downloading 88.08MB
+ 379ccbe62e26 Downloading 89.13MB
+ 379ccbe62e26 Downloading 90.18MB
+ 379ccbe62e26 Downloading 90.18MB
+ 379ccbe62e26 Downloading 91.23MB
+ 379ccbe62e26 Downloading 92.27MB
+ 379ccbe62e26 Downloading 92.27MB
+ 379ccbe62e26 Downloading 93.32MB
+ 379ccbe62e26 Downloading 93.32MB
+ 379ccbe62e26 Downloading 93.32MB
+ 379ccbe62e26 Downloading 95.42MB
+ 379ccbe62e26 Downloading 95.42MB
+ 379ccbe62e26 Downloading 96.47MB
+ 379ccbe62e26 Downloading 97.52MB
+ 379ccbe62e26 Downloading 98.57MB
+ 379ccbe62e26 Downloading 99.61MB
+ 379ccbe62e26 Downloading 100.7MB
+ 379ccbe62e26 Downloading 101.7MB
+ 379ccbe62e26 Downloading 102.8MB
+ 379ccbe62e26 Downloading 103.8MB
+ 379ccbe62e26 Downloading 104.9MB
+ 379ccbe62e26 Downloading 105.9MB
+ 379ccbe62e26 Downloading 107MB
+ 379ccbe62e26 Downloading 108MB
+ 379ccbe62e26 Downloading 109.1MB
+ 379ccbe62e26 Downloading 109.1MB
+ 379ccbe62e26 Downloading 110.1MB
+ 379ccbe62e26 Downloading 111.1MB
+ 379ccbe62e26 Downloading 112.2MB
+ 379ccbe62e26 Downloading 112.2MB
+ 379ccbe62e26 Download complete 0B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 1B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 2B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 3B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 4B
+ 379ccbe62e26 Extracting 5B
+ 379ccbe62e26 Extracting 5B
+ 1244f763be36 Pull complete 0B
+ 379ccbe62e26 Pull complete 0B
+ be193f0583fb Extracting 1B
+ d9f83a042741 Pull complete 0B
+ 9732cf873eb7 Pull complete 0B
+ c924699dde26 Pull complete 0B
+ be193f0583fb Pull complete 0B
+ Image postgres:16 Pulled 
+ Image ithub-space-api Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 535B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.72kB 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine
+#3 DONE 4.0s
+
+#4 [internal] load metadata for docker.io/library/eclipse-temurin:21-jdk-alpine
+#4 DONE 4.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context:
+#5 transferring context: 112B done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:ac05c3c42b7c2f1a52c9bd52f01041fa1958231b15ebeae7420429cbc5baf474
+#7 resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:ac05c3c42b7c2f1a52c9bd52f01041fa1958231b15ebeae7420429cbc5baf474 0.1s done
+#7 DONE 0.1s
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 resolve docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 resolve docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3 0.1s done
+#8 ...
+
+#6 [internal] load build context
+#6 transferring context: 5.00MB 0.4s done
+#6 DONE 0.5s
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 sha256:3ba8dd297de437cbe53be6f3a5f7672a27d395ede86af7228a2c2dae0d4b3a97 0B / 2.46kB 0.2s
+#8 sha256:3ba8dd297de437cbe53be6f3a5f7672a27d395ede86af7228a2c2dae0d4b3a97 2.46kB / 2.46kB 1.2s done
+#8 sha256:7c36cbce71b14bcd4166587886630abcc540e354e67a19519ae83a2606006916 0B / 129B 0.2s
+#8 sha256:7c36cbce71b14bcd4166587886630abcc540e354e67a19519ae83a2606006916 129B / 129B 0.4s done
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 0B / 158.62MB 0.2s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 0B / 21.44MB 0.2s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 2.10MB / 21.44MB 1.2s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 4.19MB / 21.44MB 2.0s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 6.29MB / 21.44MB 3.0s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 1.05MB / 158.62MB 5.3s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 8.39MB / 21.44MB 3.8s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 10.49MB / 21.44MB 4.5s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 12.58MB / 21.44MB 5.4s
+#8 ...
+
+#7 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:ac05c3c42b7c2f1a52c9bd52f01041fa1958231b15ebeae7420429cbc5baf474
+#7 sha256:e84ee4d88719efe0c0f5723556c11c87be2c0094c89dce0bb75f768f6dd74605 2.46kB / 2.46kB 0.3s done
+#7 sha256:c85a6771097082b2df91a6477c3314ec25a91b894210dd741baae08d3e41b4b3 127B / 127B 0.3s done
+#7 sha256:6ac8bacad3044dd68d9bbbc26ed22c6674c4149fc01ef8d074f009f484341d4f 15.73MB / 53.38MB 8.9s
+#7 sha256:2d99ac440d39bbade5ae9f2dd56b69d8234c4e540282df61003829295761e4fe 12.58MB / 16.97MB 8.9s
+#7 sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 3.85MB / 3.85MB 3.3s done
+#7 extracting sha256:881fc932939efef04ca120ad44bbd2c0917851eb247aa4995428afb1e80ede17 0.3s done
+#7 sha256:2d99ac440d39bbade5ae9f2dd56b69d8234c4e540282df61003829295761e4fe 13.63MB / 16.97MB 9.0s
+#7 ...
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 14.68MB / 21.44MB 6.0s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 16.78MB / 21.44MB 6.8s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 18.87MB / 21.44MB 7.5s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 20.97MB / 21.44MB 8.3s
+#8 sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 21.44MB / 21.44MB 8.3s done
+#8 extracting sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 3.15MB / 158.62MB 10.4s
+#8 extracting sha256:51708f96cbd718f1f575c791b74dcc853920cce80b5df73a45d493d942e3c1e1 1.2s done
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 8.39MB / 158.62MB 15.5s
+#8 ...
+
+#7 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:ac05c3c42b7c2f1a52c9bd52f01041fa1958231b15ebeae7420429cbc5baf474
+#7 sha256:6ac8bacad3044dd68d9bbbc26ed22c6674c4149fc01ef8d074f009f484341d4f 53.38MB / 53.38MB 18.3s done
+#7 sha256:2d99ac440d39bbade5ae9f2dd56b69d8234c4e540282df61003829295761e4fe 16.97MB / 16.97MB 11.2s done
+#7 extracting sha256:2d99ac440d39bbade5ae9f2dd56b69d8234c4e540282df61003829295761e4fe 1.1s done
+#7 extracting sha256:6ac8bacad3044dd68d9bbbc26ed22c6674c4149fc01ef8d074f009f484341d4f
+#7 ...
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 ...
+
+#7 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:ac05c3c42b7c2f1a52c9bd52f01041fa1958231b15ebeae7420429cbc5baf474
+#7 extracting sha256:6ac8bacad3044dd68d9bbbc26ed22c6674c4149fc01ef8d074f009f484341d4f 1.6s done
+#7 extracting sha256:c85a6771097082b2df91a6477c3314ec25a91b894210dd741baae08d3e41b4b3 0.1s done
+#7 extracting sha256:e84ee4d88719efe0c0f5723556c11c87be2c0094c89dce0bb75f768f6dd74605 0.0s done
+#7 DONE 20.4s
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 ...
+
+#9 [stage-1 2/3] WORKDIR /app
+#9 DONE 0.5s
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 16.78MB / 158.62MB 18.8s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 25.17MB / 158.62MB 20.7s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 33.55MB / 158.62MB 22.4s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 41.94MB / 158.62MB 24.0s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 50.33MB / 158.62MB 25.4s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 58.72MB / 158.62MB 26.7s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 67.11MB / 158.62MB 27.8s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 75.50MB / 158.62MB 29.4s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 83.89MB / 158.62MB 30.8s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 92.27MB / 158.62MB 32.4s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 100.66MB / 158.62MB 33.6s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 109.05MB / 158.62MB 34.5s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 117.44MB / 158.62MB 35.7s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 126.88MB / 158.62MB 37.5s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 135.27MB / 158.62MB 38.9s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 143.65MB / 158.62MB 40.4s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 152.04MB / 158.62MB 41.6s
+#8 sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 158.62MB / 158.62MB 42.7s done
+#8 extracting sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d
+#8 extracting sha256:7c544b56550d0dd78ef07c133f66808efcee816fc25e79733d1f3c903d04618d 2.4s done
+#8 DONE 47.4s
+
+#8 [build 1/7] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:82801f9dcdcbad5a05082aba8c86d1da5b72ccb498e71318b1f91b5a477887b3
+#8 extracting sha256:7c36cbce71b14bcd4166587886630abcc540e354e67a19519ae83a2606006916 0.0s done
+#8 extracting sha256:3ba8dd297de437cbe53be6f3a5f7672a27d395ede86af7228a2c2dae0d4b3a97 0.0s done
+#8 DONE 47.5s
+
+#10 [build 2/7] WORKDIR /app
+#10 DONE 0.3s
+
+#11 [build 3/7] COPY gradlew gradlew.bat ./
+#11 DONE 0.1s
+
+#12 [build 4/7] COPY gradle ./gradle
+#12 DONE 0.1s
+
+#13 [build 5/7] COPY build.gradle settings.gradle ./
+#13 DONE 0.1s
+
+#14 [build 6/7] COPY src ./src
+#14 DONE 0.1s
+
+#15 [build 7/7] RUN chmod +x gradlew && ./gradlew bootJar --no-daemon
+#15 0.530 Downloading https://services.gradle.org/distributions/gradle-8.14.5-bin.zip
+#15 7.437 .............10%.............20%.............30%.............40%.............50%.............60%..............70%.............80%.............90%.............100%
+#15 34.35 
+#15 34.35 Welcome to Gradle 8.14.5!
+#15 34.35 
+#15 34.35 Here are the highlights of this release:
+#15 34.35  - Java 24 support
+#15 34.35  - GraalVM Native Image toolchain selection
+#15 34.35  - Enhancements to test reporting
+#15 34.35  - Build Authoring improvements
+#15 34.35 
+#15 34.35 For more details see https://docs.gradle.org/8.14.5/release-notes.html
+#15 34.35 
+#15 34.65 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.5/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+#15 36.65 Daemon will be stopped at the end of the build 
+#15 110.2 > Task :compileJava
+#15 110.3 > Task :processResources
+#15 110.3 > Task :classes
+#15 110.4 > Task :resolveMainClassName
+#15 117.3 > Task :bootJar
+#15 117.3 
+#15 117.4 BUILD SUCCESSFUL in 1m 56s
+#15 117.4 4 actionable tasks: 4 executed
+#15 DONE 117.7s
+
+#16 [stage-1 3/3] COPY --from=build /app/build/libs/*.jar app.jar
+#16 DONE 0.1s
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 3.1s done
+#17 exporting manifest sha256:337af5b77d8000eee4a60970a242f031a20d70531f4a6b97b780f0b8f8895ee4 0.0s done
+#17 exporting config sha256:4e45ebe0b1dc6f5c878965b5bf702fc983870b0e31b6487c259b3052b7ef0a0c 0.0s done
+#17 exporting attestation manifest sha256:8837327aad18a814e4aa03ef079a3f9dda08a8d2cde7da8fae730b208a3dd11a 0.0s done
+#17 exporting manifest list sha256:8c7b6b6bfeeb9083c7c7a73f18c6c6502befa281f767053e28e43be3111816c0
+#17 exporting manifest list sha256:8c7b6b6bfeeb9083c7c7a73f18c6c6502befa281f767053e28e43be3111816c0 0.0s done
+#17 naming to docker.io/library/ithub-space-api:latest done
+#17 unpacking to docker.io/library/ithub-space-api:latest
+#17 unpacking to docker.io/library/ithub-space-api:latest 2.9s done
+#17 DONE 6.1s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.0s
+ Image ithub-space-api Built 
+ Network ithub-space_ithub-net Creating 
+ Volume ithub-space_db_data Creating 
+ Volume ithub-space_db_data Creating 
+ Network ithub-space_ithub-net Creating 
+ Volume ithub-space_db_data Created 
+ Volume ithub-space_db_data Created 
+ Network ithub-space_ithub-net Created 
+ Network ithub-space_ithub-net Created 
+ Container ithub-db Creating 
+ Container ithub-db Created 
+ Container ithub-api Creating 
+ Container ithub-api Created 
+ Container ithub-db Starting 
+ Container ithub-db Started 
+ Container ithub-db Waiting 
+ Container ithub-db Healthy 
+ Container ithub-api Starting 
+ Container ithub-api Started 

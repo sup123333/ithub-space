@@ -6,28 +6,29 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "media")
-public class Media {
+@Table(name = "events")
+public class EventEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String url;
-
     private String title;
 
-    @Enumerated(EnumType.STRING)
-    private MediaType type;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime eventDate;
+
+    private String location;
+
+    private String imageUrl;
+
+    @Column(columnDefinition = "TEXT")
+    private String program;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private User author;
-
-    public enum MediaType {
-        PHOTO, VIDEO
-    }
+    private UserEntity author;
 }

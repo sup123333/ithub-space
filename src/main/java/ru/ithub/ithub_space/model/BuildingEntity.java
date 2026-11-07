@@ -2,30 +2,25 @@ package ru.ithub.ithub_space.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "events")
-public class Event {
+@Table(name = "buildings")
+public class BuildingEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String name;
+
+    private String address;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private LocalDateTime eventDate;
-
-    private String location;
+    private String mapUrl;
 
     private String imageUrl;
-
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User author;
 }

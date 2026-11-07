@@ -1,0 +1,1 @@
+{"title":"Persistence check","description":"Must survive docker compose down / up","eventDate":"2026-12-10T12:00:00","location":"Docker volume db_data","imageUrl":null,"program":null}

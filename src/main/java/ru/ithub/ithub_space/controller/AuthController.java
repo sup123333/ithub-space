@@ -1,22 +1,29 @@
 package ru.ithub.ithub_space.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import ru.ithub.ithub_space.config.JwtService;
+import ru.ithub.ithub_space.exception.NotFoundException;
 import ru.ithub.ithub_space.model.Role;
-import ru.ithub.ithub_space.model.User;
+import ru.ithub.ithub_space.model.UserEntity;
 import ru.ithub.ithub_space.service.UserService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final UserService userService;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-        User user = userService.register(
+        UserEntity user = userService.register(
                 request.firstName(),
                 request.lastName(),
                 request.middleName(),
@@ -28,6 +35,23 @@ public class AuthController {
         );
         return ResponseEntity.ok("Пользователь " + user.getEmail() + " зарегистрирован");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        UserEntity user;
+        try {
+            user = userService.findByEmail(request.email());
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(401).body("Неверный email или пароль");
+        }
+        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
+            return ResponseEntity.status(401).body("Неверный email или пароль");
+        }
+        log.info("Успешный вход: {}", request.email());
+        return ResponseEntity.ok(jwtService.generateToken(user.getEmail()));
+    }
+
+    record LoginRequest(String email, String password) {}
 
     record RegisterRequest(
             String firstName,

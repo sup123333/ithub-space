@@ -1,0 +1,55 @@
+### 1. POST persistence event
+{"id":7,"title":"Persistence check","description":"Must survive docker compose down / up","eventDate":"2026-12-10T12:00:00","location":"Docker volume db_data","imageUrl":null,"program":null}
+
+### 2. GET /api/events/7 before down
+{"id":7,"title":"Persistence check","description":"Must survive docker compose down / up","eventDate":"2026-12-10T12:00:00","location":"Docker volume db_data","imageUrl":null,"program":null}
+
+### 3. docker compose down
+ Container ithub-api Stopping 
+ Container ithub-api Stopped 
+ Container ithub-api Removing 
+ Container ithub-api Removed 
+ Container ithub-db Stopping 
+ Container ithub-db Stopped 
+ Container ithub-db Removing 
+ Container ithub-db Removed 
+ Network ithub-space_ithub-net Removing 
+ Network ithub-space_ithub-net Removed
+
+### 4. docker volume ls (after down)
+DRIVER    VOLUME NAME
+local     ithub-space_db_data
+
+### 5. docker compose up -d
+ Network ithub-space_ithub-net Creating 
+ Network ithub-space_ithub-net Created 
+ Network ithub-space_ithub-net Created 
+ Container ithub-db Creating 
+ Container ithub-db Created 
+ Container ithub-api Creating 
+ Container ithub-api Created 
+ Container ithub-db Starting 
+ Container ithub-db Started 
+ Container ithub-db Waiting 
+ Container ithub-db Healthy 
+ Container ithub-api Starting 
+ Container ithub-api Started
+
+### 6. GET /api/events/7 after up
+HTTP/1.1 200 
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 07 Nov 2026 06:11:40 GMT
+
+{"id":7,"title":"Persistence check","description":"Must survive docker compose down / up","eventDate":"2026-12-10T12:00:00","location":"Docker volume db_data","imageUrl":null,"program":null}
+
+### 7. docker compose ps
+NAME        IMAGE             COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+ithub-api   ithub-space-api   "java -jar app.jar"      api       23 seconds ago   Up 16 seconds             0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+ithub-db    postgres:16       "docker-entrypoint.s…"   db        23 seconds ago   Up 22 seconds (healthy)   5432/tcp

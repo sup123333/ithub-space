@@ -1,42 +1,49 @@
 package ru.ithub.ithub_space.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.ithub.ithub_space.model.Event;
+import ru.ithub.ithub_space.exception.NotFoundException;
+import ru.ithub.ithub_space.model.EventEntity;
 import ru.ithub.ithub_space.repository.EventRepository;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EventService {
 
     private final EventRepository eventRepository;
 
-    public List<Event> getAll() {
+    public List<EventEntity> getAll() {
         return eventRepository.findAllByOrderByEventDateDesc();
     }
 
-    public Event getById(Long id) {
+    public EventEntity getById(Long id) {
         return eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Мероприятие не найдено: " + id));
+                .orElseThrow(() -> new NotFoundException("Мероприятие не найдено: " + id));
     }
 
-    public Event create(Event event) {
+    public EventEntity create(EventEntity event) {
+        log.info("Создание мероприятия: {}", event.getTitle());
         return eventRepository.save(event);
     }
 
-    public Event update(Long id, Event updated) {
-        Event event = getById(id);
+    public EventEntity update(Long id, EventEntity updated) {
+        log.info("Обновление мероприятия id: {}", id);
+        EventEntity event = getById(id);
         event.setTitle(updated.getTitle());
         event.setDescription(updated.getDescription());
         event.setEventDate(updated.getEventDate());
         event.setLocation(updated.getLocation());
         event.setImageUrl(updated.getImageUrl());
+        event.setProgram(updated.getProgram());
         return eventRepository.save(event);
     }
 
     public void delete(Long id) {
-        eventRepository.deleteById(id);
+        log.info("Удаление мероприятия id: {}", id);
+        eventRepository.delete(getById(id));
     }
 }

@@ -1,135 +1,439 @@
-# IT Hub Space — backend
+# IT Hub Space
 
-> REST API единой информационной платформы колледжа IThub ДГТУ (Ростов-на-Дону).
-> Командный проект учебной практики, 2026. Я — **backend-разработчик** (Java / Spring Boot).
+> Единая информационная платформа колледжа IThub ДГТУ Ростов-на-Дону
 
-![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-6-6DB33F)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-336791)
-![Gradle](https://img.shields.io/badge/Gradle-8-02303A)
+[![Java](https://img.shields.io/badge/Java-21-orange)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-green)](https://spring.io/projects/spring-boot)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue)](https://www.postgresql.org/)
 
 ---
 
-## Зачем это нужно
+## О проекте
 
-Информация о колледже была разбросана по сайту, ВКонтакте и Telegram, а портфолио студентов
-и списка корпусов не было вовсе. IT Hub Space собирает всё в одном месте для трёх аудиторий:
+До IT Hub Space информация об IThub ДГТУ была разбросана по четырём источникам: официальный сайт, ВКонтакте, Telegram и по запросу. Портфолио студентов и карта корпусов по России отсутствовали полностью.
 
-- **абитуриенты** — направления, мероприятия, заявка на поступление;
-- **студенты** — мероприятия, медиа, портфолио;
-- **работодатели** — портфолио выпускников, партнёрская программа.
+**IT Hub Space** — веб-платформа, которая собирает всё в одном месте для трёх аудиторий:
+
+-  **Абитуриенты** — направления, форма поступления, FAQ, адреса корпусов
+-  **Студенты** — мероприятия, медиа, портфолио, преподаватели
+-  **Работодатели** — портфолио выпускников, партнёрская программа
+
+---
 
 ## Моя роль
 
 В команде из 7 человек (team lead, аналитик, frontend, тестировщик, 2 дизайнера) я отвечал за серверную часть:
 
-- спроектировал доменную модель и схему БД (JPA-сущности `User`, `Event`, `Faculty`, `Media`);
+- спроектировал доменную модель и схему БД (JPA-сущности `User`, `Event`, `Faculty`, `Media` и др.);
 - реализовал слои `controller → service → repository` на Spring Boot;
-- настроил Spring Security: хеширование паролей BCrypt, `UserDetailsService` на базе БД;
+- настроил Spring Security: BCrypt, JWT, роль `ADMIN` для изменения контента;
+- упаковал API в Docker и Docker Compose;
 - вёл репозиторий: ветки `feature/*`, Conventional Commits, разрешение merge-конфликтов.
 
-## Стек
+---
 
-| Слой | Технологии |
-|------|-----------|
-| Язык | Java 21 |
-| Фреймворк | Spring Boot 3.5 (Web, Data JPA, Security, Validation) |
-| БД | PostgreSQL, Hibernate |
-| Сборка | Gradle |
-| Прочее | Lombok, JUnit 5 |
+## Команда
 
-## Архитектура
+| ФИО | Роль |
+|-----|------|
+| Арнаутов Владимир | Backend-разработчик |
+| Джамбулатович Алим | Frontend-разработчик |
+| Крупнов Георгий | Team Lead / PM |
+| Шарафаненко Кристина | Аналитик |
+| Канцян Артём | Тестировщик |
+| Мусин Лев | Дизайнер |
+| Аллазов Алихан | Дизайнер |
 
-```
-HTTP (JSON)
-   │
-Controller   — AuthController, EventController, FacultyController, MediaController
-   │
-Service      — UserService, EventService
-   │
-Repository   — Spring Data JPA
-   │
-PostgreSQL
-```
+---
 
-```
-src/main/java/ru/ithub/ithub_space/
-├── config/        # SecurityConfig
-├── controller/    # REST-контроллеры
-├── service/       # бизнес-логика
-├── repository/    # Spring Data JPA
-└── model/         # JPA-сущности и enum Role
-```
+## Стек технологий
 
-## API (реализовано)
+**Backend**
+- Java 21 + Spring Boot 3
+- Spring Security + JWT (HMAC-SHA256)
+- Spring Data JPA + Hibernate + PostgreSQL
+- HikariCP, BCrypt, Gradle
 
-| Метод | URL | Описание |
-|-------|-----|----------|
-| POST | `/api/auth/register` | Регистрация пользователя (пароль хешируется BCrypt) |
-| GET | `/api/events` | Список мероприятий, отсортирован по дате |
-| GET | `/api/events/{id}` | Мероприятие по id |
-| POST / PUT / DELETE | `/api/events[/{id}]` | Создание, изменение, удаление мероприятия |
-| GET | `/api/faculties[/{id}]` | Направления обучения |
-| POST | `/api/faculties` | Добавить направление |
-| GET | `/api/media?type=PHOTO\|VIDEO` | Медиа с фильтром по типу |
-| POST | `/api/media` | Добавить медиафайл |
+**Frontend**
+- HTML5 + CSS3 + Vanilla JavaScript (без фреймворков)
+- CSS Variables (тёмная/светлая тема)
+- SPA — одностраничное приложение
+- Адаптивная вёрстка: 1024px / 768px / 480px
 
-Полный план эндпоинтов, включая будущие, — в [api-plan.md](api-plan.md).
-Архитектурные решения и компромиссы — в [project-notes.md](project-notes.md).
+**Инструменты**
+- Git + GitHub (ветка `dev`)
+- IntelliJ IDEA, pgAdmin, Postman
 
-## Запуск
+---
 
-Нужны Java 21+ и PostgreSQL 14+.
+## Быстрый старт
+
+### Требования
+
+- Java 21+
+- PostgreSQL 14+
+- Gradle 8+
+
+### Установка
 
 ```bash
+# 1. Клонировать репозиторий
 git clone https://github.com/sup123333/ithub-space.git
 cd ithub-space
 ```
 
 ```sql
+-- 2. Создать базу данных
 CREATE DATABASE ithub_space;
 ```
 
-Параметры подключения задаются переменными окружения (есть значения по умолчанию):
+3. Параметры подключения задаются переменными окружения (в `application.properties` только значения по умолчанию, реальных паролей в репозитории нет):
 
 | Переменная | По умолчанию |
 |------------|--------------|
 | `DB_URL` | `jdbc:postgresql://localhost:5432/ithub_space` |
 | `DB_USERNAME` | `postgres` |
 | `DB_PASSWORD` | `postgres` |
-| `SERVER_PORT` | `8080` |
+| `SERVER_PORT` (или `PORT`) | `8080` |
+| `JWT_SECRET` | тестовый ключ, в проде задать свой |
 
-```bash
-./gradlew bootRun      # Linux / macOS
-gradlew.bat bootRun    # Windows
+```powershell
+$env:DB_PASSWORD = "ВАШ_ПАРОЛЬ"   # PowerShell; в bash: export DB_PASSWORD=...
 ```
 
-Схема БД создаётся автоматически (`spring.jpa.hibernate.ddl-auto=update`).
+```bash
+# 4. Запустить
+./gradlew bootRun          # Linux / macOS
+gradlew.bat bootRun        # Windows
+```
 
-## Roadmap
+```
+# 5. Открыть в браузере
+http://localhost:8080
+```
 
-- [x] Доменная модель и CRUD для мероприятий, направлений, медиа
-- [x] Регистрация с хешированием паролей
-- [ ] Вход и выдача JWT, stateless-аутентификация
-- [ ] Роль `ADMIN` для изменения контента, публичный доступ на чтение
-- [ ] DTO и валидация входных данных вместо сущностей в контроллерах
-- [ ] Глобальная обработка ошибок (`@RestControllerAdvice`), корректные 400/404
-- [ ] Пагинация для `/api/events`
-- [ ] Unit- и интеграционные тесты (Testcontainers)
-- [ ] Swagger / OpenAPI, Docker Compose
-
-## Команда
-
-| Участник | Роль |
-|----------|------|
-| **Арнаутов Владимир** | **Backend** |
-| Джамбулатович Алим | Frontend |
-| Крупнов Георгий | Team Lead / PM |
-| Шарафаненко Кристина | Аналитик |
-| Канцян Артём | Тестировщик |
-| Мусин Лев, Аллазов Алихан | Дизайн |
+> При первом запуске Spring Boot автоматически создаёт схему БД и заполняет таблицы из `data.sql`.
 
 ---
 
-Учебный проект · АТК ДГТУ / IThub Ростов-на-Дону · 2026
+## Архитектура
+
+```
+[Браузер]
+    │  Fetch API (JSON)
+    ▼
+[VIEW — index.html]
+  SPA на Vanilla JS · CSS Variables · Адаптивность
+    │
+    ▼
+[CONTROLLER — Spring Boot REST]
+  AuthController · EventController · FacultyController
+  BuildingController · MediaController · PortfolioController
+  PartnerController · UserController
+    │
+    ▼
+[MODEL — Spring Data JPA]
+  User · Event · Faculty · Building · Partner · Portfolio · Media
+    │
+    ▼
+[PostgreSQL]
+  7 таблиц · data.sql
+```
+
+### Безопасность
+
+Каждый запрос → `JwtFilter` → `SecurityContextHolder`
+
+- Публичные эндпоинты: `/api/events`, `/api/buildings`, `/api/faculties` и др.
+- Защищённые: `/api/users/me` — требуют `Authorization: Bearer <token>`
+- Пароли: BCrypt
+
+### Структура проекта
+
+```
+src/main/
+├── java/ru/ithub/ithub_space/
+│   ├── config/          # SecurityConfig, JwtFilter, JwtService, EncoderConfig
+│   ├── controller/      # 8 REST-контроллеров
+│   ├── model/           # JPA-сущности
+│   ├── repository/      # Spring Data интерфейсы
+│   └── service/         # UserService, EventService
+└── resources/
+    ├── application.properties   # Настройки БД, JWT, порт
+    ├── data.sql                 # Начальные данные
+    ├── logback-spring.xml       # Логирование
+    └── static/
+        └── index.html           # Весь фронтенд (SPA)
+```
+
+---
+
+## REST API
+
+| Метод | URL | Доступ | Описание |
+|-------|-----|--------|----------|
+| GET | `/api/health` | Публичный | Состояние API + число направлений, мероприятий, корпусов |
+| POST | `/api/auth/register` | Публичный | Регистрация |
+| POST | `/api/auth/login` | Публичный | Вход, возврат JWT |
+| GET | `/api/users/me` | 🔒 JWT | Профиль пользователя |
+| GET | `/api/events` | Публичный | Мероприятия |
+| GET | `/api/faculties` | Публичный | Направления |
+| GET | `/api/media` | Публичный | Медиа |
+| GET | `/api/partners` | Публичный | Партнёры |
+| GET | `/api/portfolios` | Публичный | Портфолио |
+| GET | `/api/buildings` | Публичный | Корпуса |
+| GET | `/api/buildings/search?q=` | Публичный | Поиск корпусов |
+
+Полный план эндпоинтов, включая будущие, — в [api-plan.md](api-plan.md).
+Архитектурные решения и компромиссы — в [project-notes.md](project-notes.md).
+
+### Пример запроса (авторизация)
+
+```bash
+# Получить токен
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password"}'
+
+# Использовать токен
+curl http://localhost:8080/api/users/me \
+  -H "Authorization: Bearer <TOKEN>"
+```
+
+---
+
+## Функциональность
+
+| Раздел | Описание |
+|--------|----------|
+| Мероприятия | Список событий с датой, временем, локацией |
+| Направления | 6 специальностей с описанием и куратором |
+| Преподаватели | Скроллер, split-screen модальное окно |
+| Корпуса | 16 объектов в 12 городах, поиск по городу/адресу |
+| Поступить | Форма заявки + FAQ (10 вопросов) |
+| Медиа | Фото и видео с фильтрацией |
+| Портфолио | Студенческие проекты со ссылками |
+| Партнёры | Компании-работодатели |
+| Тема | 🌙 Тёмная / ☀️ Светлая, сохраняется в localStorage |
+| Адаптивность | Полноценная мобильная версия с бургер-меню |
+
+---
+
+## Разработчику
+
+### Git-workflow
+
+```bash
+# Получить актуальную ветку
+git pull origin dev --rebase
+
+# Сделать изменения и закоммитить
+git add .
+git commit -m "feat: описание изменений"
+git push origin dev
+```
+
+Конвенция коммитов: `feat:` / `fix:` / `refactor:` / `docs:`
+
+### Добавить новый эндпоинт
+
+1. Создать `@Entity` класс в `model/`
+2. Создать `JpaRepository<T, Long>` в `repository/`
+3. Создать `@RestController` в `controller/`
+4. Открыть в `SecurityConfig.java`: `.requestMatchers("/api/new/**").permitAll()`
+
+### Добавить данные
+
+Отредактируйте `src/main/resources/data.sql`, добавьте INSERT с `ON CONFLICT DO NOTHING`. Данные загрузятся при следующем перезапуске.
+
+### Тестирование API в Postman
+
+1. `POST /api/auth/login` → скопировать `token`
+2. В заголовках добавить: `Authorization: Bearer <token>`
+3. Выполнять защищённые запросы
+
+### Логи
+
+```
+logs/ithub.log   — текущий день
+logs/ithub.YYYY-MM-DD.log   — архив
+```
+
+---
+
+## Docker (контрольная точка «Контейнер»)
+
+```
+API (Spring Boot) -> Dockerfile -> docker build -> image -> docker run -p 8080:8080 -> container -> curl
+```
+
+API платформы IT Hub Space упаковано в Docker-образ. Endpoint'ы по теме проекта:
+
+- `GET /api/health` — проверка, что API живо, плюс количество направлений, мероприятий и корпусов в базе;
+- `GET /api/faculties` — направления (специальности) колледжа для абитуриентов.
+
+### Dockerfile
+
+Файл `Dockerfile` в корне проекта, двухэтапная сборка:
+
+| Инструкция | Зачем |
+|------------|-------|
+| `FROM eclipse-temurin:21-jdk-alpine AS build` | базовый образ с JDK 21 для сборки |
+| `WORKDIR /app` | рабочая папка внутри контейнера |
+| `COPY ...` | копируем Gradle-обёртку, `build.gradle` и `src` |
+| `RUN ./gradlew bootJar` | при сборке образа собираем исполняемый jar |
+| `FROM eclipse-temurin:21-jre-alpine` | лёгкий образ только с JRE для запуска |
+| `COPY --from=build ... app.jar` | берём из первого этапа только готовый jar |
+| `ENV PORT=8080` | порт, на котором Spring Boot слушает внутри контейнера |
+| `EXPOSE 8080` | документирует порт приложения |
+| `ENTRYPOINT ["java", "-jar", "app.jar"]` | основная команда: контейнер = приложение |
+
+### Сборка, запуск и проверка
+
+API нужна PostgreSQL, поэтому база запускается во втором контейнере в общей сети `ithub-net`.
+
+```bash
+# 0. Сеть и база данных
+docker network create ithub-net
+docker run -d --name ithub-db --network ithub-net \
+  -e POSTGRES_DB=ithub_space -e POSTGRES_PASSWORD=132455 postgres:16-alpine
+
+# 1. Собрать образ
+docker build -t ithub-space-api .
+
+# 2. Запустить контейнер с пробросом порта 8080 (хост) -> 8080 (контейнер)
+docker run -d --name ithub-api --network ithub-net -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://ithub-db:5432/ithub_space \
+  ithub-space-api
+
+# 3. Проверить, что контейнер работает
+docker ps
+
+# 4. Запрос к API снаружи контейнера (или открыть в браузере / Postman)
+curl http://localhost:8080/api/health
+curl http://localhost:8080/api/faculties
+
+# 5. Логи контейнера
+docker logs ithub-api
+
+# Остановка и удаление
+docker stop ithub-api ithub-db
+docker rm ithub-api ithub-db
+```
+
+Все шаги одной командой (Windows), вывод сохраняется в `docs/docker/`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\docker-check.ps1
+```
+
+### Результаты проверки
+
+| Файл | Что внутри |
+|------|-----------|
+| `docs/docker/00-local-run.txt` | проверка API локально без Docker (`./gradlew bootRun`; на момент проверки порт по умолчанию был 8090, сейчас 8080) |
+| `docs/docker/01-docker-build.txt` | вывод `docker build` |
+| `docs/docker/02-docker-run.txt` | вывод `docker run -p 8080:8080` |
+| `docs/docker/03-docker-ps.txt` | вывод `docker ps` |
+| `docs/docker/04-api-health.txt`, `05-api-faculties.txt` | ответы API |
+| `docs/docker/06-docker-logs.txt` | вывод `docker logs ithub-api` |
+
+---
+
+## Запуск через Docker Compose (контрольная точка «Compose»)
+
+Вместо ручных `docker network create` / `docker run` весь стек (API + PostgreSQL) описан в [`docker-compose.yml`](docker-compose.yml). Каждая строка в файле прокомментирована.
+
+| Сервис | Контейнер | Образ | Порт на хосте | Назначение |
+|--------|-----------|-------|---------------|------------|
+| `api` | `ithub-api` | собирается из `Dockerfile` | `8080` | Spring Boot API; стартует только когда `db` стал `healthy` |
+| `db` | `ithub-db` | `postgres:16` | не публикуется | PostgreSQL; данные в томе `db_data`, готовность проверяет `pg_isready` |
+
+- Оба сервиса в сети `ithub-net`: API подключается к базе по имени сервиса, `jdbc:postgresql://db:5432/app`.
+- Порт БД наружу не открыт, база доступна только из контейнера API.
+- Datasource в `application.properties` оставлен с дефолтами для локального запуска; в Compose он переопределяется переменными `SPRING_DATASOURCE_URL` / `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` (у переменных окружения Spring приоритет выше, чем у файла), порт задаёт `SERVER_PORT`.
+- `spring.jpa.hibernate.ddl-auto=update`: схема не пересоздаётся при старте, а `data.sql` вставляет демо-данные только в пустые таблицы. Поэтому записи переживают перезапуск.
+
+### Запуск и статус
+
+```powershell
+docker compose up -d --build   # собрать образ API и запустить оба контейнера в фоне
+docker compose ps              # статус: api - Up, db - Up (healthy)
+docker compose logs --tail 60  # последние строки логов обоих сервисов
+docker compose logs -f api     # логи API в реальном времени
+```
+
+### CRUD для мероприятий
+
+GET открыт всем; POST / PUT / DELETE требуют JWT (`Authorization: Bearer <token>`) пользователя с ролью `ADMIN`.
+
+```powershell
+curl.exe -s -X POST http://localhost:8080/api/auth/register -H "Content-Type: application/json" -d "@docs/compose/requests/register.json"
+$TOKEN = curl.exe -s -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d "@docs/compose/requests/login.json"
+
+curl.exe -s -i -X POST   http://localhost:8080/api/events     -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "@docs/compose/requests/event-create.json"   # 201
+curl.exe -s -i           http://localhost:8080/api/events/6                                                                                                            # 200
+curl.exe -s -i -X PUT    http://localhost:8080/api/events/6   -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "@docs/compose/requests/event-update.json"   # 200
+curl.exe -s -i -X DELETE http://localhost:8080/api/events/6   -H "Authorization: Bearer $TOKEN"                                                                                   # 204
+curl.exe -s -i           http://localhost:8080/api/events/6                                                                                                            # 404
+```
+
+Все команды с пояснениями: [`docs/compose/crud-requests.md`](docs/compose/crud-requests.md).
+
+### Проверка сохранения данных
+
+```powershell
+# создать мероприятие (запомнить id из ответа)
+curl.exe -s -X POST http://localhost:8080/api/events -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "@docs/compose/requests/event-persist.json"
+docker compose down            # контейнеры удалены, том db_data остался
+docker compose up -d
+curl.exe -s http://localhost:8080/api/events/<id>   # запись на месте
+docker volume ls               # в списке есть ithub-space_db_data
+```
+
+### Остановка: `down` и `down -v`
+
+| Команда | Контейнеры и сеть | Том `db_data` (данные БД) |
+|---------|-------------------|---------------------------|
+| `docker compose down` | удаляются | **остаётся**, при следующем `up` данные на месте |
+| `docker compose down -v` | удаляются | **удаляется**, при следующем `up` база создаётся с нуля, заново загружаются только демо-данные из `data.sql` |
+
+### Результаты проверки
+
+| Файл | Что внутри |
+|------|-----------|
+| `docs/compose/01-compose-up.txt` | вывод `docker compose up -d --build` |
+| `docs/compose/02-compose-ps.txt` | `docker compose ps`: оба сервиса, `db` в статусе `healthy` |
+| `docs/compose/03-crud.txt` | полный CRUD через `curl.exe`: register/login → POST → GET → PUT → GET → DELETE → GET (404) |
+| `docs/compose/04-persistence.txt` | запись до и после `down` / `up -d` + `docker volume ls` |
+| `docs/compose/05-compose-logs.txt` | последние строки `docker compose logs` |
+
+---
+
+## Roadmap
+
+- [x] Доменная модель и CRUD для мероприятий, направлений, медиа, корпусов
+- [x] Регистрация с хешированием паролей
+- [x] Вход и выдача JWT, stateless-аутентификация
+- [x] Роль `ADMIN` для изменения контента, публичный доступ на чтение
+- [x] DTO вместо сущностей в контроллерах
+- [x] Глобальная обработка ошибок (`@RestControllerAdvice`), корректные 404 / 409
+- [x] Docker и Docker Compose
+- [ ] Валидация входных данных (`@Valid`), корректные 400
+- [ ] Пагинация для `/api/events`
+- [ ] Unit- и интеграционные тесты (Testcontainers)
+- [ ] Swagger / OpenAPI
+
+---
+
+## Тестирование
+
+- **28 тест-кейсов** (Postman)
+- Позитивные, негативные и граничные сценарии
+- Найдено и исправлено **4 бага**
+
+---
+
+## Лицензия
+
+Учебный проект. АТК ДГТУ / IThub Ростов-на-Дону, 2026.

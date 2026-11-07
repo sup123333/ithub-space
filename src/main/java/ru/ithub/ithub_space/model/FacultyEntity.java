@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "faculties")
-public class Faculty {
+public class FacultyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +23,12 @@ public class Faculty {
     private Integer studentCount;
 
     private String imageUrl;
+
+    @Column(columnDefinition = "TEXT")
+    private String businessRoles;
+
+    @Column(columnDefinition = "TEXT")
+    private String skills;
+
+    private String curatorPhoto;
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,10 @@ public class User {
     private String city;
 
     private String direction; // куда хочешь поступить / специальность
+
+    private String groupName; // для студентов
+
+    private String subject; // для преподавателей
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

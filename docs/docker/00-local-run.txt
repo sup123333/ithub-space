@@ -1,0 +1,2 @@
+$ curl http://localhost:8090/api/health   # локальный запуск без Docker (./gradlew bootRun)
+{"status":"UP","service":"IT Hub Space API","timestamp":"2026-10-23T15:47:35.146381200Z","faculties":6,"events":5,"buildings":19}

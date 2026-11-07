@@ -1,0 +1,35 @@
+ithub-db   | 
+ithub-db   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+ithub-api  | ██╗████████╗    ██╗  ██╗██╗   ██╗██████╗
+ithub-api  | ██║╚══██╔══╝    ██║  ██║██║   ██║██╔══██╗
+ithub-api  | ██║   ██║       ███████║██║   ██║██████╔╝
+ithub-api  | ██║   ██║       ██╔══██║██║   ██║██╔══██╗
+ithub-api  | ██║   ██║       ██║  ██║╚██████╔╝██████╔╝
+ithub-db   | 
+ithub-db   | 2026-11-07 06:11:18.532 UTC [1] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+ithub-db   | 2026-11-07 06:11:18.532 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+ithub-db   | 2026-11-07 06:11:18.532 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+ithub-db   | 2026-11-07 06:11:18.539 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+ithub-db   | 2026-11-07 06:11:18.549 UTC [29] LOG:  database system was shut down at 2026-11-07 06:11:16 UTC
+ithub-api  | ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═════╝
+ithub-api  | :: Spring Security :: PostgreSQL :: Java 21 ::
+ithub-api  | 
+ithub-api  | 06:11:26 [main] INFO  r.i.i.IthubSpaceApplication - Starting IthubSpaceApplication v0.0.1-SNAPSHOT using Java 21.0.13 with PID 1 (/app/app.jar started by root in /app)
+ithub-api  | 06:11:26 [main] DEBUG r.i.i.IthubSpaceApplication - Running with Spring Boot v3.5.15, Spring v6.2.19
+ithub-api  | 06:11:26 [main] INFO  r.i.i.IthubSpaceApplication - No active profile set, falling back to 1 default profile: "default"
+ithub-api  | 06:11:29 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+ithub-api  | 06:11:29 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+ithub-db   | 2026-11-07 06:11:18.559 UTC [1] LOG:  database system is ready to accept connections
+ithub-api  | 06:11:29 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.55]
+ithub-api  | 06:11:29 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ithub-api  | 06:11:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+ithub-api  | 06:11:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7573c7b5
+ithub-api  | 06:11:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+ithub-api  | 06:11:33 [main] DEBUG r.ithub.ithub_space.config.JwtFilter - Filter 'jwtFilter' configured for use
+ithub-api  | 06:11:35 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+ithub-api  | 06:11:35 [main] INFO  r.i.i.IthubSpaceApplication - Started IthubSpaceApplication in 9.993 seconds (process running for 10.919)
+ithub-api  | 06:11:39 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+ithub-api  | Hibernate: select ee1_0.id,ee1_0.author_id,ee1_0.description,ee1_0.event_date,ee1_0.image_url,ee1_0.location,ee1_0.program,ee1_0.title from events ee1_0 order by ee1_0.event_date desc
+ithub-api  | Hibernate: select ue1_0.id,ue1_0.city,ue1_0.direction,ue1_0.email,ue1_0.first_name,ue1_0.group_name,ue1_0.last_name,ue1_0.middle_name,ue1_0.password,ue1_0.role,ue1_0.subject from users ue1_0 where ue1_0.id=?
+ithub-api  | Hibernate: select ue1_0.id,ue1_0.city,ue1_0.direction,ue1_0.email,ue1_0.first_name,ue1_0.group_name,ue1_0.last_name,ue1_0.middle_name,ue1_0.password,ue1_0.role,ue1_0.subject from users ue1_0 where ue1_0.id=?
+ithub-api  | Hibernate: select ee1_0.id,a1_0.id,a1_0.city,a1_0.direction,a1_0.email,a1_0.first_name,a1_0.group_name,a1_0.last_name,a1_0.middle_name,a1_0.password,a1_0.role,a1_0.subject,ee1_0.description,ee1_0.event_date,ee1_0.image_url,ee1_0.location,ee1_0.program,ee1_0.title from events ee1_0 left join users a1_0 on a1_0.id=ee1_0.author_id where ee1_0.id=?
