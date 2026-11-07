@@ -104,7 +104,8 @@ SELECT * FROM (VALUES
 WHERE NOT EXISTS (SELECT 1 FROM partners LIMIT 1);
 
 -- ── MEDIA ──────────────────────────────────────────────────
-INSERT INTO media (title, description, type, url, thumbnail_url) VALUES
+INSERT INTO media (title, description, type, url, thumbnail_url)
+SELECT * FROM (VALUES
   ('День открытых дверей',
    'Последний день открытых дверей сезона — 18 апреля. Студенты, реальные занятия, атмосфера колледжа.',
    'PHOTO',
@@ -140,10 +141,12 @@ INSERT INTO media (title, description, type, url, thumbnail_url) VALUES
    'SPACE',
    '',
    null)
-ON CONFLICT DO NOTHING;
+) AS v(title, description, type, url, thumbnail_url)
+WHERE NOT EXISTS (SELECT 1 FROM media LIMIT 1);
 
 -- ── BUILDINGS ──────────────────────────────────────────────
-INSERT INTO buildings (name, address, description, map_url, image_url) VALUES
+INSERT INTO buildings (name, address, description, map_url, image_url)
+SELECT * FROM (VALUES
   ('Главный корпус ДГТУ (корп. 8)',
    'Ростов-на-Дону, пл. Гагарина, д. 1к8',
    'Главный корпус IThub на базе ДГТУ. Здесь обучаются студенты 3–4 курсов. 6-й этаж. Направления: Разработка, Программирование, Кибербезопасность.',
@@ -238,7 +241,9 @@ INSERT INTO buildings (name, address, description, map_url, image_url) VALUES
    'Кемерово, ул. Марковцева, 5',
    'Филиал IThub в Кемерово. IT-образование в Кузбассе.',
    'https://yandex.ru/maps/?text=%D0%9A%D0%B5%D0%BC%D0%B5%D1%80%D0%BE%D0%B2%D0%BE%2C%20%D1%83%D0%BB.%20%D0%9C%D0%B0%D1%80%D0%BA%D0%BE%D0%B2%D1%86%D0%B5%D0%B2%D0%B0%2C%205',
-   null);
+   null)
+) AS v(name, address, description, map_url, image_url)
+WHERE NOT EXISTS (SELECT 1 FROM buildings LIMIT 1);
 
 -- ── PORTFOLIOS ─────────────────────────────────────────────
 INSERT INTO portfolios (title, description, project_url, image_url, student_id)
